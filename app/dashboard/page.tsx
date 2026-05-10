@@ -15,7 +15,7 @@ export default async function Page() {
   try {
     products = await getProductsApi();
     orders = await getOrdersApi();
-    console.log("Products:", products.data.length);
+    console.log("Products:", products.data);
     console.log("Orders:", orders.data);
   } catch (error) {
     console.error("Failed to fetch data in page:", error);
