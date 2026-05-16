@@ -4,8 +4,8 @@ import { DataTable } from "@/components/data-table"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { getProductsApi } from "@/services/productService"
-import { getOrdersApi } from "@/services/ordersService"
+import { productService } from "@/features/products/services/product.service"
+import { orderService } from "@/features/orders/services/order.service"
 
 import data from "./data.json"
 
@@ -13,8 +13,8 @@ export default async function Page() {
   let products = null;
   let orders = null;
   try {
-    products = await getProductsApi();
-    orders = await getOrdersApi();
+    products = await productService.getAll();
+    orders = await orderService.getAll();
     console.log("Products:", products.data);
     console.log("Orders:", orders.data);
   } catch (error) {
