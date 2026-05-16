@@ -32,7 +32,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/products">{product.category.name}</BreadcrumbLink>
+          <BreadcrumbLink href={`/products?category=${product.category.slug}`}>{product.category.name}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
