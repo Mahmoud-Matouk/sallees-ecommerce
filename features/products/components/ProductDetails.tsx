@@ -5,6 +5,14 @@ import {
   TruckIcon,
   ShieldCheckIcon,
 } from "lucide-react";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import type { Product } from "../types/product.types";
 import { ProductImageGallery } from "./ProductImageGallery";
 import { ProductReviews } from "./ProductReviews";
@@ -17,17 +25,21 @@ export function ProductDetails({ product }: ProductDetailsProps) {
   return (
     <div className="container">
       {/* Breadcrumb */}
-      <nav className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
-        <a href="/products" className="transition-colors hover:text-foreground">
-          Products
-        </a>
-        <span>/</span>
-        <a href="/products" className="transition-colors hover:text-foreground">
-          {product.category.name}
-        </a>
-        <span>/</span>
-        <span className="text-foreground">{product.title}</span>
-      </nav>
+      <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/products">products</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/products">{product.category.name}</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>{product.title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
 
       {/* Main grid */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
