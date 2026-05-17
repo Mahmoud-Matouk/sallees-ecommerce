@@ -1,32 +1,58 @@
 "use client";
 
-import { StarIcon } from "lucide-react";
+import { ShoppingCartIcon, StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ProductSummary } from "../types/product.types";
+import { Heart } from "lucide-react";
+import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { ProductImageGallery } from "./ProductImageGallery";
 
 interface ProductCardProps {
   product: ProductSummary;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const [isWishlist, setIsWishlist] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const images = React.useMemo(() => {
+    const all = [product.imageCover, ...(product.images || [])];
+    return Array.from(new Set(all)).filter(Boolean);
+  }, [product]);
+
   return (
     <Link
       href={`/products/${product._id}`}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
     >
-      {/* Image */}
+      {/* Image Gallery */}
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <Image
-          src={product.imageCover}
-          alt={product.title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        <ProductImageGallery 
+          images={images} 
+          title={product.title} 
+          variant="card"
+          isHovered={isHovered} 
         />
 
+        {/* Wishlist */}
+        <div className="absolute right-3 top-3 z-10">
+          <Heart
+            className={`size-5 transition-colors hover:text-red-500 ${
+              isWishlist ? "text-red-500" : "text-black drop-shadow-md"
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsWishlist(!isWishlist);
+            }}
+          />
+        </div>
+
         {/* Category badge */}
-        <div className="absolute left-3 top-3">
+        <div className="absolute left-3 top-3 z-10">
           <span className="inline-flex items-center rounded-full bg-background/80 px-2.5 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
             {product.category.name}
           </span>
@@ -41,7 +67,7 @@ export function ProductCard({ product }: ProductCardProps) {
         </span>
 
         {/* Title */}
-        <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+        <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground transition-colors">
           {product.title}
         </h3>
 
@@ -70,6 +96,19 @@ export function ProductCard({ product }: ProductCardProps) {
             EGP {product.price.toLocaleString()}
           </span>
         </div>
+
+        {/* Add to cart button */}
+        <Button
+          size="lg"
+          className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90"
+          onClick={(e) => {
+            e.preventDefault();
+            // Handle add to cart logic here later
+          }}
+        >
+          <ShoppingCartIcon className="size-4" />
+          Add to cart
+        </Button>
       </div>
 
       {/* Hover overlay gradient */}

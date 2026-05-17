@@ -32,7 +32,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/products?category=${product.category.slug}`}>{product.category.name}</BreadcrumbLink>
+          <BreadcrumbLink href={`/products`}>{product.category.name}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
@@ -42,7 +42,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     </Breadcrumb>
 
       {/* Main grid */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
         {/* Left — Images */}
         <ProductImageGallery
           images={[product.imageCover, ...product.images]}

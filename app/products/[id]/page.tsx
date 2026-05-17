@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { productService } from "@/features/products/services/product.service";
 import { ProductDetails } from "@/features/products/components/ProductDetails";
+import { Product } from "@/features/products/types/product.types";
 
 export async function generateMetadata({
   params,
@@ -31,7 +32,7 @@ export default async function ProductPage({
   const { id } = await params;
 
   try {
-    const { data: product } = await productService.getById(id);
+    const { data: product } : { data: Product } = await productService.getById(id);
     return <ProductDetails product={product} />;
   } catch {
     notFound();

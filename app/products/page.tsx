@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { productService } from "@/features/products/services/product.service";
 import { ProductGrid } from "@/features/products/components/ProductGrid";
+import { ProductSummary } from "@/features/products/types/product.types";
 
 export const metadata: Metadata = {
   title: "Products | Store",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage() {
-  const { data: products } = await productService.getAll();
+  const { data: products }: { data: ProductSummary[] } = await productService.getAll();
 
   return <ProductGrid products={products} />;
 }
