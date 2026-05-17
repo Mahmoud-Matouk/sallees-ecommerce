@@ -110,12 +110,6 @@ export function ProductImageGallery({
               </CarouselItem>
             ))}
           </CarouselContent>
-          {images.length > 1 && (
-            <>
-              <CarouselPrevious className="left-4 opacity-0 transition-opacity group-hover:opacity-100" />
-              <CarouselNext className="right-4 opacity-0 transition-opacity group-hover:opacity-100" />
-            </>
-          )}
         </Carousel>
       </div>
 
