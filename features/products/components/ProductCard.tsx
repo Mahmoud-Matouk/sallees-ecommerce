@@ -111,9 +111,6 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           Add to cart
         </Button>
       </div>
-
-      {/* Hover overlay gradient */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-linear-to-r from-primary/0 via-primary to-primary/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
     </Link>
   );
 }

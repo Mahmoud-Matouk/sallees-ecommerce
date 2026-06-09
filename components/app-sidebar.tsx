@@ -3,6 +3,8 @@
 import * as React from 'react';
 
 import Link from 'next/link';
+import Image from 'next/image';
+import Logo from '@/public/logo.svg';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { NavDocuments } from '@/components/nav-documents';
@@ -30,14 +32,16 @@ import {
   DatabaseIcon,
   FileChartColumnIcon,
   FileIcon,
-  CommandIcon,
 } from 'lucide-react';
 
 const data = {
+  company: {
+    name: 'Sallees',
+  },
   user: {
     name: 'Mahmoud Matouk',
     email: 'Mahmoud@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: '/user.svg',
   },
   navMain: [
     {
@@ -156,13 +160,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:p-1.5!"
-            >
-              <Link href="/">
-                <CommandIcon className="size-5!" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+            <SidebarMenuButton asChild size="lg" className="h-12! px-3">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="relative flex size-9 shrink-0 items-center justify-center rounded-lg border border-sidebar-border bg-sidebar-accent/50 p-1">
+                  <Image
+                    src={Logo}
+                    alt={`${data.company.name} logo`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-base font-semibold leading-none">
+                  {data.company.name}
+                </span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
