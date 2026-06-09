@@ -10,9 +10,10 @@ import type { ProductSummary } from '../types/product.types';
 
 interface ProductCardProps {
   product: ProductSummary;
+  priority?: boolean;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [isWishlist, setIsWishlist] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
 
@@ -35,6 +36,7 @@ export function ProductCard({ product }: ProductCardProps) {
           title={product.title}
           variant="card"
           isHovered={isHovered}
+          priority={priority}
         />
 
         {/* Wishlist */}

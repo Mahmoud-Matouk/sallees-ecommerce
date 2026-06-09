@@ -3057,7 +3057,7 @@
       "label": "ProductCard()",
       "file_type": "code",
       "source_file": "features/products/components/ProductCard.tsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "components_productcard_productcard",
       "community": 2,
@@ -3117,7 +3117,7 @@
       "label": "ProductGrid()",
       "file_type": "code",
       "source_file": "features/products/components/ProductGrid.tsx",
-      "source_location": "L8",
+      "source_location": "L9",
       "_origin": "ast",
       "id": "components_productgrid_productgrid",
       "community": 2,
@@ -3147,7 +3147,7 @@
       "label": "ProductImageGallery()",
       "file_type": "code",
       "source_file": "features/products/components/ProductImageGallery.tsx",
-      "source_location": "L22",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "components_productimagegallery_productimagegallery",
       "community": 2,
@@ -13673,9 +13673,9 @@
       "source_file": "package.json",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_prettier",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_prettier"
     },
     {
       "relation": "contains",
@@ -13683,9 +13683,9 @@
       "source_file": "package.json",
       "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "package_devdependencies",
-      "target": "package_devdependencies_prettier_plugin_sort_imports",
-      "confidence_score": 1.0
+      "target": "package_devdependencies_prettier_plugin_sort_imports"
     },
     {
       "relation": "contains",
@@ -13953,9 +13953,9 @@
       "source_file": ".agents/rules/context7.md",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "rules_context7",
-      "target": "rules_context7_context7",
-      "confidence_score": 1.0
+      "target": "rules_context7_context7"
     },
     {
       "relation": "contains",
@@ -13993,9 +13993,9 @@
       "source_file": "README.md",
       "source_location": "L118",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_ai_augmented_development",
-      "confidence_score": 1.0
+      "target": "readme_ai_augmented_development"
     },
     {
       "relation": "contains",
@@ -14003,9 +14003,9 @@
       "source_file": "README.md",
       "source_location": "L332",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_api_integration",
-      "confidence_score": 1.0
+      "target": "readme_api_integration"
     },
     {
       "relation": "contains",
@@ -14013,9 +14013,9 @@
       "source_file": "README.md",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_architecture_design_decisions",
-      "confidence_score": 1.0
+      "target": "readme_architecture_design_decisions"
     },
     {
       "relation": "contains",
@@ -14023,9 +14023,9 @@
       "source_file": "README.md",
       "source_location": "L321",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_available_scripts",
-      "confidence_score": 1.0
+      "target": "readme_available_scripts"
     },
     {
       "relation": "contains",
@@ -14043,9 +14043,9 @@
       "source_file": "README.md",
       "source_location": "L209",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_project_structure",
-      "confidence_score": 1.0
+      "target": "readme_project_structure"
     },
     {
       "relation": "contains",
@@ -14053,9 +14053,9 @@
       "source_file": "README.md",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_scalability_by_design",
-      "confidence_score": 1.0
+      "target": "readme_scalability_by_design"
     },
     {
       "relation": "contains",
@@ -14063,9 +14063,9 @@
       "source_file": "README.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_table_of_contents",
-      "confidence_score": 1.0
+      "target": "readme_table_of_contents"
     },
     {
       "relation": "contains",
@@ -14073,9 +14073,9 @@
       "source_file": "README.md",
       "source_location": "L166",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_tech_stack",
-      "confidence_score": 1.0
+      "target": "readme_tech_stack"
     },
     {
       "relation": "contains",
@@ -14083,9 +14083,9 @@
       "source_file": "README.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme",
-      "target": "readme_why_this_project_exists",
-      "confidence_score": 1.0
+      "target": "readme_why_this_project_exists"
     },
     {
       "relation": "contains",
@@ -14093,9 +14093,9 @@
       "source_file": "README.md",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_architecture_design_decisions",
-      "target": "readme_feature_sliced_design_fsd",
-      "confidence_score": 1.0
+      "target": "readme_feature_sliced_design_fsd"
     },
     {
       "relation": "contains",
@@ -14103,9 +14103,9 @@
       "source_file": "README.md",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_architecture_design_decisions",
-      "target": "readme_layered_dependency_rule",
-      "confidence_score": 1.0
+      "target": "readme_layered_dependency_rule"
     },
     {
       "relation": "contains",
@@ -14113,9 +14113,9 @@
       "source_file": "README.md",
       "source_location": "L81",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_architecture_design_decisions",
-      "target": "readme_server_first_data_fetching",
-      "confidence_score": 1.0
+      "target": "readme_server_first_data_fetching"
     },
     {
       "relation": "contains",
@@ -14123,9 +14123,9 @@
       "source_file": "README.md",
       "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_ai_augmented_development",
-      "target": "readme_antigravity_primary_ai_coding_agent",
-      "confidence_score": 1.0
+      "target": "readme_antigravity_primary_ai_coding_agent"
     },
     {
       "relation": "contains",
@@ -14133,9 +14133,9 @@
       "source_file": "README.md",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_ai_augmented_development",
-      "target": "readme_context7_mcp_documentation_intelligence",
-      "confidence_score": 1.0
+      "target": "readme_context7_mcp_documentation_intelligence"
     },
     {
       "relation": "contains",
@@ -14143,9 +14143,9 @@
       "source_file": "README.md",
       "source_location": "L139",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_ai_augmented_development",
-      "target": "readme_graphify_codebase_knowledge_graph",
-      "confidence_score": 1.0
+      "target": "readme_graphify_codebase_knowledge_graph"
     },
     {
       "relation": "contains",
@@ -14153,9 +14153,9 @@
       "source_file": "README.md",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_ai_augmented_development",
-      "target": "readme_neon_mcp_database_intelligence",
-      "confidence_score": 1.0
+      "target": "readme_neon_mcp_database_intelligence"
     },
     {
       "relation": "contains",
@@ -14163,9 +14163,9 @@
       "source_file": "README.md",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_ai_augmented_development",
-      "target": "readme_tool_configuration_summary",
-      "confidence_score": 1.0
+      "target": "readme_tool_configuration_summary"
     },
     {
       "relation": "contains",
@@ -14173,9 +14173,9 @@
       "source_file": "README.md",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_tech_stack",
-      "target": "readme_core_framework",
-      "confidence_score": 1.0
+      "target": "readme_core_framework"
     },
     {
       "relation": "contains",
@@ -14183,9 +14183,9 @@
       "source_file": "README.md",
       "source_location": "L188",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_tech_stack",
-      "target": "readme_state_data",
-      "confidence_score": 1.0
+      "target": "readme_state_data"
     },
     {
       "relation": "contains",
@@ -14193,9 +14193,9 @@
       "source_file": "README.md",
       "source_location": "L176",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_tech_stack",
-      "target": "readme_ui_styling",
-      "confidence_score": 1.0
+      "target": "readme_ui_styling"
     },
     {
       "relation": "contains",
@@ -14203,9 +14203,9 @@
       "source_file": "README.md",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_tech_stack",
-      "target": "readme_ux_enhancements",
-      "confidence_score": 1.0
+      "target": "readme_ux_enhancements"
     },
     {
       "relation": "contains",
@@ -14213,9 +14213,9 @@
       "source_file": "README.md",
       "source_location": "L294",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_getting_started",
-      "target": "readme_installation",
-      "confidence_score": 1.0
+      "target": "readme_installation"
     },
     {
       "relation": "contains",
@@ -14223,9 +14223,9 @@
       "source_file": "README.md",
       "source_location": "L287",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_getting_started",
-      "target": "readme_prerequisites",
-      "confidence_score": 1.0
+      "target": "readme_prerequisites"
     },
     {
       "relation": "contains",
@@ -14233,9 +14233,9 @@
       "source_file": "README.md",
       "source_location": "L310",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_getting_started",
-      "target": "readme_quick_navigation",
-      "confidence_score": 1.0
+      "target": "readme_quick_navigation"
     },
     {
       "relation": "contains",
@@ -14243,11 +14243,11 @@
       "source_file": "README.md",
       "source_location": "L342",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_api_integration",
-      "target": "readme_supported_domains",
-      "confidence_score": 1.0
+      "target": "readme_supported_domains"
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "c4930f3633ac0848ec830ce183ba8ddfa75864ec"
+  "built_at_commit": "9ae570b7dba08a2f1f9ebaeb32ddbf1b73c724b3"
 }

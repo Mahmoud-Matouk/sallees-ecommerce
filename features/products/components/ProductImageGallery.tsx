@@ -17,6 +17,7 @@ interface ProductImageGalleryProps {
   title: string;
   variant?: 'gallery' | 'card';
   isHovered?: boolean;
+  priority?: boolean;
 }
 
 export function ProductImageGallery({
@@ -24,6 +25,7 @@ export function ProductImageGallery({
   title,
   variant = 'gallery',
   isHovered = false,
+  priority = false,
 }: ProductImageGalleryProps) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -80,6 +82,7 @@ export function ProductImageGallery({
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  priority={priority && index === 0}
                 />
               </div>
             </CarouselItem>

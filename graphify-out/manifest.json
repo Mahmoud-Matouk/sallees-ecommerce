@@ -285,8 +285,8 @@
     "semantic_hash": ""
   },
   "features/products/components/ProductCard.tsx": {
-    "mtime": 1781024733.056046,
-    "ast_hash": "a9cd6037271e2552a77b4cc997dd2886",
+    "mtime": 1781029006.914514,
+    "ast_hash": "f2043568ca07874bebfc133897d41ada",
     "semantic_hash": ""
   },
   "features/products/components/ProductDetails.tsx": {
@@ -295,13 +295,13 @@
     "semantic_hash": ""
   },
   "features/products/components/ProductGrid.tsx": {
-    "mtime": 1781024733.0847094,
-    "ast_hash": "b685e2e1c3dfd60c2eb02c4b7545b17e",
+    "mtime": 1781029288.7557783,
+    "ast_hash": "e2cfad7b2843d020189e8874a1a371ed",
     "semantic_hash": ""
   },
   "features/products/components/ProductImageGallery.tsx": {
-    "mtime": 1781024733.1023717,
-    "ast_hash": "08743762ca660ded14b6f5a1622069ba",
+    "mtime": 1781029000.8321345,
+    "ast_hash": "6fc76e943cb15390be059ae473b8448d",
     "semantic_hash": ""
   },
   "features/products/components/ProductReviews.tsx": {

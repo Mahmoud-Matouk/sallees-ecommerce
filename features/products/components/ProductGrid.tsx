@@ -3,9 +3,10 @@ import type { ProductSummary } from '../types/product.types';
 
 interface ProductGridProps {
   products: ProductSummary[];
+  preloadCount?: number;
 }
 
-export function ProductGrid({ products }: ProductGridProps) {
+export function ProductGrid({ products, preloadCount = 4 }: ProductGridProps) {
   if (!products?.length) {
     return (
       <div className="container flex flex-col items-center justify-center py-24 text-center">
@@ -36,8 +37,12 @@ export function ProductGrid({ products }: ProductGridProps) {
 
   return (
     <div className="container grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {products.map((product) => (
-        <ProductCard key={product._id} product={product} />
+      {products.map((product, index) => (
+        <ProductCard
+          key={product._id}
+          product={product}
+          priority={index < preloadCount}
+        />
       ))}
     </div>
   );
