@@ -42,8 +42,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         {/* Wishlist */}
         <div className="absolute right-3 top-3 z-10">
           <Heart
-            className={`size-5 transition-colors hover:text-red-500 ${isWishlist ? 'text-red-500' : 'text-black drop-shadow-md'
-              }`}
+            className={`size-5 transition-colors hover:text-red-500 ${
+              isWishlist ? 'text-red-500' : 'text-black drop-shadow-md'
+            }`}
             onClick={(e) => {
               e.preventDefault();
               setIsWishlist(!isWishlist);
@@ -77,10 +78,11 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             {Array.from({ length: 5 }).map((_, i) => (
               <StarIcon
                 key={i}
-                className={`size-3.5 ${i < Math.round(product.ratingsAverage)
+                className={`size-3.5 ${
+                  i < Math.round(product.ratingsAverage)
                     ? 'fill-amber-400 text-amber-400'
                     : 'fill-muted text-muted'
-                  }`}
+                }`}
               />
             ))}
           </div>

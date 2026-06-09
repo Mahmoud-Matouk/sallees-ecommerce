@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
-import { cva } from 'class-variance-authority';
 import { ChevronDownIcon } from 'lucide-react';
+import { cva } from 'class-variance-authority';
+import { NavigationMenu as NavigationMenuPrimitive } from 'radix-ui';
 
 import { cn } from '@/lib/utils';
 
@@ -44,7 +44,9 @@ function NavigationMenuList({
 function NavigationMenuItem({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
-  return <NavigationMenuPrimitive.Item data-slot="navigation-menu-item" {...props} />;
+  return (
+    <NavigationMenuPrimitive.Item data-slot="navigation-menu-item" {...props} />
+  );
 }
 
 const navigationMenuTriggerStyle = cva(
@@ -90,7 +92,9 @@ function NavigationMenuContent({
 function NavigationMenuLink({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {
-  return <NavigationMenuPrimitive.Link data-slot="navigation-menu-link" {...props} />;
+  return (
+    <NavigationMenuPrimitive.Link data-slot="navigation-menu-link" {...props} />
+  );
 }
 
 function NavigationMenuViewport({

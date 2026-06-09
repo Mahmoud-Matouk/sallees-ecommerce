@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Logo from '@/public/logo.png';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
+import { appConfig } from '@/core/constants/app';
 import { NavDocuments } from '@/components/nav-documents';
 import { NavSecondary } from '@/components/nav-secondary';
 import {
@@ -35,9 +36,6 @@ import {
 } from 'lucide-react';
 
 const data = {
-  company: {
-    name: 'Sallees',
-  },
   user: {
     name: 'Mahmoud Matouk',
     email: 'Mahmoud@gmail.com',
@@ -165,14 +163,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-foreground/10">
                   <Image
                     src={Logo}
-                    alt={`${data.company.name} logo`}
+                    alt={`${appConfig.name} logo`}
                     width={100}
                     height={20}
                     className="object-cover"
                   />
                 </div>
                 <span className="text-base font-semibold leading-none">
-                  {data.company.name}
+                  {appConfig.name}
                 </span>
               </Link>
             </SidebarMenuButton>

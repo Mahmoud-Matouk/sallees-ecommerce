@@ -1,1 +1,431 @@
-{"nodes": [{"id": "c_sallees_ecommerce_readme_md", "label": "README.md", "file_type": "document", "source_file": "README.md", "source_location": "L1"}, {"id": "sallees_ecommerce_readme_table_of_contents", "label": "Table of Contents", "file_type": "document", "source_file": "README.md", "source_location": "L21"}, {"id": "sallees_ecommerce_readme_why_this_project_exists", "label": "Why This Project Exists", "file_type": "document", "source_file": "README.md", "source_location": "L35"}, {"id": "sallees_ecommerce_readme_architecture_design_decisions", "label": "Architecture & Design Decisions", "file_type": "document", "source_file": "README.md", "source_location": "L46"}, {"id": "sallees_ecommerce_readme_feature_sliced_design_fsd", "label": "Feature-Sliced Design (FSD)", "file_type": "document", "source_file": "README.md", "source_location": "L48"}, {"id": "sallees_ecommerce_readme_layered_dependency_rule", "label": "Layered Dependency Rule", "file_type": "document", "source_file": "README.md", "source_location": "L64"}, {"id": "sallees_ecommerce_readme_server_first_data_fetching", "label": "Server-First Data Fetching", "file_type": "document", "source_file": "README.md", "source_location": "L81"}, {"id": "sallees_ecommerce_readme_scalability_by_design", "label": "Scalability by Design", "file_type": "document", "source_file": "README.md", "source_location": "L101"}, {"id": "sallees_ecommerce_readme_ai_augmented_development", "label": "AI-Augmented Development", "file_type": "document", "source_file": "README.md", "source_location": "L118"}, {"id": "sallees_ecommerce_readme_antigravity_primary_ai_coding_agent", "label": "Antigravity (Primary AI Coding Agent)", "file_type": "document", "source_file": "README.md", "source_location": "L122"}, {"id": "sallees_ecommerce_readme_context7_mcp_documentation_intelligence", "label": "Context7 MCP (Documentation Intelligence)", "file_type": "document", "source_file": "README.md", "source_location": "L131"}, {"id": "sallees_ecommerce_readme_graphify_codebase_knowledge_graph", "label": "Graphify (Codebase Knowledge Graph)", "file_type": "document", "source_file": "README.md", "source_location": "L139"}, {"id": "sallees_ecommerce_readme_neon_mcp_database_intelligence", "label": "Neon MCP (Database Intelligence)", "file_type": "document", "source_file": "README.md", "source_location": "L151"}, {"id": "sallees_ecommerce_readme_tool_configuration_summary", "label": "Tool Configuration Summary", "file_type": "document", "source_file": "README.md", "source_location": "L155"}, {"id": "sallees_ecommerce_readme_tech_stack", "label": "Tech Stack", "file_type": "document", "source_file": "README.md", "source_location": "L166"}, {"id": "sallees_ecommerce_readme_core_framework", "label": "Core Framework", "file_type": "document", "source_file": "README.md", "source_location": "L168"}, {"id": "sallees_ecommerce_readme_ui_styling", "label": "UI & Styling", "file_type": "document", "source_file": "README.md", "source_location": "L176"}, {"id": "sallees_ecommerce_readme_state_data", "label": "State & Data", "file_type": "document", "source_file": "README.md", "source_location": "L188"}, {"id": "sallees_ecommerce_readme_ux_enhancements", "label": "UX Enhancements", "file_type": "document", "source_file": "README.md", "source_location": "L198"}, {"id": "sallees_ecommerce_readme_project_structure", "label": "Project Structure", "file_type": "document", "source_file": "README.md", "source_location": "L209"}, {"id": "sallees_ecommerce_readme_getting_started", "label": "Getting Started", "file_type": "document", "source_file": "README.md", "source_location": "L285"}, {"id": "sallees_ecommerce_readme_prerequisites", "label": "Prerequisites", "file_type": "document", "source_file": "README.md", "source_location": "L287"}, {"id": "sallees_ecommerce_readme_installation", "label": "Installation", "file_type": "document", "source_file": "README.md", "source_location": "L294"}, {"id": "sallees_ecommerce_readme_quick_navigation", "label": "Quick Navigation", "file_type": "document", "source_file": "README.md", "source_location": "L310"}, {"id": "sallees_ecommerce_readme_available_scripts", "label": "Available Scripts", "file_type": "document", "source_file": "README.md", "source_location": "L321"}, {"id": "sallees_ecommerce_readme_api_integration", "label": "API Integration", "file_type": "document", "source_file": "README.md", "source_location": "L332"}, {"id": "sallees_ecommerce_readme_supported_domains", "label": "Supported Domains", "file_type": "document", "source_file": "README.md", "source_location": "L342"}], "edges": [{"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_table_of_contents", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L21", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_why_this_project_exists", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L35", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_architecture_design_decisions", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L46", "weight": 1.0}, {"source": "sallees_ecommerce_readme_architecture_design_decisions", "target": "sallees_ecommerce_readme_feature_sliced_design_fsd", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L48", "weight": 1.0}, {"source": "sallees_ecommerce_readme_architecture_design_decisions", "target": "sallees_ecommerce_readme_layered_dependency_rule", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L64", "weight": 1.0}, {"source": "sallees_ecommerce_readme_architecture_design_decisions", "target": "sallees_ecommerce_readme_server_first_data_fetching", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L81", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_scalability_by_design", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L101", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_ai_augmented_development", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L118", "weight": 1.0}, {"source": "sallees_ecommerce_readme_ai_augmented_development", "target": "sallees_ecommerce_readme_antigravity_primary_ai_coding_agent", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L122", "weight": 1.0}, {"source": "sallees_ecommerce_readme_ai_augmented_development", "target": "sallees_ecommerce_readme_context7_mcp_documentation_intelligence", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L131", "weight": 1.0}, {"source": "sallees_ecommerce_readme_ai_augmented_development", "target": "sallees_ecommerce_readme_graphify_codebase_knowledge_graph", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L139", "weight": 1.0}, {"source": "sallees_ecommerce_readme_ai_augmented_development", "target": "sallees_ecommerce_readme_neon_mcp_database_intelligence", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L151", "weight": 1.0}, {"source": "sallees_ecommerce_readme_ai_augmented_development", "target": "sallees_ecommerce_readme_tool_configuration_summary", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L155", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_tech_stack", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L166", "weight": 1.0}, {"source": "sallees_ecommerce_readme_tech_stack", "target": "sallees_ecommerce_readme_core_framework", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L168", "weight": 1.0}, {"source": "sallees_ecommerce_readme_tech_stack", "target": "sallees_ecommerce_readme_ui_styling", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L176", "weight": 1.0}, {"source": "sallees_ecommerce_readme_tech_stack", "target": "sallees_ecommerce_readme_state_data", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L188", "weight": 1.0}, {"source": "sallees_ecommerce_readme_tech_stack", "target": "sallees_ecommerce_readme_ux_enhancements", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L198", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_project_structure", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L209", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_getting_started", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L285", "weight": 1.0}, {"source": "sallees_ecommerce_readme_getting_started", "target": "sallees_ecommerce_readme_prerequisites", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L287", "weight": 1.0}, {"source": "sallees_ecommerce_readme_getting_started", "target": "sallees_ecommerce_readme_installation", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L294", "weight": 1.0}, {"source": "sallees_ecommerce_readme_getting_started", "target": "sallees_ecommerce_readme_quick_navigation", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L310", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_available_scripts", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L321", "weight": 1.0}, {"source": "c_sallees_ecommerce_readme_md", "target": "sallees_ecommerce_readme_api_integration", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L332", "weight": 1.0}, {"source": "sallees_ecommerce_readme_api_integration", "target": "sallees_ecommerce_readme_supported_domains", "relation": "contains", "confidence": "EXTRACTED", "source_file": "README.md", "source_location": "L342", "weight": 1.0}], "input_tokens": 0, "output_tokens": 0}
+{
+  "nodes": [
+    {
+      "id": "c_sallees_ecommerce_readme_md",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "sallees_ecommerce_readme_table_of_contents",
+      "label": "Table of Contents",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L21"
+    },
+    {
+      "id": "sallees_ecommerce_readme_why_this_project_exists",
+      "label": "Why This Project Exists",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L35"
+    },
+    {
+      "id": "sallees_ecommerce_readme_architecture_design_decisions",
+      "label": "Architecture & Design Decisions",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L46"
+    },
+    {
+      "id": "sallees_ecommerce_readme_feature_sliced_design_fsd",
+      "label": "Feature-Sliced Design (FSD)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L48"
+    },
+    {
+      "id": "sallees_ecommerce_readme_layered_dependency_rule",
+      "label": "Layered Dependency Rule",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "sallees_ecommerce_readme_server_first_data_fetching",
+      "label": "Server-First Data Fetching",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L81"
+    },
+    {
+      "id": "sallees_ecommerce_readme_scalability_by_design",
+      "label": "Scalability by Design",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L101"
+    },
+    {
+      "id": "sallees_ecommerce_readme_ai_augmented_development",
+      "label": "AI-Augmented Development",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L118"
+    },
+    {
+      "id": "sallees_ecommerce_readme_antigravity_primary_ai_coding_agent",
+      "label": "Antigravity (Primary AI Coding Agent)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L122"
+    },
+    {
+      "id": "sallees_ecommerce_readme_context7_mcp_documentation_intelligence",
+      "label": "Context7 MCP (Documentation Intelligence)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L131"
+    },
+    {
+      "id": "sallees_ecommerce_readme_graphify_codebase_knowledge_graph",
+      "label": "Graphify (Codebase Knowledge Graph)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L139"
+    },
+    {
+      "id": "sallees_ecommerce_readme_neon_mcp_database_intelligence",
+      "label": "Neon MCP (Database Intelligence)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L151"
+    },
+    {
+      "id": "sallees_ecommerce_readme_tool_configuration_summary",
+      "label": "Tool Configuration Summary",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L155"
+    },
+    {
+      "id": "sallees_ecommerce_readme_tech_stack",
+      "label": "Tech Stack",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L166"
+    },
+    {
+      "id": "sallees_ecommerce_readme_core_framework",
+      "label": "Core Framework",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L168"
+    },
+    {
+      "id": "sallees_ecommerce_readme_ui_styling",
+      "label": "UI & Styling",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L176"
+    },
+    {
+      "id": "sallees_ecommerce_readme_state_data",
+      "label": "State & Data",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L188"
+    },
+    {
+      "id": "sallees_ecommerce_readme_ux_enhancements",
+      "label": "UX Enhancements",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L198"
+    },
+    {
+      "id": "sallees_ecommerce_readme_project_structure",
+      "label": "Project Structure",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L209"
+    },
+    {
+      "id": "sallees_ecommerce_readme_getting_started",
+      "label": "Getting Started",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L285"
+    },
+    {
+      "id": "sallees_ecommerce_readme_prerequisites",
+      "label": "Prerequisites",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L287"
+    },
+    {
+      "id": "sallees_ecommerce_readme_installation",
+      "label": "Installation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L294"
+    },
+    {
+      "id": "sallees_ecommerce_readme_quick_navigation",
+      "label": "Quick Navigation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L310"
+    },
+    {
+      "id": "sallees_ecommerce_readme_available_scripts",
+      "label": "Available Scripts",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L321"
+    },
+    {
+      "id": "sallees_ecommerce_readme_api_integration",
+      "label": "API Integration",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L332"
+    },
+    {
+      "id": "sallees_ecommerce_readme_supported_domains",
+      "label": "Supported Domains",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L342"
+    }
+  ],
+  "edges": [
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_table_of_contents",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_why_this_project_exists",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_architecture_design_decisions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_architecture_design_decisions",
+      "target": "sallees_ecommerce_readme_feature_sliced_design_fsd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_architecture_design_decisions",
+      "target": "sallees_ecommerce_readme_layered_dependency_rule",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_architecture_design_decisions",
+      "target": "sallees_ecommerce_readme_server_first_data_fetching",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_scalability_by_design",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_ai_augmented_development",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_ai_augmented_development",
+      "target": "sallees_ecommerce_readme_antigravity_primary_ai_coding_agent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_ai_augmented_development",
+      "target": "sallees_ecommerce_readme_context7_mcp_documentation_intelligence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_ai_augmented_development",
+      "target": "sallees_ecommerce_readme_graphify_codebase_knowledge_graph",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_ai_augmented_development",
+      "target": "sallees_ecommerce_readme_neon_mcp_database_intelligence",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_ai_augmented_development",
+      "target": "sallees_ecommerce_readme_tool_configuration_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_tech_stack",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_tech_stack",
+      "target": "sallees_ecommerce_readme_core_framework",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_tech_stack",
+      "target": "sallees_ecommerce_readme_ui_styling",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_tech_stack",
+      "target": "sallees_ecommerce_readme_state_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_tech_stack",
+      "target": "sallees_ecommerce_readme_ux_enhancements",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_project_structure",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_getting_started",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L285",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_getting_started",
+      "target": "sallees_ecommerce_readme_prerequisites",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L287",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_getting_started",
+      "target": "sallees_ecommerce_readme_installation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L294",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_getting_started",
+      "target": "sallees_ecommerce_readme_quick_navigation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L310",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_available_scripts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L321",
+      "weight": 1.0
+    },
+    {
+      "source": "c_sallees_ecommerce_readme_md",
+      "target": "sallees_ecommerce_readme_api_integration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L332",
+      "weight": 1.0
+    },
+    {
+      "source": "sallees_ecommerce_readme_api_integration",
+      "target": "sallees_ecommerce_readme_supported_domains",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L342",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

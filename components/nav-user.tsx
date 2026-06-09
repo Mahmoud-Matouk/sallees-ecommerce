@@ -2,18 +2,18 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from '@/components/ui/sidebar';
+import {
   EllipsisVerticalIcon,
   CircleUserRoundIcon,
   CreditCardIcon,
   BellIcon,
   LogOutIcon,
 } from 'lucide-react';
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from '@/components/ui/sidebar';
 import {
   DropdownMenu,
   DropdownMenuContent,

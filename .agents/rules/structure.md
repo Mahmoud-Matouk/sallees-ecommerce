@@ -18,13 +18,17 @@ This guide defines the directory structure, dependency flow, and feature organiz
 ## Architecture Layers
 
 ### app/
-*Next.js routing layer (layouts, templates, async Server Components).*
+
+_Next.js routing layer (layouts, templates, async Server Components)._
+
 - **Location**: `app/[route]/`
 - **Use for**: Routing, route segment configuration, and high-level page layouts.
 - **Rule**: Keep components thin. Fetch data and pass it to feature components.
 
 ### features/
-*Self-contained business domains containing domain logic, components, state, and services.*
+
+_Self-contained business domains containing domain logic, components, state, and services._
+
 - **Location**: `features/[feature-name]/`
 - **Internal Structure**:
   - `components/` - Feature-specific UI components (e.g., `ProductCard.tsx` in `products`)
@@ -34,7 +38,9 @@ This guide defines the directory structure, dependency flow, and feature organiz
 - **Rule**: Features are self-contained. `features/cart` cannot import from `features/products`.
 
 ### core/
-*Cross-cutting application infrastructure, configuration, and base modules.*
+
+_Cross-cutting application infrastructure, configuration, and base modules._
+
 - **Location**: `core/`
 - **Structure**:
   - `api/` - Base Axios/fetch wrapper and anti-corruption layer (`client.ts`)
@@ -43,7 +49,9 @@ This guide defines the directory structure, dependency flow, and feature organiz
 - **Rule**: Core must not import from features or routing layers.
 
 ### components/
-*Presentational UI components containing zero business logic.*
+
+_Presentational UI components containing zero business logic._
+
 - **Location**: `components/`
 - **Structure**:
   - `ui/` - Shadcn UI primitive blocks (e.g., `button.tsx`, `card.tsx`)
@@ -51,7 +59,9 @@ This guide defines the directory structure, dependency flow, and feature organiz
 - **Rule**: Do not import features, hooks, or service layers here.
 
 ### hooks/ & lib/
-*Global hooks and pure helpers/utilities.*
+
+_Global hooks and pure helpers/utilities._
+
 - **Location**: `hooks/` (e.g., `use-mobile.ts`) and `lib/` (e.g., `utils.ts` for Tailwind class merges)
 - **Rule**: Must be completely context-free, generic, and stateless helpers.
 

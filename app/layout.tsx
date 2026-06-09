@@ -1,8 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
 import { Geist_Mono } from 'next/font/google';
 import { appConfig } from '@/core/constants/app';
-import { Navbar } from '@/components/navbar';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ThemeProvider } from '@/components/theme-provider';
 
@@ -46,4 +46,3 @@ export default function RootLayout({
     </html>
   );
 }
-

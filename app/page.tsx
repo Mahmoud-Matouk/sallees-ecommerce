@@ -40,7 +40,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           {/* Products */}
           <Link href="/products">
-            <Button variant="secondary" size="lg" className='cursor-pointer'>
+            <Button variant="secondary" size="lg" className="cursor-pointer">
               <Package size={16} />
               Products
             </Button>
@@ -48,7 +48,7 @@ export default function Home() {
 
           {/* Dashboard */}
           <Link href="/dashboard">
-            <Button variant="secondary" size="lg" className='cursor-pointer'>
+            <Button variant="secondary" size="lg" className="cursor-pointer">
               <LayoutDashboard size={16} />
               Dashboard
             </Button>

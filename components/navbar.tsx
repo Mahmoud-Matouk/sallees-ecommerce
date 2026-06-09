@@ -17,13 +17,20 @@ import {
   Zap,
 } from 'lucide-react';
 
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -32,13 +39,6 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 
 interface MenuItem {
   title: string;
@@ -296,28 +296,28 @@ const renderMenuItem = (item: MenuItem) => {
         <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
         <NavigationMenuContent>
           <ul className="w-80 p-3">
-              {item.items.map((subItem) => (
-                <li key={subItem.title}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      className="flex select-none gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted hover:text-accent-foreground"
-                      href={subItem.url}
-                    >
-                      {subItem.icon}
-                      <div>
-                        <div className="text-sm font-semibold">
-                          {subItem.title}
-                        </div>
-                        {subItem.description && (
-                          <p className="text-sm leading-snug text-muted-foreground">
-                            {subItem.description}
-                          </p>
-                        )}
+            {item.items.map((subItem) => (
+              <li key={subItem.title}>
+                <NavigationMenuLink asChild>
+                  <Link
+                    className="flex select-none gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-muted hover:text-accent-foreground"
+                    href={subItem.url}
+                  >
+                    {subItem.icon}
+                    <div>
+                      <div className="text-sm font-semibold">
+                        {subItem.title}
                       </div>
-                    </Link>
-                  </NavigationMenuLink>
-                </li>
-              ))}
+                      {subItem.description && (
+                        <p className="text-sm leading-snug text-muted-foreground">
+                          {subItem.description}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                </NavigationMenuLink>
+              </li>
+            ))}
           </ul>
         </NavigationMenuContent>
       </NavigationMenuItem>
@@ -338,11 +338,7 @@ const renderMenuItem = (item: MenuItem) => {
 const renderMobileMenuItem = (item: MenuItem) => {
   if (item.items) {
     return (
-      <AccordionItem
-        key={item.title}
-        value={item.title}
-        className="border-b-0"
-      >
+      <AccordionItem key={item.title} value={item.title} className="border-b-0">
         <AccordionTrigger className="py-0 font-semibold hover:no-underline">
           {item.title}
         </AccordionTrigger>

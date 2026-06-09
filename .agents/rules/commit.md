@@ -12,7 +12,7 @@ This guide provides simple principles to follow when making commits to this proj
 
 1. **Group related changes** - Keep each commit focused on a single logical change or feature
 2. **Use multiple commits** - Break down large changes into several smaller, targeted commits
-3. **Write descriptive messages** - Explain *why* the change was made, not just what files were changed
+3. **Write descriptive messages** - Explain _why_ the change was made, not just what files were changed
 4. **Be thorough** - Include all related changes in each commit
 
 ## Commit Message Format
