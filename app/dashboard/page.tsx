@@ -15,8 +15,6 @@ export default async function Page() {
   try {
     products = await productService.getAll();
     orders = await orderService.getAll();
-    console.log('Products:', products.data);
-    console.log('Orders:', orders.data);
   } catch (error) {
     console.error('Failed to fetch data in page:', error);
   }

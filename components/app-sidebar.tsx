@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '@/public/logo.svg';
+import Logo from '@/public/logo.png';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { NavDocuments } from '@/components/nav-documents';
@@ -162,12 +162,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton asChild size="lg" className="h-12! px-3">
               <Link href="/" className="flex items-center gap-2">
-                <div className="relative flex size-9 shrink-0 items-center justify-center rounded-lg border border-sidebar-border bg-sidebar-accent/50 p-1">
+                <div className="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-foreground/10">
                   <Image
                     src={Logo}
                     alt={`${data.company.name} logo`}
                     fill
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </div>
                 <span className="text-base font-semibold leading-none">
