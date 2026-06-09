@@ -6,7 +6,7 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products }: ProductGridProps) {
-  if (products.length === 0) {
+  if (!products?.length) {
     return (
       <div className="container flex flex-col items-center justify-center py-24 text-center">
         <div className="rounded-full bg-muted p-6">
