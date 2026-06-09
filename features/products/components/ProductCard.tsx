@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { ShoppingCartIcon, StarIcon } from "lucide-react";
-import Link from "next/link";
-import type { ProductSummary } from "../types/product.types";
-import { Heart } from "lucide-react";
-import * as React from "react";
-import { Button } from "@/components/ui/button";
-import { ProductImageGallery } from "./ProductImageGallery";
+import Link from 'next/link';
+import * as React from 'react';
+import { Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ShoppingCartIcon, StarIcon } from 'lucide-react';
+import { ProductImageGallery } from './ProductImageGallery';
+import type { ProductSummary } from '../types/product.types';
 
 interface ProductCardProps {
   product: ProductSummary;
@@ -41,7 +41,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <div className="absolute right-3 top-3 z-10">
           <Heart
             className={`size-5 transition-colors hover:text-red-500 ${
-              isWishlist ? "text-red-500" : "text-black drop-shadow-md"
+              isWishlist ? 'text-red-500' : 'text-black drop-shadow-md'
             }`}
             onClick={(e) => {
               e.preventDefault();
@@ -78,8 +78,8 @@ export function ProductCard({ product }: ProductCardProps) {
                 key={i}
                 className={`size-3.5 ${
                   i < Math.round(product.ratingsAverage)
-                    ? "fill-amber-400 text-amber-400"
-                    : "fill-muted text-muted"
+                    ? 'fill-amber-400 text-amber-400'
+                    : 'fill-muted text-muted'
                 }`}
               />
             ))}

@@ -1,7 +1,10 @@
 import { apiClient } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
-import type { PaginatedResponse, SingleResponse } from '@/core/types/common.types';
 import type { Brand, BrandsQueryParams } from '../types/brand.types';
+import type {
+  PaginatedResponse,
+  SingleResponse,
+} from '@/core/types/common.types';
 
 export const brandService = {
   async getAll(params?: BrandsQueryParams): Promise<PaginatedResponse<Brand>> {

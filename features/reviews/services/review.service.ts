@@ -1,7 +1,14 @@
-import { apiClient, authHeaders } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
-import type { PaginatedResponse, SingleResponse } from '@/core/types/common.types';
-import type { Review, CreateReviewBody, UpdateReviewBody } from '../types/review.types';
+import { apiClient, authHeaders } from '@/core/api/client';
+import type {
+  PaginatedResponse,
+  SingleResponse,
+} from '@/core/types/common.types';
+import type {
+  Review,
+  CreateReviewBody,
+  UpdateReviewBody,
+} from '../types/review.types';
 
 export const reviewService = {
   /** Get all reviews */

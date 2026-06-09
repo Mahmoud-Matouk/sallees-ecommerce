@@ -1,5 +1,5 @@
-import type { ProductSummary } from "../types/product.types";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from './ProductCard';
+import type { ProductSummary } from '../types/product.types';
 
 interface ProductGridProps {
   products: ProductSummary[];

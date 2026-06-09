@@ -1,5 +1,5 @@
-import { apiClient, authHeaders } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
+import { apiClient, authHeaders } from '@/core/api/client';
 import type {
   SignupBody,
   SigninBody,

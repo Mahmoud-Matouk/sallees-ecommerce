@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import * as React from 'react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
@@ -10,24 +10,24 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi,
-} from "@/components/ui/carousel";
+} from '@/components/ui/carousel';
 
 interface ProductImageGalleryProps {
   images: string[];
   title: string;
-  variant?: "gallery" | "card";
+  variant?: 'gallery' | 'card';
   isHovered?: boolean;
 }
 
 export function ProductImageGallery({
   images,
   title,
-  variant = "gallery",
+  variant = 'gallery',
   isHovered = false,
 }: ProductImageGalleryProps) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const isCard = variant === "card";
+  const isCard = variant === 'card';
 
   // Gallery variant: Sync selected thumbnail with carousel
   React.useEffect(() => {
@@ -35,7 +35,7 @@ export function ProductImageGallery({
       return;
     }
 
-    api.on("select", () => {
+    api.on('select', () => {
       setSelectedIndex(api.selectedScrollSnap());
     });
   }, [api, isCard]);
@@ -54,7 +54,7 @@ export function ProductImageGallery({
   // Card variant: Smoothly reset back to the cover image when hover ends
   React.useEffect(() => {
     if (!api || !isCard || isHovered) return;
-    
+
     api.scrollTo(0);
   }, [api, isCard, isHovered]);
 
@@ -120,10 +120,11 @@ export function ProductImageGallery({
             <Button
               key={index}
               onClick={() => onThumbClick(index)}
-              className={`relative size-16 shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-200 sm:size-20 ${index === selectedIndex
-                  ? "border-primary ring-2 ring-primary/20"
-                  : "border-border opacity-60 hover:opacity-100"
-                }`}
+              className={`relative size-16 shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-200 sm:size-20 ${
+                index === selectedIndex
+                  ? 'border-primary ring-2 ring-primary/20'
+                  : 'border-border opacity-60 hover:opacity-100'
+              }`}
             >
               <Image
                 src={image}

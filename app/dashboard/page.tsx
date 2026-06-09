@@ -1,13 +1,13 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { productService } from "@/features/products/services/product.service"
-import { orderService } from "@/features/orders/services/order.service"
+import { DataTable } from '@/components/data-table';
+import { AppSidebar } from '@/components/app-sidebar';
+import { SiteHeader } from '@/components/site-header';
+import { SectionCards } from '@/components/section-cards';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { orderService } from '@/features/orders/services/order.service';
+import { ChartAreaInteractive } from '@/components/chart-area-interactive';
+import { productService } from '@/features/products/services/product.service';
 
-import data from "./data.json"
+import data from './data.json';
 
 export default async function Page() {
   let products = null;
@@ -15,18 +15,18 @@ export default async function Page() {
   try {
     products = await productService.getAll();
     orders = await orderService.getAll();
-    console.log("Products:", products.data);
-    console.log("Orders:", orders.data);
+    console.log('Products:', products.data);
+    console.log('Orders:', orders.data);
   } catch (error) {
-    console.error("Failed to fetch data in page:", error);
+    console.error('Failed to fetch data in page:', error);
   }
 
   return (
     <SidebarProvider
       style={
         {
-          "--sidebar-width": "calc(var(--spacing) * 72)",
-          "--header-height": "calc(var(--spacing) * 12)",
+          '--sidebar-width': 'calc(var(--spacing) * 72)',
+          '--header-height': 'calc(var(--spacing) * 12)',
         } as React.CSSProperties
       }
     >
@@ -46,5 +46,5 @@ export default async function Page() {
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

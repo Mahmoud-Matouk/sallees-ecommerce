@@ -53,13 +53,13 @@ The codebase follows a **feature-sliced architecture** — a methodology borrowe
 Why FSD over a flat "components + pages" approach?
 ```
 
-| Decision | Flat Structure | Feature-Sliced (This Project) |
-|---|---|---|
-| **Ownership** | Any file can depend on any other file | Each feature owns its types, services, hooks, and components |
-| **Onboarding** | New devs must understand the entire codebase | New devs only need to understand one feature slice |
+| Decision        | Flat Structure                                         | Feature-Sliced (This Project)                                  |
+| --------------- | ------------------------------------------------------ | -------------------------------------------------------------- |
+| **Ownership**   | Any file can depend on any other file                  | Each feature owns its types, services, hooks, and components   |
+| **Onboarding**  | New devs must understand the entire codebase           | New devs only need to understand one feature slice             |
 | **Refactoring** | Moving a component risks breaking 12 unrelated imports | Features are self-contained — rename or delete with confidence |
-| **Code Review** | PRs touch files across the entire tree | PRs are scoped to a single `features/` directory |
-| **Testing** | Mocking requires understanding global state | Each feature's service layer is independently testable |
+| **Code Review** | PRs touch files across the entire tree                 | PRs are scoped to a single `features/` directory               |
+| **Testing**     | Mocking requires understanding global state            | Each feature's service layer is independently testable         |
 
 ### Layered Dependency Rule
 
@@ -91,6 +91,7 @@ export default async function ProductsPage() {
 ```
 
 This approach gives us:
+
 - **Zero client-side waterfalls** — Data arrives with the HTML.
 - **Built-in ISR** — `{ next: { revalidate: 60 } }` gives us stale-while-revalidate caching for free.
 - **SEO without effort** — Full HTML is available to crawlers on first response.
@@ -101,14 +102,14 @@ This approach gives us:
 
 This architecture was chosen because real e-commerce projects grow in predictable ways. Here is how each growth vector is handled:
 
-| Growth Vector | How This Architecture Handles It |
-|---|---|
-| **More features** (wishlist, reviews, orders, addresses) | Add a new `features/` directory. Zero changes to existing code. |
-| **More developers** | Each developer "owns" a feature slice. No merge conflicts on shared files. |
-| **More API versions** | `ENDPOINTS` constant supports v1/v2 side-by-side (`cart` vs `cartV2`). |
-| **More UI complexity** | Shadcn/ui primitives compose without modification. CVA handles variant explosion. |
-| **Performance at scale** | Server Components eliminate client JS for read-heavy pages. TanStack Query handles client-side cache invalidation for mutations. |
-| **Backend migration** | All API calls funnel through `core/api/client.ts`. Swap the base URL, and every feature follows. |
+| Growth Vector                                            | How This Architecture Handles It                                                                                                 |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| **More features** (wishlist, reviews, orders, addresses) | Add a new `features/` directory. Zero changes to existing code.                                                                  |
+| **More developers**                                      | Each developer "owns" a feature slice. No merge conflicts on shared files.                                                       |
+| **More API versions**                                    | `ENDPOINTS` constant supports v1/v2 side-by-side (`cart` vs `cartV2`).                                                           |
+| **More UI complexity**                                   | Shadcn/ui primitives compose without modification. CVA handles variant explosion.                                                |
+| **Performance at scale**                                 | Server Components eliminate client JS for read-heavy pages. TanStack Query handles client-side cache invalidation for mutations. |
+| **Backend migration**                                    | All API calls funnel through `core/api/client.ts`. Swap the base URL, and every feature follows.                                 |
 
 The centralized API client (`apiClient`) acts as an **anti-corruption layer** — if the backend changes its error format or auth scheme, you fix it in one place, not across 10 feature directories.
 
@@ -121,6 +122,7 @@ This project is built with a deliberate AI-augmented workflow. Every tool below 
 ### Antigravity (Primary AI Coding Agent)
 
 The entire codebase was developed in collaboration with **Antigravity** — an agentic AI coding assistant. It handles:
+
 - Architecture scaffolding and feature generation
 - Code review and refactoring suggestions
 - Automated file creation following the feature-sliced convention
@@ -130,7 +132,7 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 
 [Context7](https://context7.com) is integrated as an **MCP server** that provides the AI agent with **live, version-accurate documentation** for every library in the stack.
 
-**Why it matters:** LLM training data goes stale. Next.js 16 and React 19 have breaking changes that don't exist in most models' training data. Context7 fetches the *actual current docs* — not hallucinated patterns from 2023.
+**Why it matters:** LLM training data goes stale. Next.js 16 and React 19 have breaking changes that don't exist in most models' training data. Context7 fetches the _actual current docs_ — not hallucinated patterns from 2023.
 
 **Configured via:** `mcp_config.json` with authenticated API key for higher rate limits.
 
@@ -139,6 +141,7 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 [Graphify](https://github.com/graphify-ai/graphify) generates a **navigable knowledge graph** of the entire codebase — 434 nodes, 884 edges, 21 communities.
 
 **What it reveals:**
+
 - `cn()` is the top "god node" (126 connections) — confirming it's the shared utility bridge across all UI communities.
 - `apiClient` and `ENDPOINTS` are the second-tier hubs — validating the centralized API layer design.
 - **Zero import cycles detected** — the layered dependency rule is working.
@@ -151,51 +154,55 @@ The graph is available as an interactive HTML visualization at `graphify-out/gra
 
 ### Tool Configuration Summary
 
-| Tool | Purpose | Integration Point |
-|---|---|---|
-| **Antigravity** | AI coding agent (architecture, code gen, review) | IDE-native |
-| **Context7** | Live documentation for Next.js, React, Tailwind, etc. | MCP Server (HTTPS) |
-| **Graphify** | Codebase knowledge graph & architecture validation | MCP Server (local) |
-| **Neon** | Serverless Postgres, schema design, query tuning | MCP Server (HTTPS) |
+| Tool            | Purpose                                               | Integration Point  |
+| --------------- | ----------------------------------------------------- | ------------------ |
+| **Antigravity** | AI coding agent (architecture, code gen, review)      | IDE-native         |
+| **Context7**    | Live documentation for Next.js, React, Tailwind, etc. | MCP Server (HTTPS) |
+| **Graphify**    | Codebase knowledge graph & architecture validation    | MCP Server (local) |
+| **Neon**        | Serverless Postgres, schema design, query tuning      | MCP Server (HTTPS) |
 
 ---
 
 ## Tech Stack
 
 ### Core Framework
-| Technology | Version | Role |
-|---|---|---|
-| [Next.js](https://nextjs.org) | 16.2.6 | App Router, Server Components, ISR, Image optimization |
-| [React](https://react.dev) | 19.2.6 | Server Components, streaming, use() hook |
-| [TypeScript](https://typescriptlang.org) | 6.0 | End-to-end type safety, strict mode |
+
+| Technology                               | Version | Role                                                   |
+| ---------------------------------------- | ------- | ------------------------------------------------------ |
+| [Next.js](https://nextjs.org)            | 16.2.6  | App Router, Server Components, ISR, Image optimization |
+| [React](https://react.dev)               | 19.2.6  | Server Components, streaming, use() hook               |
+| [TypeScript](https://typescriptlang.org) | 6.0     | End-to-end type safety, strict mode                    |
 
 ### UI & Styling
-| Technology | Role |
-|---|---|
-| [Tailwind CSS 4](https://tailwindcss.com) | Utility-first styling with CSS-first configuration |
-| [Shadcn/ui](https://ui.shadcn.com) | Accessible, composable UI primitives (23 components) |
-| [Radix UI](https://radix-ui.com) | Unstyled accessible component primitives |
-| [Lucide React](https://lucide.dev) | Consistent icon system |
-| [Class Variance Authority](https://cva.style) | Type-safe component variants |
-| [Recharts](https://recharts.org) | Dashboard analytics charts |
-| [Embla Carousel](https://embla-carousel.com) | Product image galleries |
+
+| Technology                                    | Role                                                 |
+| --------------------------------------------- | ---------------------------------------------------- |
+| [Tailwind CSS 4](https://tailwindcss.com)     | Utility-first styling with CSS-first configuration   |
+| [Shadcn/ui](https://ui.shadcn.com)            | Accessible, composable UI primitives (23 components) |
+| [Radix UI](https://radix-ui.com)              | Unstyled accessible component primitives             |
+| [Lucide React](https://lucide.dev)            | Consistent icon system                               |
+| [Class Variance Authority](https://cva.style) | Type-safe component variants                         |
+| [Recharts](https://recharts.org)              | Dashboard analytics charts                           |
+| [Embla Carousel](https://embla-carousel.com)  | Product image galleries                              |
 
 ### State & Data
-| Technology | Role |
-|---|---|
-| [TanStack Query](https://tanstack.com/query) | Server state management, caching, optimistic updates |
+
+| Technology                                   | Role                                                    |
+| -------------------------------------------- | ------------------------------------------------------- |
+| [TanStack Query](https://tanstack.com/query) | Server state management, caching, optimistic updates    |
 | [TanStack Table](https://tanstack.com/table) | Headless data table with sorting, filtering, pagination |
-| [Zustand](https://zustand.docs.pmnd.rs) | Client-side state (cart, UI preferences) |
-| [Zod](https://zod.dev) | Runtime schema validation at data boundaries |
-| [Axios](https://axios-http.com) | HTTP client (available for client-side mutations) |
+| [Zustand](https://zustand.docs.pmnd.rs)      | Client-side state (cart, UI preferences)                |
+| [Zod](https://zod.dev)                       | Runtime schema validation at data boundaries            |
+| [Axios](https://axios-http.com)              | HTTP client (available for client-side mutations)       |
 
 ### UX Enhancements
-| Technology | Role |
-|---|---|
-| [dnd-kit](https://dndkit.com) | Drag-and-drop table row reordering |
+
+| Technology                                                | Role                                    |
+| --------------------------------------------------------- | --------------------------------------- |
+| [dnd-kit](https://dndkit.com)                             | Drag-and-drop table row reordering      |
 | [next-themes](https://github.com/pacocoursey/next-themes) | Dark/light theme with system preference |
-| [Sonner](https://sonner.emilkowal.ski) | Toast notifications |
-| [Vaul](https://vaul.emilkowal.ski) | Mobile-friendly drawer component |
+| [Sonner](https://sonner.emilkowal.ski)                    | Toast notifications                     |
+| [Vaul](https://vaul.emilkowal.ski)                        | Mobile-friendly drawer component        |
 
 ---
 
@@ -279,10 +286,10 @@ sallees-ecommerce/
 
 ### Prerequisites
 
-| Requirement | Minimum Version |
-|---|---|
-| [Node.js](https://nodejs.org) | 18.0.0+ |
-| [pnpm](https://pnpm.io) | 9.0+ |
+| Requirement                   | Minimum Version |
+| ----------------------------- | --------------- |
+| [Node.js](https://nodejs.org) | 18.0.0+         |
+| [pnpm](https://pnpm.io)       | 9.0+            |
 
 ### Installation
 
@@ -302,23 +309,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Quick Navigation
 
-| Page | URL | Description |
-|---|---|---|
-| Landing | `/` | Project entry point with navigation |
-| Products | `/products` | Full product catalog (SSR) |
+| Page           | URL              | Description                                          |
+| -------------- | ---------------- | ---------------------------------------------------- |
+| Landing        | `/`              | Project entry point with navigation                  |
+| Products       | `/products`      | Full product catalog (SSR)                           |
 | Product Detail | `/products/[id]` | Individual product page with reviews & image gallery |
-| Dashboard | `/dashboard` | Admin dashboard with charts, tables, and KPIs |
+| Dashboard      | `/dashboard`     | Admin dashboard with charts, tables, and KPIs        |
 
 ---
 
 ## Available Scripts
 
-| Command | Description |
-|---|---|
-| `pnpm dev` | Start development server with hot reload |
-| `pnpm build` | Create optimized production build |
-| `pnpm start` | Serve the production build |
-| `pnpm lint` | Run ESLint across the codebase |
+| Command      | Description                              |
+| ------------ | ---------------------------------------- |
+| `pnpm dev`   | Start development server with hot reload |
+| `pnpm build` | Create optimized production build        |
+| `pnpm start` | Serve the production build               |
+| `pnpm lint`  | Run ESLint across the codebase           |
 
 ---
 
@@ -334,14 +341,14 @@ Request → apiClient (core/api/client.ts) → ENDPOINTS (core/constants/endpoin
 
 ### Supported Domains
 
-| Domain | Endpoints | Auth Required |
-|---|---|---|
-| Products | List, Detail | No |
-| Categories | List, Detail, Subcategories | No |
-| Brands | List, Detail | No |
-| Cart (v1 & v2) | Get, Add, Update, Remove, Clear | Yes |
-| Wishlist | Get, Add, Remove | Yes |
-| Orders | List, Create (Cash & Checkout) | Yes |
-| Auth | Signup, Signin, Forgot/Reset Password | No |
-| Addresses | List, Add, Update, Remove | Yes |
-| Reviews | List, Detail, By Product | Partial |
+| Domain         | Endpoints                             | Auth Required |
+| -------------- | ------------------------------------- | ------------- |
+| Products       | List, Detail                          | No            |
+| Categories     | List, Detail, Subcategories           | No            |
+| Brands         | List, Detail                          | No            |
+| Cart (v1 & v2) | Get, Add, Update, Remove, Clear       | Yes           |
+| Wishlist       | Get, Add, Remove                      | Yes           |
+| Orders         | List, Create (Cash & Checkout)        | Yes           |
+| Auth           | Signup, Signin, Forgot/Reset Password | No            |
+| Addresses      | List, Add, Update, Remove             | Yes           |
+| Reviews        | List, Detail, By Product              | Partial       |

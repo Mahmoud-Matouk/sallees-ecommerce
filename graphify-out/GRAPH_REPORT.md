@@ -1,16 +1,16 @@
 # Graph Report - sallees-ecommerce  (2026-06-09)
 
 ## Corpus Check
-- 82 files · ~18,149 words
+- 83 files · ~20,162 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 434 nodes · 884 edges · 21 communities (15 shown, 6 thin omitted)
+- 461 nodes · 910 edges · 21 communities (14 shown, 7 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `d80c4f3d`
+- Built from commit: `c4930f36`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -52,89 +52,85 @@
   components/ui/breadcrumb.tsx → lib/utils.ts
 - `DrawerOverlay()` --calls--> `cn()`  [EXTRACTED]
   components/ui/drawer.tsx → lib/utils.ts
-- `DropdownMenuRadioItem()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/dropdown-menu.tsx → lib/utils.ts
-- `DropdownMenuShortcut()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/dropdown-menu.tsx → lib/utils.ts
-- `DropdownMenuSubTrigger()` --calls--> `cn()`  [EXTRACTED]
-  components/ui/dropdown-menu.tsx → lib/utils.ts
+- `SelectLabel()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/select.tsx → lib/utils.ts
+- `SelectSeparator()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/select.tsx → lib/utils.ts
+- `SelectScrollUpButton()` --calls--> `cn()`  [EXTRACTED]
+  components/ui/select.tsx → lib/utils.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (21 total, 6 thin omitted)
+## Communities (21 total, 7 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.07
-Nodes (47): SiteHeader(), cn(), Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage() (+39 more)
+Cohesion: 0.06
+Nodes (61): data, NavDocuments(), NavMain(), NavSecondary(), NavUser(), cn(), Avatar(), AvatarBadge() (+53 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (40): apiClient, authHeaders(), HttpMethod, RequestOptions, ENDPOINTS, orderKeys, addressService, brandService (+32 more)
+Cohesion: 0.05
+Nodes (49): apiClient, authHeaders(), HttpMethod, RequestOptions, ENDPOINTS, orderKeys, addressService, authService (+41 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.06
 Nodes (36): ProductCard(), ProductCardProps, ProductDetails(), ProductDetailsProps, ProductGrid(), ProductGridProps, ProductImageGallery(), ProductReviews() (+28 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.07
-Nodes (34): AppSidebar(), ChartAreaInteractive(), chartData, DataTable(), TableCellViewer(), SectionCards(), useIsMobile(), Card() (+26 more)
+Cohesion: 0.09
+Nodes (29): AppSidebar(), ChartAreaInteractive(), chartData, DataTable(), TableCellViewer(), SectionCards(), useIsMobile(), Card() (+21 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.05
-Nodes (42): dependencies, axios, class-variance-authority, clsx, @dnd-kit/core, @dnd-kit/modifiers, @dnd-kit/sortable, @dnd-kit/utilities (+34 more)
+Cohesion: 0.08
+Nodes (25): dependencies, axios, class-variance-authority, clsx, @dnd-kit/core, @dnd-kit/modifiers, @dnd-kit/sortable, @dnd-kit/utilities (+17 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.09
-Nodes (27): chartData, columns, schema, Badge(), badgeVariants, Drawer(), DrawerClose(), DrawerContent() (+19 more)
+Cohesion: 0.06
+Nodes (39): chartData, columns, schema, Badge(), badgeVariants, ChartConfig, ChartContainer(), ChartContext (+31 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.12
-Nodes (25): data, NavDocuments(), NavMain(), NavSecondary(), NavUser(), DropdownMenu(), DropdownMenuCheckboxItem(), DropdownMenuContent() (+17 more)
+Cohesion: 0.10
+Nodes (19): devDependencies, eslint, eslint-config-next, prettier, prettier-plugin-sort-imports, tailwindcss, @tailwindcss/postcss, @types/node (+11 more)
 
 ### Community 7 - "Community 7"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.17
-Nodes (16): ProductImageGalleryProps, Button(), buttonVariants, Carousel(), CarouselApi, CarouselContent(), CarouselContext, CarouselContextProps (+8 more)
+Cohesion: 0.14
+Nodes (18): ProductImageGalleryProps, SiteHeader(), Button(), buttonVariants, Carousel(), CarouselApi, CarouselContent(), CarouselContext (+10 more)
 
 ### Community 9 - "Community 9"
 Cohesion: 0.10
 Nodes (19): compilerOptions, allowJs, esModuleInterop, incremental, isolatedModules, jsx, lib, module (+11 more)
 
-### Community 10 - "Community 10"
-Cohesion: 0.33
-Nodes (9): authService, AuthResponse, ChangePasswordBody, ForgotPasswordBody, ResetPasswordBody, SigninBody, SignupBody, UpdateUserBody (+1 more)
-
 ### Community 11 - "Community 11"
-Cohesion: 0.33
-Nodes (4): geistMono, metadata, ThemeProvider(), TooltipProvider()
+Cohesion: 0.24
+Nodes (6): geistMono, metadata, ThemeProvider(), Tooltip(), TooltipProvider(), TooltipTrigger()
 
 ### Community 12 - "Community 12"
-Cohesion: 0.50
-Nodes (3): Deploy on Vercel, Getting Started, Learn More
+Cohesion: 0.07
+Nodes (26): AI-Augmented Development, Antigravity (Primary AI Coding Agent), API Integration, Architecture & Design Decisions, Available Scripts, Context7 MCP (Documentation Intelligence), Core Framework, Feature-Sliced Design (FSD) (+18 more)
 
 ## Knowledge Gaps
-- **136 isolated node(s):** `geistMono`, `metadata`, `metadata`, `$schema`, `style` (+131 more)
+- **157 isolated node(s):** `geistMono`, `metadata`, `metadata`, `$schema`, `style` (+152 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **6 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **7 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `cn()` connect `Community 0` to `Community 2`, `Community 3`, `Community 5`, `Community 6`, `Community 8`?**
-  _High betweenness centrality (0.200) - this node is a cross-community bridge._
-- **Why does `apiClient` connect `Community 1` to `Community 10`, `Community 2`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
-- **Why does `ENDPOINTS` connect `Community 1` to `Community 10`, `Community 2`?**
-  _High betweenness centrality (0.031) - this node is a cross-community bridge._
+- **Why does `cn()` connect `Community 0` to `Community 2`, `Community 3`, `Community 5`, `Community 8`, `Community 11`?**
+  _High betweenness centrality (0.177) - this node is a cross-community bridge._
+- **Why does `apiClient` connect `Community 1` to `Community 2`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
+- **Why does `ENDPOINTS` connect `Community 1` to `Community 2`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **What connects `geistMono`, `metadata`, `metadata` to the rest of the system?**
-  _136 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _157 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.06861239119303636 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06493506493506493 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**
-  _Cohesion score 0.06398730830248546 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0547945205479452 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.0641025641025641 - nodes in this community are weakly interconnected._

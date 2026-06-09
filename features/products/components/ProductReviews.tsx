@@ -1,5 +1,5 @@
-import { StarIcon } from "lucide-react";
-import type { Review } from "../types/product.types";
+import { StarIcon } from 'lucide-react';
+import type { Review } from '../types/product.types';
 
 interface ProductReviewsProps {
   reviews: Review[];
@@ -23,8 +23,8 @@ export function ProductReviews({
                 key={i}
                 className={`size-5 ${
                   i < Math.round(ratingsAverage)
-                    ? "fill-amber-400 text-amber-400"
-                    : "fill-muted text-muted"
+                    ? 'fill-amber-400 text-amber-400'
+                    : 'fill-muted text-muted'
                 }`}
               />
             ))}
@@ -34,7 +34,7 @@ export function ProductReviews({
           </span>
         </div>
         <span className="text-sm text-muted-foreground">
-          ({ratingsQuantity} {ratingsQuantity === 1 ? "review" : "reviews"})
+          ({ratingsQuantity} {ratingsQuantity === 1 ? 'review' : 'reviews'})
         </span>
       </div>
 
@@ -42,7 +42,10 @@ export function ProductReviews({
       {reviews.length > 0 ? (
         <div className="flex flex-col divide-y divide-border">
           {reviews.map((review) => (
-            <div key={review._id} className="flex flex-col gap-2 py-4 first:pt-0">
+            <div
+              key={review._id}
+              className="flex flex-col gap-2 py-4 first:pt-0"
+            >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {/* Avatar */}
@@ -54,10 +57,10 @@ export function ProductReviews({
                       {review.user.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {new Date(review.createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
+                      {new Date(review.createdAt).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
                       })}
                     </p>
                   </div>
@@ -70,8 +73,8 @@ export function ProductReviews({
                       key={i}
                       className={`size-3.5 ${
                         i < review.rating
-                          ? "fill-amber-400 text-amber-400"
-                          : "fill-muted text-muted"
+                          ? 'fill-amber-400 text-amber-400'
+                          : 'fill-muted text-muted'
                       }`}
                     />
                   ))}

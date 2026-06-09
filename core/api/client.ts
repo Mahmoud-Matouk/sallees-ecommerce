@@ -50,7 +50,8 @@ async function request<T>(
   if (!response.ok) {
     const errorBody = await response.json().catch(() => null);
     throw new Error(
-      errorBody?.message || `API Error: ${response.status} ${response.statusText}`
+      errorBody?.message ||
+        `API Error: ${response.status} ${response.statusText}`
     );
   }
 

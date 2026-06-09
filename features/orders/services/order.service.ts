@@ -1,7 +1,7 @@
-import { apiClient, authHeaders } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
-import type { PaginatedResponse } from '@/core/types/common.types';
+import { apiClient, authHeaders } from '@/core/api/client';
 import type { Order, CreateOrderBody } from '../types/order.types';
+import type { PaginatedResponse } from '@/core/types/common.types';
 
 export const orderService = {
   /** Get all orders (public) */

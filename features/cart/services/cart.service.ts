@@ -1,5 +1,5 @@
-import { apiClient, authHeaders } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
+import { apiClient, authHeaders } from '@/core/api/client';
 import type {
   CartResponse,
   AddToCartBody,
@@ -88,7 +88,10 @@ export const cartV2Service = {
     });
   },
 
-  async applyCoupon(body: ApplyCouponBody, token: string): Promise<CartResponse> {
+  async applyCoupon(
+    body: ApplyCouponBody,
+    token: string
+  ): Promise<CartResponse> {
     return apiClient.put(ENDPOINTS.cartV2.applyCoupon, {
       body,
       headers: authHeaders(token),

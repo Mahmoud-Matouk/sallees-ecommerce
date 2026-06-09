@@ -1,10 +1,13 @@
+import { ProductReviews } from './ProductReviews';
+import type { Product } from '../types/product.types';
+import { ProductImageGallery } from './ProductImageGallery';
 import {
   StarIcon,
   TagIcon,
   BoxIcon,
   TruckIcon,
   ShieldCheckIcon,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,10 +15,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import type { Product } from "../types/product.types";
-import { ProductImageGallery } from "./ProductImageGallery";
-import { ProductReviews } from "./ProductReviews";
+} from '@/components/ui/breadcrumb';
 
 interface ProductDetailsProps {
   product: Product;
@@ -26,20 +26,22 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     <div className="container">
       {/* Breadcrumb */}
       <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/products">products</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href={`/products`}>{product.category.name}</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>{product.title}</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/products">products</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink href={`/products`}>
+              {product.category.name}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{product.title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
       {/* Main grid */}
       <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
@@ -69,8 +71,8 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                   key={i}
                   className={`size-4 ${
                     i < Math.round(product.ratingsAverage)
-                      ? "fill-amber-400 text-amber-400"
-                      : "fill-muted text-muted"
+                      ? 'fill-amber-400 text-amber-400'
+                      : 'fill-muted text-muted'
                   }`}
                 />
               ))}
@@ -130,12 +132,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             <BoxIcon className="size-4 text-muted-foreground" />
             <span
               className={`text-sm font-medium ${
-                product.quantity > 0 ? "text-green-500" : "text-destructive"
+                product.quantity > 0 ? 'text-green-500' : 'text-destructive'
               }`}
             >
               {product.quantity > 0
                 ? `${product.quantity} in stock`
-                : "Out of stock"}
+                : 'Out of stock'}
             </span>
           </div>
 

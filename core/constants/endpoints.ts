@@ -46,8 +46,7 @@ export const ENDPOINTS = {
   reviews: {
     list: '/api/v1/reviews',
     detail: (id: string) => `/api/v1/reviews/${id}`,
-    forProduct: (productId: string) =>
-      `/api/v1/products/${productId}/reviews`,
+    forProduct: (productId: string) => `/api/v1/products/${productId}/reviews`,
   },
 
   // ─── Cart (v1) ─────────────────────────────────────

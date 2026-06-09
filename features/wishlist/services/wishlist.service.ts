@@ -1,5 +1,5 @@
-import { apiClient, authHeaders } from '@/core/api/client';
 import { ENDPOINTS } from '@/core/constants/endpoints';
+import { apiClient, authHeaders } from '@/core/api/client';
 import type {
   WishlistResponse,
   AddToWishlistBody,
@@ -15,7 +15,10 @@ export const wishlistService = {
   },
 
   /** Add a product to wishlist */
-  async add(body: AddToWishlistBody, token: string): Promise<AddToWishlistResponse> {
+  async add(
+    body: AddToWishlistBody,
+    token: string
+  ): Promise<AddToWishlistResponse> {
     return apiClient.post(ENDPOINTS.wishlist.add, {
       body,
       headers: authHeaders(token),

@@ -1,1 +1,12 @@
-{"nodes": [{"id": "c_sallees_ecommerce_app_dashboard_data_json", "label": "data.json", "file_type": "code", "source_file": "app/dashboard/data.json", "source_location": "L1"}], "edges": []}
+{
+  "nodes": [
+    {
+      "id": "c_sallees_ecommerce_app_dashboard_data_json",
+      "label": "data.json",
+      "file_type": "code",
+      "source_file": "app/dashboard/data.json",
+      "source_location": "L1"
+    }
+  ],
+  "edges": []
+}
