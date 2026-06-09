@@ -31,11 +31,11 @@ export function ProductCard({ product }: ProductCardProps) {
     >
       {/* Image Gallery */}
       <div className="relative aspect-square overflow-hidden bg-muted">
-        <ProductImageGallery 
-          images={images} 
-          title={product.title} 
+        <ProductImageGallery
+          images={images}
+          title={product.title}
           variant="card"
-          isHovered={isHovered} 
+          isHovered={isHovered}
         />
 
         {/* Wishlist */}
