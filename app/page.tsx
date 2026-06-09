@@ -5,7 +5,7 @@ import { LayoutDashboard, Package } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-col flex-1 items-center justify-center font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
@@ -40,7 +40,7 @@ export default function Home() {
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
           {/* Products */}
           <Link href="/products">
-            <Button variant="secondary" size="lg">
+            <Button variant="secondary" size="lg" className='cursor-pointer'>
               <Package size={16} />
               Products
             </Button>
@@ -48,7 +48,7 @@ export default function Home() {
 
           {/* Dashboard */}
           <Link href="/dashboard">
-            <Button variant="secondary" size="lg">
+            <Button variant="secondary" size="lg" className='cursor-pointer'>
               <LayoutDashboard size={16} />
               Dashboard
             </Button>

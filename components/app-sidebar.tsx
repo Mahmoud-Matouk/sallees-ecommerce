@@ -166,7 +166,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <Image
                     src={Logo}
                     alt={`${data.company.name} logo`}
-                    fill
+                    width={100}
+                    height={20}
                     className="object-cover"
                   />
                 </div>
