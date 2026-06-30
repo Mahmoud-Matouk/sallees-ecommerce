@@ -1,30 +1,33 @@
-# Skill: Update Readme (Analyze Git File History and Summarize Changes)
+---
+trigger: manual
+---
 
-This skill outlines the process for locating the last commit that modified a specific file (such as `README.md`), extracting the changes introduced by that commit, and summarizing those changes in a professional, structured format.
+# Skill: Update Readme (Sync README Content with Codebase Changes)
+
+This skill outlines the process for reading recent git commits to identify new features, files, folders, or tool integrations, and updating the project's `README.md` main sections (e.g., directory structure tree, feature list, tables) to keep the documentation in sync with the codebase.
+
+Do NOT add a separate commit summary, changelog, or history section. Instead, update the existing document content directly.
 
 ## Procedure
 
-1. **Locate Target Commits**:
-   Run the following command to retrieve the most recent commits modifying the target file (e.g., `README.md`):
+1. **Identify Codebase Changes**:
+   Analyze the recent git commits to identify what code files, folders, features, or configurations were modified, added, or deleted:
    ```bash
-   git log -n 5 --oneline -- <file_path>
+   git log -n 5 --oneline
+   ```
+   Inspect the specific file modifications in those commits:
+   ```bash
+   git show <commit_hash> --stat
    ```
 
-2. **Inspect the Last Modifying Commit**:
-   Identify the target commit hash from the log (excluding formatting-only commits if necessary) and view the detailed diff for the target file:
-   ```bash
-   git show <commit_hash> -- <file_path>
-   ```
-   *Tip*: If the diff is extremely large, redirect the output to a temporary file for structured reading:
-   ```bash
-   git show <commit_hash> -- <file_path> > temp_diff.txt
-   ```
+2. **Locate Target README Sections**:
+   Open `README.md` and find the sections that need to be updated to reflect these codebase changes (e.g., the directory structure tree under "Project Structure", lists of features, list of API integrations/domains, or the "Tech Stack" tables).
 
-3. **Analyze and Classify Added Content**:
-   Examine the added lines (prefixed with `+`) to identify:
-   - Core architectural or logic patterns introduced.
-   - New external tools, integrations, dependencies, or configurations.
-   - Enhancements to the tech stack, developer workflows, or APIs.
+3. **Update the Main Document Body**:
+   Modify the relevant sections of `README.md` directly. For example:
+   - If a folder was deleted/added, update the ASCII folder structure tree.
+   - If a new domain/feature was added, update the "Supported Domains" table or feature lists.
+   - If a tool/library was removed or configured, update the "AI-Augmented Development" or "Tech Stack" tables.
 
-4. **Formulate a Professional Summary**:
-   Draft a clean, structured overview of the modifications, grouping related changes logically and utilizing professional technical terminology. Avoid generic descriptions and focus on the *engineering intent* and *value* of the additions.
+4. **Verify Consistency**:
+   Verify that all updated file links and directory paths in the README match the actual status of the workspace, and that the tone remains professional and unified with the rest of the document.
