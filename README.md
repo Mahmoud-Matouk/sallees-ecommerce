@@ -76,7 +76,7 @@ pages    domain     shared
 - **`components/`** — Reusable UI primitives (Shadcn/ui) with no business logic.
 - **`lib/`** — Pure utility functions (`cn()`, etc.).
 
-> Dependencies flow **downward only**. A feature never imports from another feature. Core never imports from features. This is enforced by convention and verified by the Graphify knowledge graph (see [AI-Augmented Development](#ai-augmented-development)).
+> Dependencies flow **downward only**. A feature never imports from another feature. Core never imports from features.
 
 ### Server-First Data Fetching
 
@@ -136,18 +136,6 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 
 **Configured via:** `mcp_config.json` with authenticated API key for higher rate limits.
 
-### Graphify (Codebase Knowledge Graph)
-
-[Graphify](https://github.com/graphify-ai/graphify) generates a **navigable knowledge graph** of the entire codebase — 434 nodes, 884 edges, 21 communities.
-
-**What it reveals:**
-
-- `cn()` is the top "god node" (126 connections) — confirming it's the shared utility bridge across all UI communities.
-- `apiClient` and `ENDPOINTS` are the second-tier hubs — validating the centralized API layer design.
-- **Zero import cycles detected** — the layered dependency rule is working.
-
-The graph is available as an interactive HTML visualization at `graphify-out/graph.html`.
-
 ### Neon MCP (Database Intelligence)
 
 [Neon](https://neon.tech) is configured as an MCP server for serverless Postgres integration, enabling AI-assisted database schema design, query optimization, and migration planning.
@@ -158,7 +146,6 @@ The graph is available as an interactive HTML visualization at `graphify-out/gra
 | --------------- | ----------------------------------------------------- | ------------------ |
 | **Antigravity** | AI coding agent (architecture, code gen, review)      | IDE-native         |
 | **Context7**    | Live documentation for Next.js, React, Tailwind, etc. | MCP Server (HTTPS) |
-| **Graphify**    | Codebase knowledge graph & architecture validation    | MCP Server (local) |
 | **Neon**        | Serverless Postgres, schema design, query tuning      | MCP Server (HTTPS) |
 
 ---
@@ -267,11 +254,6 @@ sallees-ecommerce/
 │
 ├── lib/                          # Pure utilities
 │   └── utils.ts                  # cn() — Tailwind class merging
-│
-├── graphify-out/                 # AI-generated knowledge graph
-│   ├── graph.json                # Full graph data (434 nodes, 884 edges)
-│   ├── graph.html                # Interactive visualization
-│   └── GRAPH_REPORT.md           # Architecture analysis report
 │
 ├── next.config.ts                # Next.js configuration (remote images)
 ├── tsconfig.json                 # TypeScript strict config with path aliases
