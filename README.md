@@ -140,6 +140,14 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 
 [Neon](https://neon.tech) is configured as an MCP server for serverless Postgres integration, enabling AI-assisted database schema design, query optimization, and migration planning.
 
+### Agent Rules & Custom Skills (Codebase Guardrails)
+
+The project leverages custom agent instructions and automated skills inside the [`.agents/rules/`](file:///c:/sallees-ecommerce/.agents/rules/) directory:
+- **`commit.md`**: Enforces unified commit style rules.
+- **`context7.md`**: Directs agents to fetch version-accurate library documentation.
+- **`structure.md`**: Ensures adherence to the Feature-Sliced Design (FSD) boundaries.
+- **`update_readme.md`**: Orchestrates keeping codebase changes documented in the README.
+
 ### Tool Configuration Summary
 
 | Tool            | Purpose                                               | Integration Point  |
@@ -147,6 +155,7 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 | **Antigravity** | AI coding agent (architecture, code gen, review)      | IDE-native         |
 | **Context7**    | Live documentation for Next.js, React, Tailwind, etc. | MCP Server (HTTPS) |
 | **Neon**        | Serverless Postgres, schema design, query tuning      | MCP Server (HTTPS) |
+| **Agent Rules** | Strict architecture guardrails and automation skills  | Local `.agents/`   |
 
 ---
 
@@ -254,6 +263,13 @@ sallees-ecommerce/
 │
 ├── lib/                          # Pure utilities
 │   └── utils.ts                  # cn() — Tailwind class merging
+│
+├── .agents/                      # Agent instructions, workflows, and development rules
+│   └── rules/                    # Guardrails and skills for AI agents
+│       ├── commit.md             # Commit message guidelines
+│       ├── context7.md           # External library lookup guidelines
+│       ├── structure.md          # Architecture and layered dependency rules
+│       └── update_readme.md      # Skill for syncing README with codebase changes
 │
 ├── next.config.ts                # Next.js configuration (remote images)
 ├── tsconfig.json                 # TypeScript strict config with path aliases
