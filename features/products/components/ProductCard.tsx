@@ -4,6 +4,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { ShoppingCartIcon, StarIcon } from 'lucide-react';
 import { ProductImageGallery } from './ProductImageGallery';
 import type { ProductSummary } from '../types/product.types';
@@ -112,5 +113,46 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         </Button>
       </div>
     </Link>
+  );
+}
+
+export function ProductCardSkeleton() {
+  return (
+    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card">
+      {/* Image Gallery Skeleton */}
+      <div className="relative aspect-square overflow-hidden bg-muted">
+        <Skeleton className="h-full w-full" />
+      </div>
+
+      {/* Content Skeleton */}
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        {/* Brand */}
+        <Skeleton className="h-3 w-16" />
+
+        {/* Title */}
+        <div className="space-y-1">
+          <Skeleton className="h-5 w-full" />
+          <Skeleton className="h-5 w-2/3" />
+        </div>
+
+        {/* Rating */}
+        <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton key={i} className="size-3.5 rounded-full" />
+            ))}
+          </div>
+          <Skeleton className="h-3 w-8" />
+        </div>
+
+        {/* Price */}
+        <div className="mt-auto pt-2">
+          <Skeleton className="h-6 w-24" />
+        </div>
+
+        {/* Add to cart button */}
+        <Skeleton className="mt-2 h-11 w-full rounded-md" />
+      </div>
+    </div>
   );
 }
