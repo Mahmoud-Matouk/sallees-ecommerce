@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import * as React from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { appConfig } from '@/core/constants/app';
@@ -18,6 +19,8 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { CartPanel } from '@/features/cart/components/CartPanel';
+import { useCartStore } from '@/features/cart/hooks/useCartStore';
 import {
   Sheet,
   SheetContent,
@@ -25,6 +28,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   Accordion,
   AccordionContent,
@@ -154,6 +162,21 @@ const Navbar = ({
   },
 }: NavbarProps) => {
   const pathname = usePathname();
+  const totalItems = useCartStore((s) => s.totalItems());
+  const [mounted, setMounted] = React.useState(false);
+  const [cartOpen, setCartOpen] = React.useState(false);
+  const [mobileCartOpen, setMobileCartOpen] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    setCartOpen(false);
+    setMobileCartOpen(false);
+    setMenuOpen(false);
+  }, [pathname]);
 
   // Hide navbar on dashboard pages (dashboard has its own sidebar navigation)
   if (pathname.startsWith('/dashboard')) return null;
@@ -187,12 +210,27 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Button asChild variant="ghost" size="icon">
-              <Link href="#">
-                <ShoppingCart className="size-4" />
-                <span className="sr-only">Cart</span>
-              </Link>
-            </Button>
+            {/* Desktop cart dropdown */}
+            <DropdownMenu open={cartOpen} onOpenChange={setCartOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative cursor-pointer"
+                >
+                  <ShoppingCart className="size-4" />
+                  {mounted && totalItems > 0 && (
+                    <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                      {totalItems > 99 ? '99+' : totalItems}
+                    </span>
+                  )}
+                  <span className="sr-only">Cart</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-80 p-0">
+                <CartPanel />
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button asChild variant="outline" size="sm">
               <Link href={auth.login.url}>{auth.login.text}</Link>
             </Button>
@@ -219,15 +257,37 @@ const Navbar = ({
             </span>
           </Link>
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="icon">
-              <Link href="#">
-                <ShoppingCart className="size-4" />
-                <span className="sr-only">Cart</span>
-              </Link>
-            </Button>
-            <Sheet>
+            {/* Mobile cart dropdown */}
+            <DropdownMenu
+              open={mobileCartOpen}
+              onOpenChange={setMobileCartOpen}
+            >
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative cursor-pointer"
+                >
+                  <ShoppingCart className="size-4" />
+                  {mounted && totalItems > 0 && (
+                    <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                      {totalItems > 99 ? '99+' : totalItems}
+                    </span>
+                  )}
+                  <span className="sr-only">Cart</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-80 p-0">
+                <CartPanel />
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="cursor-pointer"
+                >
                   <Menu className="size-4" />
                 </Button>
               </SheetTrigger>

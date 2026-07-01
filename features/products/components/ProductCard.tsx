@@ -8,6 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { ShoppingCartIcon, StarIcon } from 'lucide-react';
 import { ProductImageGallery } from './ProductImageGallery';
 import type { ProductSummary } from '../types/product.types';
+import { useCartStore } from '@/features/cart/hooks/useCartStore';
 
 interface ProductCardProps {
   product: ProductSummary;
@@ -17,6 +18,7 @@ interface ProductCardProps {
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [isWishlist, setIsWishlist] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const addItem = useCartStore((s) => s.addItem);
 
   const images = React.useMemo(() => {
     const all = [product.imageCover, ...(product.images || [])];
@@ -105,7 +107,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90"
           onClick={(e) => {
             e.preventDefault();
-            // Handle add to cart logic here later
+            addItem(product);
           }}
         >
           <ShoppingCartIcon className="size-4" />
