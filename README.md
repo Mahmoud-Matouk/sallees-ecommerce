@@ -143,6 +143,7 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 ### Agent Rules & Custom Skills (Codebase Guardrails)
 
 The project leverages custom agent instructions and automated skills inside the [`.agents/rules/`](file:///c:/sallees-ecommerce/.agents/rules/) directory:
+
 - **`commit.md`**: Enforces unified commit style rules.
 - **`context7.md`**: Directs agents to fetch version-accurate library documentation.
 - **`structure.md`**: Ensures adherence to the Feature-Sliced Design (FSD) boundaries.

@@ -12,10 +12,13 @@ Do NOT add a separate commit summary, changelog, or history section. Instead, up
 
 1. **Identify Codebase Changes**:
    Analyze the recent git commits to identify what code files, folders, features, or configurations were modified, added, or deleted:
+
    ```bash
    git log -n 5 --oneline
    ```
+
    Inspect the specific file modifications in those commits:
+
    ```bash
    git show <commit_hash> --stat
    ```
