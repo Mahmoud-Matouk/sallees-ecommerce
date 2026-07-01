@@ -168,9 +168,21 @@ const Navbar = ({
   const [mobileCartOpen, setMobileCartOpen] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
 
+  const [animateBadge, setAnimateBadge] = React.useState(false);
+  const prevItemsCount = React.useRef(totalItems);
+
   React.useEffect(() => {
     setMounted(true);
   }, []);
+
+  React.useEffect(() => {
+    if (mounted && totalItems > prevItemsCount.current) {
+      setAnimateBadge(true);
+      const timer = setTimeout(() => setAnimateBadge(false), 400);
+      return () => clearTimeout(timer);
+    }
+    prevItemsCount.current = totalItems;
+  }, [totalItems, mounted]);
 
   React.useEffect(() => {
     setCartOpen(false);
@@ -213,15 +225,16 @@ const Navbar = ({
             {/* Desktop cart dropdown */}
             <DropdownMenu open={cartOpen} onOpenChange={setCartOpen}>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative cursor-pointer"
-                >
+                <Button variant="ghost" size="icon" className="relative cursor-pointer">
                   <ShoppingCart className="size-4" />
                   {mounted && totalItems > 0 && (
-                    <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                      {totalItems > 99 ? '99+' : totalItems}
+                    <span className="absolute -right-1 -top-1 flex items-center justify-center">
+                      {animateBadge && (
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75"></span>
+                      )}
+                      <span className="relative flex min-w-4 h-4 items-center justify-center rounded-full bg-red-600 px-1 text-[11px] font-bold leading-none text-white">
+                        {totalItems > 99 ? '99+' : totalItems}
+                      </span>
                     </span>
                   )}
                   <span className="sr-only">Cart</span>
@@ -263,15 +276,16 @@ const Navbar = ({
               onOpenChange={setMobileCartOpen}
             >
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative cursor-pointer"
-                >
+                <Button variant="ghost" size="icon" className="relative cursor-pointer">
                   <ShoppingCart className="size-4" />
                   {mounted && totalItems > 0 && (
-                    <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                      {totalItems > 99 ? '99+' : totalItems}
+                    <span className="absolute -right-1 -top-1 flex items-center justify-center">
+                      {animateBadge && (
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-destructive opacity-75"></span>
+                      )}
+                      <span className="relative flex min-w-4 h-4 items-center justify-center rounded-full bg-red-600 px-1 text-[9px] font-bold leading-none text-white">
+                        {totalItems > 99 ? '99+' : totalItems}
+                      </span>
                     </span>
                   )}
                   <span className="sr-only">Cart</span>

@@ -16,6 +16,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ProductDetailsProps {
   product: Product;
@@ -171,3 +172,154 @@ export function ProductDetails({ product }: ProductDetailsProps) {
     </div>
   );
 }
+
+export function ProductDetailsSkeleton() {
+  return (
+    <div className="container py-8">
+      {/* Breadcrumb Skeleton */}
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <Skeleton className="h-4 w-16" />
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <Skeleton className="h-4 w-24" />
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <Skeleton className="h-4 w-32" />
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+
+      {/* Main grid */}
+      <div className="mt-6 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+        {/* Left Column — Image Gallery Skeleton */}
+        <div className="flex flex-col gap-4">
+          <div className="relative aspect-square overflow-hidden rounded-xl bg-muted">
+            <Skeleton className="h-full w-full" />
+          </div>
+          {/* Thumbnails */}
+          <div className="flex gap-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="aspect-square w-20 rounded-md bg-muted" />
+            ))}
+          </div>
+        </div>
+
+        {/* Right Column — Info Skeleton */}
+        <div className="flex flex-col gap-6">
+          {/* Brand */}
+          <Skeleton className="h-4 w-20" />
+
+          {/* Title */}
+          <div className="space-y-2">
+            <Skeleton className="h-8 w-3/4" />
+            <Skeleton className="h-8 w-1/2" />
+          </div>
+
+          {/* Rating row */}
+          <div className="flex items-center gap-3">
+            <div className="flex gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Skeleton key={i} className="size-4 rounded-full" />
+              ))}
+            </div>
+            <Skeleton className="h-4 w-8" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+
+          {/* Price */}
+          <Skeleton className="h-10 w-36" />
+
+          <hr className="border-border" />
+
+          {/* Description */}
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-2/3" />
+          </div>
+
+          {/* Category & Subcategory tags */}
+          <div className="flex gap-2">
+            <Skeleton className="h-6 w-24 rounded-full" />
+            <Skeleton className="h-6 w-20 rounded-full" />
+            <Skeleton className="h-6 w-28 rounded-full" />
+          </div>
+
+          {/* Stock info */}
+          <div className="flex items-center gap-2">
+            <Skeleton className="size-4 rounded-full" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+
+          {/* Trust badges */}
+          <div className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-muted/50 p-4">
+            <div className="flex items-center gap-2.5">
+              <Skeleton className="size-4 rounded-full" />
+              <Skeleton className="h-3 w-20" />
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Skeleton className="size-4 rounded-full" />
+              <Skeleton className="h-3 w-24" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Reviews section skeleton */}
+      <div className="mt-16">
+        <h2 className="mb-6 text-xl font-bold text-foreground">
+          Customer Reviews
+        </h2>
+        <div className="flex flex-col gap-6">
+          {/* Summary header skeleton */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Skeleton key={i} className="size-5 rounded-full" />
+                ))}
+              </div>
+              <Skeleton className="h-6 w-8" />
+            </div>
+            <Skeleton className="h-4 w-20" />
+          </div>
+
+          {/* Reviews list skeleton */}
+          <div className="flex flex-col divide-y divide-border">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="flex flex-col gap-2 py-4 first:pt-0">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {/* Avatar skeleton */}
+                    <Skeleton className="size-9 rounded-full" />
+                    <div>
+                      <Skeleton className="h-4 w-24 mb-1" />
+                      <Skeleton className="h-3 w-16" />
+                    </div>
+                  </div>
+                  {/* Rating stars skeleton */}
+                  <div className="flex gap-0.5">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Skeleton key={j} className="size-3.5 rounded-full" />
+                    ))}
+                  </div>
+                </div>
+                {/* Review text skeleton */}
+                <div className="pl-12 space-y-1.5">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
