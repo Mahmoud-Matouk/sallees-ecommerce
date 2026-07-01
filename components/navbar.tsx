@@ -83,31 +83,31 @@ const Navbar = ({
     { title: 'Home', url: '/' },
     {
       title: 'Shop',
-      url: '/products',
+      url: '/',
       items: [
         {
           title: 'All Products',
           description: 'Browse our complete collection of products',
           icon: <Package className="size-5 shrink-0" />,
-          url: '/products',
+          url: '/',
         },
         {
           title: 'New Arrivals',
           description: 'Check out the latest additions to our store',
           icon: <Zap className="size-5 shrink-0" />,
-          url: '/products',
+          url: '/',
         },
         {
           title: 'Best Sellers',
           description: 'Our most popular products loved by customers',
           icon: <Star className="size-5 shrink-0" />,
-          url: '/products',
+          url: '/',
         },
         {
           title: 'Deals & Offers',
           description: 'Special discounts and limited-time offers',
           icon: <Tag className="size-5 shrink-0" />,
-          url: '/products',
+          url: '/',
         },
       ],
     },
@@ -159,7 +159,7 @@ const Navbar = ({
   if (pathname.startsWith('/dashboard')) return null;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background">
+    <header className="sticky top-0 z-50 w-full border-b border-gray-300 shadow-md bg-background">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
         <nav className="hidden h-16 items-center justify-between lg:flex">

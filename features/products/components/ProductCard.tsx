@@ -25,7 +25,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
   return (
     <Link
-      href={`/products/${product._id}`}
+      href={`/${product._id}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
