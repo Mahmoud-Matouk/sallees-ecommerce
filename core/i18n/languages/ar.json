@@ -1,0 +1,64 @@
+{
+  "common": {
+    "title": "ساليز",
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "dashboard": "لوحة التحكم",
+    "cart": "السلة",
+    "search": "بحث",
+    "language": "اللغة",
+    "english": "الإنجليزية",
+    "arabic": "العربية",
+    "egp": "ج.م",
+    "loading": "جاري التحميل..."
+  },
+  "navbar": {
+    "allProducts": "جميع المنتجات",
+    "newArrivals": "وصل حديثاً",
+    "bestSellers": "الأكثر مبيعاً",
+    "dealsOffers": "العروض والخصومات",
+    "myOrders": "طلباتي",
+    "wishlist": "قائمة الأمنيات",
+    "profile": "الملف الشخصي",
+    "helpCenter": "مركز المساعدة",
+    "contactUs": "اتصل بنا",
+    "shippingInfo": "معلومات الشحن",
+    "returns": "المرتجعات",
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب"
+  },
+  "products": {
+    "price": "السعر",
+    "addToCart": "إضافة إلى السلة",
+    "reviews": "تقييمات",
+    "rating": "التقييم",
+    "inStock": "متوفر في المخزون",
+    "outOfStock": "غير متوفر",
+    "description": "الوصف",
+    "specifications": "المواصفات",
+    "brand": "العلامة التجارية",
+    "category": "الفئة",
+    "share": "مشاركة",
+    "notFound": "المنتج غير موجود",
+    "backToProducts": "العودة للمنتجات"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "orders": "الطلبات",
+    "revenue": "الإيرادات",
+    "sales": "المبيعات",
+    "analytics": "التحليلات",
+    "documents": "المستندات"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "startAdding": "أضف منتجات للبدء",
+    "clearAll": "مسح الكل",
+    "remove": "إزالة",
+    "subtotal": "المجموع الكلي",
+    "checkout": "إتمام الشراء",
+    "item": "منتج",
+    "items": "منتجات"
+  }
+}

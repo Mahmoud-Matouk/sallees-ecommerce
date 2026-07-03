@@ -23,3 +23,5 @@ export interface MessageResponse {
   status: string;
   message: string;
 }
+
+export type Direction = 'ltr' | 'rtl';

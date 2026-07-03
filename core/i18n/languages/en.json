@@ -1,0 +1,64 @@
+{
+  "common": {
+    "title": "Sallees",
+    "home": "Home",
+    "shop": "Shop",
+    "dashboard": "Dashboard",
+    "cart": "Cart",
+    "search": "Search",
+    "language": "Language",
+    "english": "English",
+    "arabic": "Arabic",
+    "egp": "EGP",
+    "loading": "Loading..."
+  },
+  "navbar": {
+    "allProducts": "All Products",
+    "newArrivals": "New Arrivals",
+    "bestSellers": "Best Sellers",
+    "dealsOffers": "Deals & Offers",
+    "myOrders": "My Orders",
+    "wishlist": "Wishlist",
+    "profile": "Profile",
+    "helpCenter": "Help Center",
+    "contactUs": "Contact Us",
+    "shippingInfo": "Shipping Info",
+    "returns": "Returns",
+    "login": "Log in",
+    "signup": "Sign up"
+  },
+  "products": {
+    "price": "Price",
+    "addToCart": "Add to Cart",
+    "reviews": "reviews",
+    "rating": "Rating",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "description": "Description",
+    "specifications": "Specifications",
+    "brand": "Brand",
+    "category": "Category",
+    "share": "Share",
+    "notFound": "Product Not Found",
+    "backToProducts": "Back to Products"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "orders": "Orders",
+    "revenue": "Revenue",
+    "sales": "Sales",
+    "analytics": "Analytics",
+    "documents": "Documents"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "startAdding": "Add items to get started",
+    "clearAll": "Clear all",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "item": "item",
+    "items": "items"
+  }
+}
