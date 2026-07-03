@@ -61,7 +61,7 @@ export function ProductReviews({
                       {review.user.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {localizeDate(review.createdAt, lang)}
+                      {localizeDate(review.createdAt, lang ?? 'en')}
                     </p>
                   </div>
                 </div>
