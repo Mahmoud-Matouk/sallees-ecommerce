@@ -5,7 +5,7 @@
 <h1 align="center">Sallees E-Commerce</h1>
 
 <p align="center">
-  A production-grade e-commerce storefront built with <strong>Next.js 16</strong>, <strong>React 19</strong>, and a <strong>feature-sliced architecture</strong> — designed for scalability, maintainability, and real-world team workflows.
+  A production-grade e-commerce storefront built with <strong>Next.js 16</strong>, <strong>React 19</strong>, and a <strong>feature-sliced architecture</strong> — designed for scalability, maintainability, and real-world team workflows. Fully internationalized with <strong>Arabic (RTL) and English (LTR)</strong> support.
 </p>
 
 <p align="center">
@@ -13,6 +13,7 @@
   <img src="https://img.shields.io/badge/React-19.2-61DAFB?logo=react" alt="React" />
   <img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript" alt="TypeScript" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-4.3-06B6D4?logo=tailwindcss" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/i18n-AR_%7C_EN-green" alt="Internationalization" />
   <img src="https://img.shields.io/badge/AI_Augmented-Antigravity_+_Context7-blueviolet" alt="AI Augmented" />
 </p>
 
@@ -22,6 +23,7 @@
 
 - [Why This Project Exists](#why-this-project-exists)
 - [Architecture & Design Decisions](#architecture--design-decisions)
+- [Internationalization (i18n)](#internationalization-i18n)
 - [Scalability by Design](#scalability-by-design)
 - [AI-Augmented Development](#ai-augmented-development)
 - [Tech Stack](#tech-stack)
@@ -40,6 +42,7 @@ This is not a tutorial follow-along. It is a deliberate engineering exercise tha
 2. **AI-augmented workflows** — Every phase of development (scaffolding, documentation lookup, code review, knowledge graph generation) leverages AI tooling in a structured, repeatable way.
 3. **Modern React & Next.js mastery** — React 19 Server Components, Next.js 16 App Router with `async` pages, dynamic metadata generation, ISR caching, and streaming.
 4. **Type-safe full-stack integration** — End-to-end TypeScript from API client to UI components, with Zod runtime validation at data boundaries.
+5. **Full internationalization** — Locale-aware routing, RTL layout switching, locale-scoped number/currency/date formatting, and translated UI strings for Arabic and English.
 
 ---
 
@@ -72,9 +75,9 @@ pages    domain     shared
 
 - **`app/`** — Route handlers and page layouts. Thin wrappers that compose feature components.
 - **`features/`** — Self-contained business domains. Each feature owns its own `types/`, `services/`, `hooks/`, and `components/`.
-- **`core/`** — Cross-cutting infrastructure: API client, shared types, endpoint constants.
+- **`core/`** — Cross-cutting infrastructure: API client, shared types, endpoint constants, and i18n context.
 - **`components/`** — Reusable UI primitives (Shadcn/ui) with no business logic.
-- **`lib/`** — Pure utility functions (`cn()`, etc.).
+- **`lib/`** — Pure utility functions (`cn()`, `formatCurrency()`, `formatNumber()`, etc.).
 
 > Dependencies flow **downward only**. A feature never imports from another feature. Core never imports from features.
 
@@ -83,7 +86,7 @@ pages    domain     shared
 Pages use **async Server Components** with Next.js native `fetch` extensions:
 
 ```tsx
-// app/products/page.tsx — No useEffect, no loading spinners on first paint
+// app/[lang]/(products)/page.tsx — No useEffect, no loading spinners on first paint
 export default async function ProductsPage() {
   const { data: products } = await productService.getAll();
   return <ProductGrid products={products} />;
@@ -95,6 +98,38 @@ This approach gives us:
 - **Zero client-side waterfalls** — Data arrives with the HTML.
 - **Built-in ISR** — `{ next: { revalidate: 60 } }` gives us stale-while-revalidate caching for free.
 - **SEO without effort** — Full HTML is available to crawlers on first response.
+
+---
+
+## Internationalization (i18n)
+
+The application supports **Arabic (RTL)** and **English (LTR)** through a fully integrated localization system — no third-party i18n library required.
+
+### How It Works
+
+| Layer | File | Responsibility |
+| ----- | ---- | -------------- |
+| **Routing** | `app/[lang]/layout.tsx` | Reads the `[lang]` segment, sets `<html lang dir>` attributes |
+| **Context** | `core/i18n/I18nProvider.tsx` | Exposes `locale`, `dir`, and `lang` (translation map) to all client components |
+| **Translations** | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings |
+| **Locale types** | `core/i18n/languages.ts` | `Locale` union type (`'en' | 'ar'`) |
+| **Direction type** | `core/types/common.types.ts` | `Direction = 'ltr' | 'rtl'` |
+| **Helpers** | `lib/helper.ts` | `formatCurrency()`, `formatNumber()`, `formatDate()`, `getLocalizedPath()`, `getAppDirection()` |
+| **Switcher** | `components/language-switcher.tsx` | UI control to switch between locales |
+| **Proxy** | `proxy.ts` | Redirects root `/` to the locale stored in the `NEXT_LOCALE` cookie |
+
+### RTL Support
+
+- The `<html dir>` attribute switches between `ltr` and `rtl` automatically based on locale.
+- The Navbar reads `dir` from `I18nProvider` and **reverses menu item order** in Arabic so items read naturally right-to-left.
+- Embla Carousel (`ProductImageGallery`) receives `direction: dir` in its options so slide transforms are computed in the correct axis for RTL.
+- All number, currency, and date formatting uses locale-appropriate `Intl` APIs (e.g., `ar-EG` for Arabic).
+
+### Adding a New Language
+
+1. Add a translation file at `core/i18n/languages/<code>.json`.
+2. Extend the `Locale` union in `core/i18n/languages.ts`.
+3. Add the locale to the `[lang]` segment's `generateStaticParams` in `app/[lang]/layout.tsx`.
 
 ---
 
@@ -110,6 +145,7 @@ This architecture was chosen because real e-commerce projects grow in predictabl
 | **More UI complexity**                                   | Shadcn/ui primitives compose without modification. CVA handles variant explosion.                                                |
 | **Performance at scale**                                 | Server Components eliminate client JS for read-heavy pages. TanStack Query handles client-side cache invalidation for mutations. |
 | **Backend migration**                                    | All API calls funnel through `core/api/client.ts`. Swap the base URL, and every feature follows.                                 |
+| **More languages**                                       | Add a JSON translation file and extend the `Locale` type. The routing and context system picks it up automatically.              |
 
 The centralized API client (`apiClient`) acts as an **anti-corruption layer** — if the backend changes its error format or auth scheme, you fix it in one place, not across 10 feature directories.
 
@@ -180,7 +216,7 @@ The project leverages custom agent instructions and automated skills inside the 
 | [Lucide React](https://lucide.dev)            | Consistent icon system                               |
 | [Class Variance Authority](https://cva.style) | Type-safe component variants                         |
 | [Recharts](https://recharts.org)              | Dashboard analytics charts                           |
-| [Embla Carousel](https://embla-carousel.com)  | Product image galleries                              |
+| [Embla Carousel](https://embla-carousel.com)  | Product image galleries with RTL direction support   |
 
 ### State & Data
 
@@ -192,12 +228,21 @@ The project leverages custom agent instructions and automated skills inside the 
 | [Zod](https://zod.dev)                       | Runtime schema validation at data boundaries            |
 | [Axios](https://axios-http.com)              | HTTP client (available for client-side mutations)       |
 
+### Internationalization
+
+| Technology / Module                   | Role                                                        |
+| ------------------------------------- | ----------------------------------------------------------- |
+| `core/i18n/I18nProvider.tsx`          | React context exposing locale, direction, and translations  |
+| `core/i18n/languages/`               | JSON translation files for `en` and `ar`                   |
+| `lib/helper.ts`                       | Locale-aware `formatCurrency`, `formatNumber`, `formatDate` |
+| `components/language-switcher.tsx`    | UI control for switching between Arabic and English         |
+| `proxy.ts`                            | Cookie-based locale detection and root redirect             |
+
 ### UX Enhancements
 
 | Technology                                                | Role                                    |
 | --------------------------------------------------------- | --------------------------------------- |
 | [dnd-kit](https://dndkit.com)                             | Drag-and-drop table row reordering      |
-| [next-themes](https://github.com/pacocoursey/next-themes) | Dark/light theme with system preference |
 | [Sonner](https://sonner.emilkowal.ski)                    | Toast notifications                     |
 | [Vaul](https://vaul.emilkowal.ski)                        | Mobile-friendly drawer component        |
 
@@ -208,15 +253,17 @@ The project leverages custom agent instructions and automated skills inside the 
 ```
 sallees-ecommerce/
 ├── app/                          # Next.js App Router (pages & layouts)
-│   ├── layout.tsx                # Root layout (theme, fonts, providers)
-│   ├── page.tsx                  # Landing page
-│   ├── dashboard/                # Admin dashboard
-│   │   ├── page.tsx              # Server Component — fetches products & orders
-│   │   └── data.json             # Dashboard mock data
-│   └── products/                 # Product catalog
-│       ├── page.tsx              # Product listing (SSR + ISR)
-│       └── [id]/                 # Dynamic product detail
-│           └── page.tsx          # generateMetadata + SSR detail page
+│   └── [lang]/                   # Locale segment — all routes are locale-scoped
+│       ├── layout.tsx            # Locale layout: sets <html lang dir>, wraps I18nProvider
+│       ├── (products)/           # Product catalog route group
+│       │   ├── page.tsx          # Product listing (SSR + ISR)
+│       │   ├── loading.tsx       # Streaming skeleton for product list
+│       │   └── [id]/             # Dynamic product detail
+│       │       ├── page.tsx      # generateMetadata + SSR detail page
+│       │       └── loading.tsx   # Streaming skeleton for product detail
+│       └── dashboard/            # Admin dashboard
+│           ├── page.tsx          # Server Component — fetches products & orders
+│           └── data.json         # Dashboard mock data
 │
 ├── features/                     # Feature-sliced business domains
 │   ├── products/                 # Product domain
@@ -229,7 +276,8 @@ sallees-ecommerce/
 │   │   ├── services/             #   authService (signup, signin, reset)
 │   │   └── types/                #   AuthResponse, SignupBody, etc.
 │   ├── cart/                     # Shopping cart domain
-│   │   ├── components/           #   Cart UI components
+│   │   ├── components/           #   CartPanel (translated UI)
+│   │   ├── hooks/                #   useCartStore (Zustand)
 │   │   ├── services/             #   Cart API operations
 │   │   └── types/                #   Cart types
 │   ├── orders/                   # Order management domain
@@ -248,22 +296,33 @@ sallees-ecommerce/
 │   │   └── client.ts             # Centralized fetch wrapper (auth, caching, errors)
 │   ├── constants/
 │   │   └── endpoints.ts          # All API endpoint definitions (v1 + v2)
+│   ├── i18n/                     # Internationalization system
+│   │   ├── I18nProvider.tsx      # React context: locale, dir, lang translations
+│   │   ├── languages.ts          # Locale union type + translation loader
+│   │   └── languages/
+│   │       ├── en.json           # English translation strings
+│   │       └── ar.json           # Arabic translation strings
 │   └── types/
-│       └── common.types.ts       # PaginatedResponse, SingleResponse, etc.
+│       └── common.types.ts       # PaginatedResponse, SingleResponse, Direction, etc.
 │
 ├── components/                   # Shared UI components
 │   ├── ui/                       # Shadcn/ui primitives (23 components)
+│   ├── navbar.tsx                # RTL-aware top navigation with locale support
+│   ├── language-switcher.tsx     # Locale toggle (AR / EN)
 │   ├── app-sidebar.tsx           # Dashboard sidebar navigation
 │   ├── chart-area-interactive.tsx # Analytics area chart
 │   ├── data-table.tsx            # Full-featured data table (drag, sort, filter)
-│   ├── section-cards.tsx         # Dashboard KPI cards
-│   └── theme-provider.tsx        # Dark/light mode provider
+│   └── section-cards.tsx         # Dashboard KPI cards
 │
 ├── hooks/                        # Global custom hooks
 │   └── use-mobile.ts             # Responsive breakpoint detection
 │
 ├── lib/                          # Pure utilities
-│   └── utils.ts                  # cn() — Tailwind class merging
+│   ├── utils.ts                  # cn() — Tailwind class merging
+│   └── helper.ts                 # formatCurrency, formatNumber, formatDate,
+│                                 # getLocalizedPath, getAppDirection
+│
+├── proxy.ts                      # Cookie-based locale detection & root redirect
 │
 ├── .agents/                      # Agent instructions, workflows, and development rules
 │   └── rules/                    # Guardrails and skills for AI agents
@@ -274,7 +333,7 @@ sallees-ecommerce/
 │
 ├── next.config.ts                # Next.js configuration (remote images)
 ├── tsconfig.json                 # TypeScript strict config with path aliases
-├── tailwind.config.ts            # Tailwind CSS configuration
+├── postcss.config.mjs            # PostCSS configuration for Tailwind CSS
 ├── package.json                  # Dependencies & scripts
 └── pnpm-workspace.yaml           # pnpm workspace config
 ```
@@ -304,16 +363,15 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser. You will be redirected to `/en` or `/ar` based on your locale cookie.
 
 ### Quick Navigation
 
-| Page           | URL              | Description                                          |
-| -------------- | ---------------- | ---------------------------------------------------- |
-| Landing        | `/`              | Project entry point with navigation                  |
-| Products       | `/products`      | Full product catalog (SSR)                           |
-| Product Detail | `/products/[id]` | Individual product page with reviews & image gallery |
-| Dashboard      | `/dashboard`     | Admin dashboard with charts, tables, and KPIs        |
+| Page           | URL (English)      | URL (Arabic)       | Description                                          |
+| -------------- | ------------------ | ------------------ | ---------------------------------------------------- |
+| Products       | `/en`              | `/ar`              | Full product catalog (SSR)                           |
+| Product Detail | `/en/[id]`         | `/ar/[id]`         | Individual product page with reviews & image gallery |
+| Dashboard      | `/en/dashboard`    | `/ar/dashboard`    | Admin dashboard with charts, tables, and KPIs        |
 
 ---
 
