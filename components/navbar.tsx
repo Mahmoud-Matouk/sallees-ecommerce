@@ -18,8 +18,11 @@ import {
   Zap,
 } from 'lucide-react';
 
+import { getLocalizedPath } from '@/lib/helper';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/core/i18n/I18nProvider';
 import { CartPanel } from '@/features/cart/components/CartPanel';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { useCartStore } from '@/features/cart/hooks/useCartStore';
 import {
   Sheet,
@@ -81,88 +84,14 @@ interface NavbarProps {
 }
 
 const Navbar = ({
-  logo = {
-    url: '/',
-    src: '/logo.svg',
-    alt: `${appConfig.name} logo`,
-    title: appConfig.name,
-  },
-  menu = [
-    { title: 'Home', url: '/' },
-    {
-      title: 'Shop',
-      url: '/',
-      items: [
-        {
-          title: 'All Products',
-          description: 'Browse our complete collection of products',
-          icon: <Package className="size-5 shrink-0" />,
-          url: '/',
-        },
-        {
-          title: 'New Arrivals',
-          description: 'Check out the latest additions to our store',
-          icon: <Zap className="size-5 shrink-0" />,
-          url: '/',
-        },
-        {
-          title: 'Best Sellers',
-          description: 'Our most popular products loved by customers',
-          icon: <Star className="size-5 shrink-0" />,
-          url: '/',
-        },
-        {
-          title: 'Deals & Offers',
-          description: 'Special discounts and limited-time offers',
-          icon: <Tag className="size-5 shrink-0" />,
-          url: '/',
-        },
-      ],
-    },
-    {
-      title: 'Account',
-      url: '#',
-      items: [
-        {
-          title: 'My Orders',
-          description: 'Track and manage your orders',
-          icon: <Truck className="size-5 shrink-0" />,
-          url: '#',
-        },
-        {
-          title: 'Wishlist',
-          description: 'Your saved items and favorites',
-          icon: <Heart className="size-5 shrink-0" />,
-          url: '#',
-        },
-        {
-          title: 'Dashboard',
-          description: 'View analytics and manage your store',
-          icon: <LayoutDashboard className="size-5 shrink-0" />,
-          url: '/dashboard',
-        },
-        {
-          title: 'Profile',
-          description: 'Manage your account settings and preferences',
-          icon: <User className="size-5 shrink-0" />,
-          url: '#',
-        },
-      ],
-    },
-  ],
-  mobileExtraLinks = [
-    { name: 'Help Center', url: '#' },
-    { name: 'Contact Us', url: '#' },
-    { name: 'Shipping Info', url: '#' },
-    { name: 'Returns', url: '#' },
-  ],
-  auth = {
-    login: { text: 'Log in', url: '#' },
-    signup: { text: 'Sign up', url: '#' },
-  },
+  logo: logoProp,
+  menu: menuProp,
+  mobileExtraLinks: mobileExtraLinksProp,
+  auth: authProp,
 }: NavbarProps) => {
   const pathname = usePathname();
   const totalItems = useCartStore((s) => s.totalItems());
+  const { locale, lang, dir } = useI18n();
   const [mounted, setMounted] = React.useState(false);
   const [cartOpen, setCartOpen] = React.useState(false);
   const [mobileCartOpen, setMobileCartOpen] = React.useState(false);
@@ -170,6 +99,98 @@ const Navbar = ({
 
   const [animateBadge, setAnimateBadge] = React.useState(false);
   const prevItemsCount = React.useRef(totalItems);
+
+  // Helper to prepend locale to paths
+  const localizePath = React.useCallback(
+    (url: string) => {
+      return getLocalizedPath(url, locale);
+    },
+    [locale]
+  );
+
+  // Generate localized objects
+  const logo = logoProp || {
+    url: localizePath('/'),
+    src: '/logo.svg',
+    alt: `${lang.common.title} logo`,
+    title: lang.common.title,
+  };
+
+  const menu: MenuItem[] = menuProp || [
+    { title: lang.common.home, url: localizePath('/') },
+    {
+      title: lang.common.shop,
+      url: localizePath('/'),
+      items: [
+        {
+          title: lang.navbar.allProducts,
+          description: lang.navbar.allProducts,
+          icon: <Package className="size-5 shrink-0" />,
+          url: localizePath('/'),
+        },
+        {
+          title: lang.navbar.newArrivals,
+          description: lang.navbar.newArrivals,
+          icon: <Zap className="size-5 shrink-0" />,
+          url: localizePath('/'),
+        },
+        {
+          title: lang.navbar.bestSellers,
+          description: lang.navbar.bestSellers,
+          icon: <Star className="size-5 shrink-0" />,
+          url: localizePath('/'),
+        },
+        {
+          title: lang.navbar.dealsOffers,
+          description: lang.navbar.dealsOffers,
+          icon: <Tag className="size-5 shrink-0" />,
+          url: localizePath('/'),
+        },
+      ],
+    },
+    {
+      title: lang.navbar.profile || 'Account',
+      url: '#',
+      items: [
+        {
+          title: lang.navbar.myOrders,
+          description: lang.navbar.myOrders,
+          icon: <Truck className="size-5 shrink-0" />,
+          url: '#',
+        },
+        {
+          title: lang.navbar.wishlist,
+          description: lang.navbar.wishlist,
+          icon: <Heart className="size-5 shrink-0" />,
+          url: '#',
+        },
+        {
+          title: lang.common.dashboard,
+          description: lang.common.dashboard,
+          icon: <LayoutDashboard className="size-5 shrink-0" />,
+          url: localizePath('/dashboard'),
+        },
+        {
+          title: lang.navbar.profile,
+          description: lang.navbar.profile,
+          icon: <User className="size-5 shrink-0" />,
+          url: '#',
+        },
+      ],
+    },
+  ];
+
+  const mobileExtraLinks = mobileExtraLinksProp || [
+    { name: lang.navbar.helpCenter, url: '#' },
+    { name: lang.navbar.contactUs, url: '#' },
+    { name: lang.navbar.shippingInfo, url: '#' },
+    { name: lang.navbar.returns, url: '#' },
+  ];
+
+  const auth = authProp || {
+    login: { text: lang.navbar.login, url: '#' },
+    signup: { text: lang.navbar.signup, url: '#' },
+  };
 
   React.useEffect(() => {
     setMounted(true);
@@ -190,15 +211,17 @@ const Navbar = ({
     setMenuOpen(false);
   }, [pathname]);
 
-  // Hide navbar on dashboard pages (dashboard has its own sidebar navigation)
-  if (pathname.startsWith('/dashboard')) return null;
+  // Strip locale prefix from pathname to test for dashboard pages
+  const normalizedPathname = pathname.replace(/^\/[a-z]{2}/, '');
+  if (normalizedPathname.startsWith('/dashboard')) return null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-gray-300 shadow-md bg-background">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Navigation */}
         <nav className="hidden h-16 items-center justify-between lg:flex">
-          <div className="flex items-center gap-8">
+          {/* Logo + Nav links grouped together */}
+          <div className="flex items-center gap-6">
             <Link href={logo.url} className="flex items-center gap-2.5">
               <div className="flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-md ring-1 ring-foreground/10">
                 <Image
@@ -213,19 +236,25 @@ const Navbar = ({
                 {logo.title}
               </span>
             </Link>
-            <div className="flex items-center">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
+            <NavigationMenu>
+              <NavigationMenuList>
+                {(dir === 'rtl' ? [...menu].reverse() : menu).map((item) =>
+                  renderMenuItem(item)
+                )}
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
+          {/* Actions */}
           <div className="flex items-center gap-3">
+            <LanguageSwitcher />
             {/* Desktop cart dropdown */}
             <DropdownMenu open={cartOpen} onOpenChange={setCartOpen}>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative cursor-pointer">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative cursor-pointer"
+                >
                   <ShoppingCart className="size-4" />
                   {mounted && totalItems > 0 && (
                     <span className="absolute -right-1 -top-1 flex items-center justify-center">
@@ -270,13 +299,18 @@ const Navbar = ({
             </span>
           </Link>
           <div className="flex items-center gap-2">
+            <LanguageSwitcher />
             {/* Mobile cart dropdown */}
             <DropdownMenu
               open={mobileCartOpen}
               onOpenChange={setMobileCartOpen}
             >
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative cursor-pointer">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="relative cursor-pointer"
+                >
                   <ShoppingCart className="size-4" />
                   {mounted && totalItems > 0 && (
                     <span className="absolute -right-1 -top-1 flex items-center justify-center">
