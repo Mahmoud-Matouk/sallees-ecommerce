@@ -3,7 +3,9 @@
 import Link from 'next/link';
 import * as React from 'react';
 import { Heart } from 'lucide-react';
+import { localizeCurrency } from '@/lib/helper';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/core/i18n/I18nProvider';
 import { Skeleton } from '@/components/ui/skeleton';
 import { ShoppingCartIcon, StarIcon } from 'lucide-react';
 import { ProductImageGallery } from './ProductImageGallery';
@@ -19,6 +21,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const [isWishlist, setIsWishlist] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
   const addItem = useCartStore((s) => s.addItem);
+  const { locale } = useI18n();
 
   const images = React.useMemo(() => {
     const all = [product.imageCover, ...(product.images || [])];
@@ -97,7 +100,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         {/* Price */}
         <div className="mt-auto pt-2">
           <span className="text-lg font-bold text-foreground">
-            EGP {product.price.toLocaleString()}
+            {localizeCurrency(product.price, locale)}
           </span>
         </div>
 

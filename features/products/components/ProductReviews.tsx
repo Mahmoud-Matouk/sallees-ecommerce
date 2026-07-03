@@ -1,16 +1,20 @@
 import { StarIcon } from 'lucide-react';
+import { localizeDate } from '@/lib/helper';
+import type { Locale } from '@/core/i18n/languages';
 import type { Review } from '../types/product.types';
 
 interface ProductReviewsProps {
   reviews: Review[];
   ratingsAverage: number;
   ratingsQuantity: number;
+  lang?: Locale;
 }
 
 export function ProductReviews({
   reviews,
   ratingsAverage,
   ratingsQuantity,
+  lang,
 }: ProductReviewsProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -57,11 +61,7 @@ export function ProductReviews({
                       {review.user.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {new Date(review.createdAt).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                      })}
+                      {localizeDate(review.createdAt, lang)}
                     </p>
                   </div>
                 </div>

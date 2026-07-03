@@ -3,12 +3,11 @@
 import * as React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/core/i18n/I18nProvider';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
 
@@ -30,6 +29,7 @@ export function ProductImageGallery({
   const [api, setApi] = React.useState<CarouselApi>();
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const isCard = variant === 'card';
+  const { dir } = useI18n();
 
   // Gallery variant: Sync selected thumbnail with carousel
   React.useEffect(() => {
@@ -51,7 +51,7 @@ export function ProductImageGallery({
     }, 800);
 
     return () => clearInterval(interval);
-  }, [api, isCard, isHovered]);
+  }, [api, isCard, isHovered, dir]);
 
   // Card variant: Smoothly reset back to the cover image when hover ends
   React.useEffect(() => {
@@ -71,7 +71,11 @@ export function ProductImageGallery({
 
   if (isCard) {
     return (
-      <Carousel setApi={setApi} opts={{ loop: true }} className="w-full">
+      <Carousel
+        setApi={setApi}
+        opts={{ loop: true, direction: dir }}
+        className="w-full"
+      >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
@@ -96,7 +100,11 @@ export function ProductImageGallery({
     <div className="flex flex-col gap-4">
       {/* Main image */}
       <div className="group relative w-full">
-        <Carousel setApi={setApi} opts={{ loop: true }} className="w-full">
+        <Carousel
+          setApi={setApi}
+          opts={{ loop: true, direction: dir }}
+          className="w-full"
+        >
           <CarouselContent>
             {images.map((image, index) => (
               <CarouselItem key={index}>

@@ -1,4 +1,5 @@
 import { ProductReviews } from './ProductReviews';
+import { Skeleton } from '@/components/ui/skeleton';
 import type { Product } from '../types/product.types';
 import { ProductImageGallery } from './ProductImageGallery';
 import {
@@ -16,13 +17,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Skeleton } from '@/components/ui/skeleton';
+
+import { localizeCurrency } from '@/lib/helper';
+import type { Locale } from '@/core/i18n/languages';
 
 interface ProductDetailsProps {
   product: Product;
+  lang?: Locale;
 }
-
-export function ProductDetails({ product }: ProductDetailsProps) {
+export function ProductDetails({ product, lang }: ProductDetailsProps) {
   return (
     <div className="container">
       {/* Breadcrumb */}
@@ -91,7 +94,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           {/* Price */}
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold text-foreground">
-              EGP {product.price.toLocaleString()}
+              {localizeCurrency(product.price, lang)}
             </span>
           </div>
 
@@ -167,6 +170,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           reviews={product.reviews}
           ratingsAverage={product.ratingsAverage}
           ratingsQuantity={product.ratingsQuantity}
+          lang={lang}
         />
       </div>
     </div>
@@ -203,7 +207,10 @@ export function ProductDetailsSkeleton() {
           {/* Thumbnails */}
           <div className="flex gap-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <Skeleton key={i} className="aspect-square w-20 rounded-md bg-muted" />
+              <Skeleton
+                key={i}
+                className="aspect-square w-20 rounded-md bg-muted"
+              />
             ))}
           </div>
         </div>
@@ -322,4 +329,3 @@ export function ProductDetailsSkeleton() {
     </div>
   );
 }
-
