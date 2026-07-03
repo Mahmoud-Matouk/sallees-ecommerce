@@ -233,7 +233,7 @@ const Navbar = ({
                 />
               </div>
               <span className="text-lg font-semibold tracking-tight">
-                {logo.title}
+                {appConfig.name}
               </span>
             </Link>
             <NavigationMenu>

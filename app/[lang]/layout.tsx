@@ -6,7 +6,8 @@ import { getAppDirection } from '@/lib/helper';
 import { appConfig } from '@/core/constants/app';
 import { I18nProvider } from '@/core/i18n/I18nProvider';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 import { getLanguage, Locale } from '@/core/i18n/languages';
 
 const fontSans = 'SF Pro Display, system-ui, -apple-system, sans-serif';
@@ -53,6 +54,7 @@ export default async function RootLayout({
           </TooltipProvider>
         </I18nProvider>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
