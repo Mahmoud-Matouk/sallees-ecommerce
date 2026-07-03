@@ -55,7 +55,7 @@ _Presentational UI components containing zero business logic._
 - **Location**: `components/`
 - **Structure**:
   - `ui/` - Shadcn UI primitive blocks (e.g., `button.tsx`, `card.tsx`)
-  - Root: Global shell components (e.g., `app-sidebar.tsx`, `site-header.tsx`, `data-table.tsx`)
+  - Root: Global shell components (e.g., `app-sidebar.tsx`, `navbar.tsx`, `data-table.tsx`)
 - **Rule**: Do not import features, hooks, or service layers here.
 
 ### hooks/ & lib/
