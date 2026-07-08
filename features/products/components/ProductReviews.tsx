@@ -1,21 +1,24 @@
 import { StarIcon } from 'lucide-react';
 import { localizeDate } from '@/lib/helper';
-import type { Locale } from '@/core/i18n/languages';
+import { appConfig } from '@/core/constants/app';
 import type { Review } from '../types/product.types';
+import { getTranslation, type Locale } from '@/core/i18n/languages';
 
 interface ProductReviewsProps {
   reviews: Review[];
   ratingsAverage: number;
   ratingsQuantity: number;
-  lang?: Locale;
+  locale?: Locale;
 }
 
-export function ProductReviews({
+export async function ProductReviews({
   reviews,
   ratingsAverage,
   ratingsQuantity,
-  lang,
+  locale,
 }: ProductReviewsProps) {
+  const { defaultLocale } = appConfig;
+  const t = await getTranslation(locale ?? defaultLocale);
   return (
     <div className="flex flex-col gap-6">
       {/* Summary header */}
@@ -61,7 +64,7 @@ export function ProductReviews({
                       {review.user.name}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {localizeDate(review.createdAt, lang ?? 'en')}
+                      {localizeDate(review.createdAt, locale ?? defaultLocale)}
                     </p>
                   </div>
                 </div>
@@ -90,9 +93,7 @@ export function ProductReviews({
           ))}
         </div>
       ) : (
-        <p className="text-sm text-muted-foreground">
-          No reviews yet. Be the first to review this product!
-        </p>
+        <p className="text-sm text-muted-foreground">{t.products.noReviews}</p>
       )}
     </div>
   );

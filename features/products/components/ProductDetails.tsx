@@ -23,9 +23,9 @@ import type { Locale } from '@/core/i18n/languages';
 
 interface ProductDetailsProps {
   product: Product;
-  lang?: Locale;
+  locale?: Locale;
 }
-export function ProductDetails({ product, lang }: ProductDetailsProps) {
+export function ProductDetails({ product, locale }: ProductDetailsProps) {
   return (
     <div className="container">
       {/* Breadcrumb */}
@@ -94,7 +94,7 @@ export function ProductDetails({ product, lang }: ProductDetailsProps) {
           {/* Price */}
           <div className="flex items-baseline gap-2">
             <span className="text-3xl font-bold text-foreground">
-              {localizeCurrency(product.price, lang)}
+              {localizeCurrency(product.price, locale)}
             </span>
           </div>
 
@@ -170,7 +170,7 @@ export function ProductDetails({ product, lang }: ProductDetailsProps) {
           reviews={product.reviews}
           ratingsAverage={product.ratingsAverage}
           ratingsQuantity={product.ratingsQuantity}
-          lang={lang}
+          locale={locale}
         />
       </div>
     </div>

@@ -10,7 +10,8 @@
     "english": "الإنجليزية",
     "arabic": "العربية",
     "egp": "ج.م",
-    "loading": "جاري التحميل..."
+    "loading": "جاري التحميل...",
+    "toggleLanguage": "التغيير إلى الإنجليزية"
   },
   "navbar": {
     "allProducts": "جميع المنتجات",
@@ -40,7 +41,11 @@
     "category": "الفئة",
     "share": "مشاركة",
     "notFound": "المنتج غير موجود",
-    "backToProducts": "العودة للمنتجات"
+    "backToProducts": "العودة للمنتجات",
+    "noReviews": "لا توجد تقييمات بعد. كن أول من يقيم هذا المنتج!"
+  },
+  "product": {
+    "notFound": "المنتج غير موجود"
   },
   "dashboard": {
     "title": "لوحة التحكم",

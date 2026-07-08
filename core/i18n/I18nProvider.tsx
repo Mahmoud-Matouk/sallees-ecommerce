@@ -4,14 +4,15 @@ import * as React from 'react';
 import { getAppDirection } from '@/lib/helper';
 import type { Locale } from '@/core/i18n/languages';
 import type { Direction } from '@/core/types/common.types';
+import type arTranslations from '@/core/i18n/languages/ar.json';
 import type enTranslations from '@/core/i18n/languages/en.json';
 
-type Translations = typeof enTranslations;
+type Translations = typeof arTranslations | typeof enTranslations;
 
 type I18nContextType = {
   locale: Locale;
   dir: Direction;
-  lang: Translations;
+  translation: Translations;
 };
 
 const I18nContext = React.createContext<I18nContextType | null>(null);
@@ -19,15 +20,15 @@ const I18nContext = React.createContext<I18nContextType | null>(null);
 export function I18nProvider({
   children,
   locale,
-  lang,
+  translation,
 }: {
   children: React.ReactNode;
   locale: Locale;
-  lang: Translations;
+  translation: Translations;
 }) {
   const dir = getAppDirection(locale);
   return (
-    <I18nContext.Provider value={{ locale, dir, lang }}>
+    <I18nContext.Provider value={{ locale, dir, translation }}>
       {children}
     </I18nContext.Provider>
   );

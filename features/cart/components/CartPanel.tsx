@@ -13,7 +13,7 @@ export function CartPanel() {
   const { items, removeItem, updateQuantity, clearCart, totalPrice } =
     useCartStore();
   const [mounted, setMounted] = React.useState(false);
-  const { locale, lang } = useI18n();
+  const { locale, translation } = useI18n();
 
   React.useEffect(() => {
     setMounted(true);
@@ -34,8 +34,12 @@ export function CartPanel() {
         <div className="flex size-14 items-center justify-center rounded-full bg-muted">
           <ShoppingBag className="size-6 text-muted-foreground" />
         </div>
-        <p className="text-sm font-medium text-foreground">{lang.cart.empty}</p>
-        <p className="text-xs text-muted-foreground">{lang.cart.startAdding}</p>
+        <p className="text-sm font-medium text-foreground">
+          {translation.cart.empty}
+        </p>
+        <p className="text-xs text-muted-foreground">
+          {translation.cart.startAdding}
+        </p>
       </div>
     );
   }
@@ -45,8 +49,8 @@ export function CartPanel() {
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <span className="text-sm font-semibold text-foreground">
-          {lang.cart.title} ({items.length}{' '}
-          {items.length === 1 ? lang.cart.item : lang.cart.items})
+          {translation.cart.title} ({items.length}{' '}
+          {items.length === 1 ? translation.cart.item : translation.cart.items})
         </span>
         <Button
           variant="ghost"
@@ -54,7 +58,7 @@ export function CartPanel() {
           className="h-7 px-2 text-xs text-muted-foreground hover:text-destructive"
           onClick={clearCart}
         >
-          {lang.cart.clearAll}
+          {translation.cart.clearAll}
         </Button>
       </div>
 
@@ -122,7 +126,7 @@ export function CartPanel() {
               className="mt-0.5 shrink-0 self-start cursor-pointer text-destructive transition-colors hover:text-destructive/80"
             >
               <Trash2 className="size-3.5" />
-              <span className="sr-only">{lang.cart.remove}</span>
+              <span className="sr-only">{translation.cart.remove}</span>
             </button>
           </li>
         ))}
@@ -132,14 +136,14 @@ export function CartPanel() {
       <div className="flex flex-col gap-3 border-t border-border px-4 py-3">
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">
-            {lang.cart.subtotal}
+            {translation.cart.subtotal}
           </span>
           <span className="text-sm font-bold text-foreground">
             {localizeCurrency(totalPrice(), locale)}
           </span>
         </div>
         <Button className="w-full" size="sm">
-          {lang.cart.checkout}
+          {translation.cart.checkout}
         </Button>
       </div>
     </div>

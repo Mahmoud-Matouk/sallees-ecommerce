@@ -91,7 +91,7 @@ const Navbar = ({
 }: NavbarProps) => {
   const pathname = usePathname();
   const totalItems = useCartStore((s) => s.totalItems());
-  const { locale, lang, dir } = useI18n();
+  const { locale, translation: lang, dir } = useI18n();
   const [mounted, setMounted] = React.useState(false);
   const [cartOpen, setCartOpen] = React.useState(false);
   const [mobileCartOpen, setMobileCartOpen] = React.useState(false);

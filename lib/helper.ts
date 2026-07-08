@@ -1,5 +1,11 @@
 import type { NextRequest } from 'next/server';
-import { appConfig } from '@/core/constants/app';
+import {
+  appConfig,
+  AppDirection,
+  LOCALES,
+  type Locale,
+  type RegionalLocale,
+} from '@/core/constants/app';
 
 const { locales, defaultLocale } = appConfig;
 
@@ -75,8 +81,8 @@ export const getLocaleFromRequest = (request: NextRequest): string => {
 
     for (const pref of preferences) {
       const code = pref.code.toLowerCase();
-      if (code.startsWith('ar')) return 'ar';
-      if (code.startsWith('en')) return 'en';
+      if (code.startsWith(LOCALES.ar)) return LOCALES.ar;
+      if (code.startsWith(LOCALES.en)) return LOCALES.en;
     }
   }
 
@@ -88,34 +94,43 @@ export const getLocaleFromRequest = (request: NextRequest): string => {
  */
 export const localizeCurrency = (
   amount: number,
-  locale: string = 'en'
+  locale: RegionalLocale = defaultLocale
 ): string => {
-  if (locale === 'ar') {
-    return `${amount.toLocaleString('ar-EG')} ج.م`;
+  const targetLocale = appConfig.regionalLocales[locale];
+  const currencySymbol = appConfig.currencies[locale].symbol;
+  const currencyPosition = appConfig.currencies[locale].position;
+  if (currencyPosition === 'before') {
+    return `${currencySymbol} ${amount.toLocaleString(targetLocale)}`;
   }
-  return `EGP ${amount.toLocaleString('en-US')}`;
+  return `${amount.toLocaleString(targetLocale)} ${currencySymbol}`;
 };
 
 /**
- * localize a date, localized to the active language.
+ * Localizes a date based on the active application locale.
  */
 export const localizeDate = (
-  dateInput: string | Date,
-  locale: string,
+  dateInput: string | Date | null | undefined,
+  locale: Locale,
   options: Intl.DateTimeFormatOptions = {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   }
 ): string => {
+  if (!dateInput) return '';
+
   const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput;
-  const targetLocale = locale === 'ar' ? 'ar-EG' : 'en-US';
+  if (isNaN(date.getTime())) return '';
+
+  const targetLocale = appConfig.regionalLocales[locale] || 'en-US';
   return date.toLocaleDateString(targetLocale, options);
 };
 
 /**
  * Gets the layout direction ('ltr' or 'rtl') for a given locale.
  */
-export const getAppDirection = (locale: string): 'ltr' | 'rtl' => {
-  return locale === 'ar' ? 'rtl' : 'ltr';
+export const getAppDirection = (locale: string): AppDirection => {
+  return (
+    appConfig.direction[locale as keyof typeof appConfig.direction] || 'ltr'
+  );
 };

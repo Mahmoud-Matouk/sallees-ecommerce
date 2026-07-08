@@ -10,7 +10,8 @@
     "english": "English",
     "arabic": "Arabic",
     "egp": "EGP",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "toggleLanguage": "Switch to Arabic"
   },
   "navbar": {
     "allProducts": "All Products",
@@ -40,7 +41,11 @@
     "category": "Category",
     "share": "Share",
     "notFound": "Product Not Found",
-    "backToProducts": "Back to Products"
+    "backToProducts": "Back to Products",
+    "noReviews": "No reviews yet. Be the first to review this product!"
+  },
+  "product": {
+    "notFound": "Product Not Found"
   },
   "dashboard": {
     "title": "Dashboard",
