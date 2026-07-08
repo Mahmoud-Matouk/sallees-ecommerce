@@ -55,6 +55,7 @@ Changed many files to add new feature
 
 ## Best Practices
 
+- Run `npx prettier --write .` to format your code before committing
 - Keep the summary line under 50 characters if possible
 - Wrap longer descriptions at 72 characters
 - Use the imperative mood in the subject line ("Add feature" not "Added feature")

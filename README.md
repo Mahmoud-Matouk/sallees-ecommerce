@@ -107,16 +107,16 @@ The application supports **Arabic (RTL)** and **English (LTR)** through a fully 
 
 ### How It Works
 
-| Layer | File | Responsibility |
-| ----- | ---- | -------------- |
-| **Routing** | `app/[lang]/layout.tsx` | Reads the `[lang]` segment, sets `<html lang dir>` attributes |
-| **Context** | `core/i18n/I18nProvider.tsx` | Exposes `locale`, `dir`, and `lang` (translation map) to all client components |
-| **Translations** | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings |
-| **Locale types** | `core/i18n/languages.ts` | `Locale` union type (`'en' | 'ar'`) |
-| **Direction type** | `core/types/common.types.ts` | `Direction = 'ltr' | 'rtl'` |
-| **Helpers** | `lib/helper.ts` | `formatCurrency()`, `formatNumber()`, `formatDate()`, `getLocalizedPath()`, `getAppDirection()` |
-| **Switcher** | `components/language-switcher.tsx` | UI control to switch between locales |
-| **Proxy** | `proxy.ts` | Redirects root `/` to the locale stored in the `NEXT_LOCALE` cookie |
+| Layer              | File                                      | Responsibility                                                                                  |
+| ------------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Routing**        | `app/[lang]/layout.tsx`                   | Reads the `[lang]` segment, sets `<html lang dir>` attributes                                   |
+| **Context**        | `core/i18n/I18nProvider.tsx`              | Exposes `locale`, `dir`, and `lang` (translation map) to all client components                  |
+| **Translations**   | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings                                                              |
+| **Locale types**   | `core/i18n/languages.ts`                  | `Locale` union type (`'en'                                                                      | 'ar'`) |
+| **Direction type** | `core/types/common.types.ts`              | `Direction = 'ltr'                                                                              | 'rtl'` |
+| **Helpers**        | `lib/helper.ts`                           | `formatCurrency()`, `formatNumber()`, `formatDate()`, `getLocalizedPath()`, `getAppDirection()` |
+| **Switcher**       | `components/language-switcher.tsx`        | UI control to switch between locales                                                            |
+| **Proxy**          | `proxy.ts`                                | Redirects root `/` to the locale stored in the `NEXT_LOCALE` cookie                             |
 
 ### RTL Support
 
@@ -230,21 +230,21 @@ The project leverages custom agent instructions and automated skills inside the 
 
 ### Internationalization
 
-| Technology / Module                   | Role                                                        |
-| ------------------------------------- | ----------------------------------------------------------- |
-| `core/i18n/I18nProvider.tsx`          | React context exposing locale, direction, and translations  |
-| `core/i18n/languages/`               | JSON translation files for `en` and `ar`                   |
-| `lib/helper.ts`                       | Locale-aware `formatCurrency`, `formatNumber`, `formatDate` |
-| `components/language-switcher.tsx`    | UI control for switching between Arabic and English         |
-| `proxy.ts`                            | Cookie-based locale detection and root redirect             |
+| Technology / Module                | Role                                                        |
+| ---------------------------------- | ----------------------------------------------------------- |
+| `core/i18n/I18nProvider.tsx`       | React context exposing locale, direction, and translations  |
+| `core/i18n/languages/`             | JSON translation files for `en` and `ar`                    |
+| `lib/helper.ts`                    | Locale-aware `formatCurrency`, `formatNumber`, `formatDate` |
+| `components/language-switcher.tsx` | UI control for switching between Arabic and English         |
+| `proxy.ts`                         | Cookie-based locale detection and root redirect             |
 
 ### UX Enhancements
 
-| Technology                                                | Role                                    |
-| --------------------------------------------------------- | --------------------------------------- |
-| [dnd-kit](https://dndkit.com)                             | Drag-and-drop table row reordering      |
-| [Sonner](https://sonner.emilkowal.ski)                    | Toast notifications                     |
-| [Vaul](https://vaul.emilkowal.ski)                        | Mobile-friendly drawer component        |
+| Technology                             | Role                               |
+| -------------------------------------- | ---------------------------------- |
+| [dnd-kit](https://dndkit.com)          | Drag-and-drop table row reordering |
+| [Sonner](https://sonner.emilkowal.ski) | Toast notifications                |
+| [Vaul](https://vaul.emilkowal.ski)     | Mobile-friendly drawer component   |
 
 ---
 
@@ -367,11 +367,11 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. You will be
 
 ### Quick Navigation
 
-| Page           | URL (English)      | URL (Arabic)       | Description                                          |
-| -------------- | ------------------ | ------------------ | ---------------------------------------------------- |
-| Products       | `/en`              | `/ar`              | Full product catalog (SSR)                           |
-| Product Detail | `/en/[id]`         | `/ar/[id]`         | Individual product page with reviews & image gallery |
-| Dashboard      | `/en/dashboard`    | `/ar/dashboard`    | Admin dashboard with charts, tables, and KPIs        |
+| Page           | URL (English)   | URL (Arabic)    | Description                                          |
+| -------------- | --------------- | --------------- | ---------------------------------------------------- |
+| Products       | `/en`           | `/ar`           | Full product catalog (SSR)                           |
+| Product Detail | `/en/[id]`      | `/ar/[id]`      | Individual product page with reviews & image gallery |
+| Dashboard      | `/en/dashboard` | `/ar/dashboard` | Admin dashboard with charts, tables, and KPIs        |
 
 ---
 

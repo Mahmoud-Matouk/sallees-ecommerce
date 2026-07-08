@@ -4,11 +4,11 @@ import { Navbar } from '@/components/navbar';
 import { Geist_Mono } from 'next/font/google';
 import { getAppDirection } from '@/lib/helper';
 import { appConfig } from '@/core/constants/app';
+import { Analytics } from '@vercel/analytics/next';
 import { I18nProvider } from '@/core/i18n/I18nProvider';
 import { TooltipProvider } from '@/components/ui/tooltip';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { Analytics } from '@vercel/analytics/next';
 import { getLanguage, Locale } from '@/core/i18n/languages';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const fontSans = 'SF Pro Display, system-ui, -apple-system, sans-serif';
 
