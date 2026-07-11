@@ -110,9 +110,10 @@ The application supports **Arabic (RTL)** and **English (LTR)** through a fully 
 | Layer              | File                                      | Responsibility                                                                                  |
 | ------------------ | ----------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | **Routing**        | `app/[lang]/layout.tsx`                   | Reads the `[lang]` segment, sets `<html lang dir>` attributes                                   |
-| **Context**        | `core/i18n/I18nProvider.tsx`              | Exposes `locale`, `dir`, and `lang` (translation map) to all client components                  |
+| **Config**         | `core/constants/app.ts`                   | Centralizes application-wide configuration (locales, currencies, regional settings, directions) |
+| **Context**        | `core/i18n/I18nProvider.tsx`              | Exposes `locale`, `dir`, and `translation` (dictionary) to all client components                |
 | **Translations**   | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings                                                              |
-| **Locale types**   | `core/i18n/languages.ts`                  | `Locale` union type (`'en'                                                                      | 'ar'`) |
+| **Locale types**   | `core/i18n/languages.ts`                  | Re-exports types (`Locale`) and loads JSON translation maps dynamically                         |
 | **Direction type** | `core/types/common.types.ts`              | `Direction = 'ltr'                                                                              | 'rtl'` |
 | **Helpers**        | `lib/helper.ts`                           | `formatCurrency()`, `formatNumber()`, `formatDate()`, `getLocalizedPath()`, `getAppDirection()` |
 | **Switcher**       | `components/language-switcher.tsx`        | UI control to switch between locales                                                            |
@@ -230,13 +231,14 @@ The project leverages custom agent instructions and automated skills inside the 
 
 ### Internationalization
 
-| Technology / Module                | Role                                                        |
-| ---------------------------------- | ----------------------------------------------------------- |
-| `core/i18n/I18nProvider.tsx`       | React context exposing locale, direction, and translations  |
-| `core/i18n/languages/`             | JSON translation files for `en` and `ar`                    |
-| `lib/helper.ts`                    | Locale-aware `formatCurrency`, `formatNumber`, `formatDate` |
-| `components/language-switcher.tsx` | UI control for switching between Arabic and English         |
-| `proxy.ts`                         | Cookie-based locale detection and root redirect             |
+| Technology / Module                | Role                                                                         |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| `core/constants/app.ts`            | Centralized locale, direction, currency, and regional settings configuration |
+| `core/i18n/I18nProvider.tsx`       | React context exposing locale, direction, and translation dictionary         |
+| `core/i18n/languages/`             | JSON translation files for `en` and `ar`                                     |
+| `lib/helper.ts`                    | Locale-aware `formatCurrency`, `formatNumber`, `formatDate`                  |
+| `components/language-switcher.tsx` | UI control for switching between Arabic and English                          |
+| `proxy.ts`                         | Cookie-based locale detection and root redirect                              |
 
 ### UX Enhancements
 
@@ -246,6 +248,13 @@ The project leverages custom agent instructions and automated skills inside the 
 | [Sonner](https://sonner.emilkowal.ski) | Toast notifications                |
 | [Vaul](https://vaul.emilkowal.ski)     | Mobile-friendly drawer component   |
 
+### Analytics & Monitoring
+
+| Technology                                                 | Role                                            |
+| ---------------------------------------------------------- | ----------------------------------------------- |
+| [Vercel Analytics](https://vercel.com/analytics)           | Page view and audience demographics tracking    |
+| [Vercel Speed Insights](https://vercel.com/speed-insights) | Real-time performance and Web Vitals monitoring |
+
 ---
 
 ## Project Structure
@@ -254,7 +263,7 @@ The project leverages custom agent instructions and automated skills inside the 
 sallees-ecommerce/
 ├── app/                          # Next.js App Router (pages & layouts)
 │   └── [lang]/                   # Locale segment — all routes are locale-scoped
-│       ├── layout.tsx            # Locale layout: sets <html lang dir>, wraps I18nProvider
+│       ├── layout.tsx            # Locale layout: sets <html lang dir>, wraps I18nProvider, mounts Vercel Analytics/Speed Insights
 │       ├── (products)/           # Product catalog route group
 │       │   ├── page.tsx          # Product listing (SSR + ISR)
 │       │   ├── loading.tsx       # Streaming skeleton for product list
@@ -295,10 +304,11 @@ sallees-ecommerce/
 │   ├── api/
 │   │   └── client.ts             # Centralized fetch wrapper (auth, caching, errors)
 │   ├── constants/
+│   │   ├── app.ts                # App-wide configuration (locales, currencies, regional settings)
 │   │   └── endpoints.ts          # All API endpoint definitions (v1 + v2)
 │   ├── i18n/                     # Internationalization system
-│   │   ├── I18nProvider.tsx      # React context: locale, dir, lang translations
-│   │   ├── languages.ts          # Locale union type + translation loader
+│   │   ├── I18nProvider.tsx      # React context: locale, dir, translation dictionary
+│   │   ├── languages.ts          # Locale union type + dynamic translation loader
 │   │   └── languages/
 │   │       ├── en.json           # English translation strings
 │   │       └── ar.json           # Arabic translation strings
