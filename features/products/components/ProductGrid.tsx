@@ -6,6 +6,7 @@ import { localizeCurrency } from '@/lib/helper';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/core/i18n/I18nProvider';
 import type { ProductSummary } from '../types/product.types';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import type { Category } from '@/features/categories/types/category.types';
 import {
   ProductFiltersSidebar,
@@ -19,13 +20,6 @@ import {
   Star,
   Check,
 } from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -284,12 +278,6 @@ export function ProductGrid({
                 side={dir === 'rtl' ? 'right' : 'left'}
                 className="overflow-y-auto w-[85vw] max-w-md p-5"
               >
-                <SheetHeader className="pb-2">
-                  <SheetTitle className="flex items-center gap-2">
-                    <SlidersHorizontal className="size-4 text-primary" />
-                    <span>{t.filters.title}</span>
-                  </SheetTitle>
-                </SheetHeader>
                 <div className="mt-4">
                   <ProductFiltersSidebar
                     products={products}
