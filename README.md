@@ -281,7 +281,7 @@ sallees-ecommerce/
 │   │   └── types/                #   AuthResponse, SignupBody, etc.
 │   ├── cart/                     # Shopping cart domain
 │   │   ├── components/           #   CartPanel (translated UI)
-│   │   ├── hooks/                #   useCartStore (Zustand with persistence)
+│   │   ├── hooks/                #   useCartStore (Zustand)
 │   │   ├── services/             #   Cart API operations
 │   │   └── types/                #   Cart types
 │   ├── wishlist/                 # Wishlist domain
@@ -305,8 +305,8 @@ sallees-ecommerce/
 │   │   ├── I18nProvider.tsx      # React context: locale, dir, translation dictionary
 │   │   ├── languages.ts          # Locale union type + dynamic translation loader
 │   │   └── languages/
-│   │       ├── en.json           # English translation strings (136 keys)
-│   │       └── ar.json           # Arabic translation strings (136 keys)
+│   │       ├── en.json           # English translation strings
+│   │       └── ar.json           # Arabic translation strings
 │   └── types/
 │       └── common.types.ts       # PaginatedResponse, SingleResponse, Direction, etc.
 │
