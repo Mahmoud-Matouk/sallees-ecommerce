@@ -259,9 +259,6 @@ export function ProductGrid({
             <h2 className="text-lg sm:text-2xl font-bold tracking-tight text-foreground truncate">
               {t.products.recommended}
             </h2>
-            <span className="text-xs text-muted-foreground font-semibold shrink-0">
-              ({filteredAndSortedProducts.length})
-            </span>
           </div>
 
           {/* Action Controls: Mobile Filters Button + Sort Dropdown */}
