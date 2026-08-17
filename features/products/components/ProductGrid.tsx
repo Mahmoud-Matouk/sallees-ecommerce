@@ -6,7 +6,6 @@ import { localizeCurrency } from '@/lib/helper';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/core/i18n/I18nProvider';
 import type { ProductSummary } from '../types/product.types';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import type { Category } from '@/features/categories/types/category.types';
 import {
   ProductFiltersSidebar,
@@ -20,6 +19,13 @@ import {
   Star,
   Check,
 } from 'lucide-react';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -245,94 +251,99 @@ export function ProductGrid({
 
   return (
     <section id="products" className="w-full py-4">
-      {/* Top Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-border/60">
-        {/* Title and Result Counter */}
-        <div className="flex items-center gap-3">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-            {t.products.recommended}
-          </h2>
-        </div>
+      {/* Top Section Header & Mobile Sticky Filter Bar */}
+      <div className="sticky top-27 lg:static z-30 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 bg-background/95 backdrop-blur-md transition-all py-3 mb-4 border-b border-border/80 lg:border-none lg:bg-transparent lg:py-0 lg:mb-6">
+        <div className="flex items-center justify-between gap-3 pt-2">
+          {/* Title and Result Counter */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <h2 className="text-lg sm:text-2xl font-bold tracking-tight text-foreground truncate">
+              {t.products.recommended}
+            </h2>
+            <span className="text-xs text-muted-foreground font-semibold shrink-0">
+              ({filteredAndSortedProducts.length})
+            </span>
+          </div>
 
-        {/* Action Controls: Mobile Filters Button + Sort Dropdown */}
-        <div className="flex items-center gap-2.5 self-end sm:self-auto">
-          {/* Mobile Filters Sheet Trigger */}
-          <div className="lg:hidden">
-            <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
-              <SheetTrigger asChild>
+          {/* Action Controls: Mobile Filters Button + Sort Dropdown */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Mobile Filters Sheet Trigger */}
+            <div className="lg:hidden">
+              <Sheet open={mobileFilterOpen} onOpenChange={setMobileFilterOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-xl flex items-center gap-1.5 px-3 h-9 font-semibold shadow-xs cursor-pointer"
+                  >
+                    <SlidersHorizontal className="size-4 text-primary" />
+                    <span className="text-xs">{t.filters.title}</span>
+                    {activeCount > 0 && (
+                      <span className="flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                        {activeCount}
+                      </span>
+                    )}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side={dir === 'rtl' ? 'right' : 'left'}
+                  className="overflow-y-auto w-[85vw] max-w-md p-5"
+                >
+                  <SheetHeader className="sr-only">
+                    <SheetTitle>{t.filters.title}</SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-4">
+                    <ProductFiltersSidebar
+                      products={products}
+                      categories={categories}
+                      filters={filters}
+                      onFiltersChange={handleFiltersChange}
+                      onClearAll={handleClearAll}
+                      isMobile={true}
+                      onCloseMobile={() => setMobileFilterOpen(false)}
+                    />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Sort By Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="rounded-xl flex items-center gap-2 font-semibold cursor-pointer"
+                  className="rounded-xl flex items-center gap-1.5 px-3 h-9 font-semibold shadow-xs cursor-pointer"
                 >
-                  <SlidersHorizontal className="size-4 text-primary" />
-                  <span>{t.filters.title}</span>
-                  {activeCount > 0 && (
-                    <span className="flex size-4.5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-                      {activeCount}
-                    </span>
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent
-                side={dir === 'rtl' ? 'right' : 'left'}
-                className="overflow-y-auto w-[85vw] max-w-md p-5"
-              >
-                <div className="mt-4">
-                  <ProductFiltersSidebar
-                    products={products}
-                    categories={categories}
-                    filters={filters}
-                    onFiltersChange={handleFiltersChange}
-                    onClearAll={handleClearAll}
-                    isMobile={true}
-                    onCloseMobile={() => setMobileFilterOpen(false)}
-                  />
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-
-          {/* Sort By Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                className="rounded-xl flex items-center gap-2 font-semibold cursor-pointer"
-              >
-                <ArrowUpDown className="size-3.5 text-muted-foreground" />
-                <span className="text-muted-foreground text-xs">
-                  {t.filters.sortBy}:
-                </span>
-                <span className="text-foreground text-xs font-bold">
-                  {currentSortLabel}
-                </span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-52">
-              {sortOptions.map((opt) => (
-                <DropdownMenuItem
-                  key={opt.value}
-                  onClick={() => setSortBy(opt.value as SortOption)}
-                  className="flex items-center justify-between cursor-pointer text-xs py-2"
-                >
-                  <span
-                    className={
-                      sortBy === opt.value
-                        ? 'font-bold text-primary'
-                        : 'text-foreground'
-                    }
-                  >
-                    {opt.label}
+                  <ArrowUpDown className="size-3.5 text-muted-foreground" />
+                  <span className="text-foreground text-xs font-bold line-clamp-1 max-w-[90px] sm:max-w-none">
+                    {currentSortLabel}
                   </span>
-                  {sortBy === opt.value && (
-                    <Check className="size-4 text-primary" />
-                  )}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-52">
+                {sortOptions.map((opt) => (
+                  <DropdownMenuItem
+                    key={opt.value}
+                    onClick={() => setSortBy(opt.value as SortOption)}
+                    className="flex items-center justify-between cursor-pointer text-xs py-2"
+                  >
+                    <span
+                      className={
+                        sortBy === opt.value
+                          ? 'font-bold text-primary'
+                          : 'text-foreground'
+                      }
+                    >
+                      {opt.label}
+                    </span>
+                    {sortBy === opt.value && (
+                      <Check className="size-4 text-primary" />
+                    )}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
 

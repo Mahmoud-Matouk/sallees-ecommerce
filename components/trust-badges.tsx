@@ -33,7 +33,7 @@ export function TrustBadges() {
   return (
     <section className="w-full border-t border-border/80 bg-background/50 py-10 my-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, idx) => (
             <div key={idx} className="flex items-center gap-4">
               <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-muted/60 border border-border/70 shadow-2xs">
