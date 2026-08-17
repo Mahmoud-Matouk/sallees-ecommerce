@@ -504,9 +504,9 @@ export function ProductGrid({
             </div>
           )}
 
-          {/* Product Cards Grid */}
+          {/* Product Cards Grid (2 cols on mobile, 3 on tablet, 4 on desktop) */}
           {filteredAndSortedProducts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-4">
               {filteredAndSortedProducts.map((product, index) => (
                 <ProductCard
                   key={product._id}

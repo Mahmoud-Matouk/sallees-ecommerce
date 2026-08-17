@@ -446,8 +446,22 @@ export function Navbar() {
             </Link>
 
             {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <LanguageSwitcher />
+
+              {/* Mobile Wishlist */}
+              <Link
+                href={localize('/#wishlist')}
+                className="relative flex items-center justify-center size-9 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+                title={t.common.wishlist}
+              >
+                <Heart className="size-5" />
+                {mounted && totalWishlistItems > 0 && (
+                  <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                    {totalWishlistItems}
+                  </span>
+                )}
+              </Link>
 
               {/* Mobile Cart */}
               <DropdownMenu
@@ -503,6 +517,18 @@ export function Navbar() {
                     </SheetTitle>
                   </SheetHeader>
                   <div className="mt-6 flex flex-col gap-2">
+                    <Link
+                      href={localize('/#wishlist')}
+                      onClick={() => setMenuOpen(false)}
+                      className="px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:bg-muted flex items-center justify-between"
+                    >
+                      <span>{t.common.wishlist}</span>
+                      {mounted && totalWishlistItems > 0 && (
+                        <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
+                          {totalWishlistItems}
+                        </span>
+                      )}
+                    </Link>
                     {mounted && isAuthenticated ? (
                       <>
                         <div className="px-3 py-2 rounded-lg bg-muted/50 mb-1">

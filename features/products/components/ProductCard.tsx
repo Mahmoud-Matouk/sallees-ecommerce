@@ -4,9 +4,9 @@ import Link from 'next/link';
 import * as React from 'react';
 import { useI18n } from '@/core/i18n/I18nProvider';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { ProductImageGallery } from './ProductImageGallery';
 import type { ProductSummary } from '../types/product.types';
+import { Heart, ShoppingCart, Star, Check } from 'lucide-react';
 import { localizeCurrency, getLocalizedPath } from '@/lib/helper';
 import { useCartStore } from '@/features/cart/hooks/useCartStore';
 import { useWishlistStore } from '@/features/wishlist/hooks/useWishlistStore';
@@ -23,6 +23,8 @@ export const ProductCard = React.memo(function ProductCard({
   priority = false,
 }: ProductCardProps) {
   const [isHovered, setIsHovered] = React.useState(false);
+  const [justAddedToCart, setJustAddedToCart] = React.useState(false);
+
   const addItem = useCartStore((s) => s.addItem);
 
   // Granular subscription: only re-render this card if its own favorite status changes
@@ -35,6 +37,10 @@ export const ProductCard = React.memo(function ProductCard({
   const toggleItem = useWishlistStore((s) => s.toggleItem);
 
   const { locale, translation: t } = useI18n();
+
+  // Throttle refs to strictly prevent double-click / rapid touch firing glitches
+  const lastWishlistClickRef = React.useRef(0);
+  const lastCartClickRef = React.useRef(0);
 
   // Combine imageCover with images list for the gallery
   const images = React.useMemo(() => {
@@ -67,6 +73,11 @@ export const ProductCard = React.memo(function ProductCard({
     (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
+      const now = Date.now();
+      if (now - lastWishlistClickRef.current < 450) {
+        return; // Guard against rapid duplicate clicks / synthetic touch events
+      }
+      lastWishlistClickRef.current = now;
       toggleItem(product);
     },
     [toggleItem, product]
@@ -76,7 +87,16 @@ export const ProductCard = React.memo(function ProductCard({
     (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
+      const now = Date.now();
+      if (now - lastCartClickRef.current < 450) {
+        return; // Guard against rapid duplicate clicks / synthetic touch events
+      }
+      lastCartClickRef.current = now;
       addItem(product);
+
+      // Brief visual success indicator
+      setJustAddedToCart(true);
+      setTimeout(() => setJustAddedToCart(false), 900);
     },
     [addItem, product]
   );
@@ -108,8 +128,8 @@ export const ProductCard = React.memo(function ProductCard({
 
         {/* Discount Badge (Top-Left) */}
         {discountPercentage && (
-          <div className="absolute top-2.5 start-2.5 z-20 pointer-events-none">
-            <span className="inline-flex items-center rounded-md bg-red-600 px-2 py-0.5 text-xs font-bold text-white shadow-xs">
+          <div className="absolute top-2 start-2 sm:top-2.5 sm:start-2.5 z-20 pointer-events-none">
+            <span className="inline-flex items-center rounded-md bg-red-600 px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs font-bold text-white shadow-xs">
               -{discountPercentage}%
             </span>
           </div>
@@ -119,11 +139,11 @@ export const ProductCard = React.memo(function ProductCard({
         <button
           type="button"
           onClick={handleToggleFavorite}
-          className="absolute top-2.5 end-2.5 z-20 flex size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-xs backdrop-blur-xs hover:text-red-500 hover:bg-background transition-colors cursor-pointer"
+          className="absolute top-2 end-2 sm:top-2.5 sm:end-2.5 z-20 flex size-7 sm:size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-xs backdrop-blur-xs hover:text-red-500 hover:bg-background transition-all active:scale-90 cursor-pointer"
           title={t.navbar.wishlist}
         >
           <Heart
-            className={`size-4 transition-colors ${
+            className={`size-3.5 sm:size-4 transition-colors ${
               isFavorite ? 'fill-red-500 text-red-500' : ''
             }`}
           />
@@ -133,19 +153,27 @@ export const ProductCard = React.memo(function ProductCard({
         <button
           type="button"
           onClick={handleAddToCart}
-          className="absolute bottom-2.5 end-2.5 z-20 flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md hover:bg-primary/90 transition-colors cursor-pointer"
+          className={`absolute bottom-2 end-2 sm:bottom-2.5 sm:end-2.5 z-20 flex size-7.5 sm:size-9 items-center justify-center rounded-lg sm:rounded-xl shadow-md transition-all active:scale-90 cursor-pointer ${
+            justAddedToCart
+              ? 'bg-green-600 text-white'
+              : 'bg-primary text-primary-foreground hover:bg-primary/90'
+          }`}
           title={t.products.addToCart}
         >
-          <ShoppingCart className="size-4" />
+          {justAddedToCart ? (
+            <Check className="size-3.5 sm:size-4 animate-in zoom-in-50" />
+          ) : (
+            <ShoppingCart className="size-3.5 sm:size-4" />
+          )}
         </button>
       </div>
 
-      {/* Bottom Info Section with dedicated padding */}
-      <div className="p-3.5 flex flex-1 flex-col justify-between gap-2">
+      {/* Bottom Info Section with dedicated responsive padding */}
+      <div className="p-2.5 sm:p-3.5 flex flex-1 flex-col justify-between gap-1.5 sm:gap-2">
         <div>
           {/* Brand or Category */}
           {(product.brand?.name || product.category?.name) && (
-            <span className="text-[11px] font-medium text-muted-foreground block truncate">
+            <span className="text-[10px] sm:text-[11px] font-medium text-muted-foreground block truncate">
               {product.brand?.name || product.category?.name}
             </span>
           )}
@@ -153,7 +181,7 @@ export const ProductCard = React.memo(function ProductCard({
           {/* Title */}
           <Link
             href={productUrl}
-            className="line-clamp-1 text-sm font-bold text-foreground transition-colors hover:text-primary mt-0.5"
+            className="line-clamp-1 text-xs sm:text-sm font-bold text-foreground transition-colors hover:text-primary mt-0.5"
             title={product.title}
           >
             {product.title}
@@ -161,23 +189,23 @@ export const ProductCard = React.memo(function ProductCard({
         </div>
 
         {/* Rating & Price Row */}
-        <div className="flex items-center justify-between pt-1">
+        <div className="flex items-center justify-between pt-0.5 sm:pt-1 gap-1">
           {/* Rating */}
-          <div className="flex items-center gap-1">
-            <span className="text-xs font-bold text-foreground">
+          <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+            <span className="text-[11px] sm:text-xs font-bold text-foreground">
               {product.ratingsAverage?.toFixed(1) || '4.5'}
             </span>
-            <Star className="size-3.5 fill-amber-400 text-amber-400" />
+            <Star className="size-3 sm:size-3.5 fill-amber-400 text-amber-400" />
           </div>
 
           {/* Price with Original & Discounted display */}
-          <div className="flex items-baseline gap-1.5">
+          <div className="flex items-baseline gap-1 sm:gap-1.5 overflow-hidden">
             {originalPrice && (
-              <span className="text-xs text-muted-foreground line-through">
+              <span className="text-[10px] sm:text-xs text-muted-foreground line-through truncate">
                 {localizeCurrency(originalPrice, locale)}
               </span>
             )}
-            <span className="text-sm font-extrabold text-foreground">
+            <span className="text-xs sm:text-sm font-extrabold text-foreground truncate">
               {localizeCurrency(currentPrice, locale)}
             </span>
           </div>
