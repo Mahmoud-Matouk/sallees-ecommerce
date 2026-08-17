@@ -22,6 +22,7 @@
 ## Table of Contents
 
 - [Why This Project Exists](#why-this-project-exists)
+- [Key Storefront Features](#key-storefront-features)
 - [Architecture & Design Decisions](#architecture--design-decisions)
 - [Internationalization (i18n)](#internationalization-i18n)
 - [Scalability by Design](#scalability-by-design)
@@ -43,6 +44,38 @@ This is not a tutorial follow-along. It is a deliberate engineering exercise tha
 3. **Modern React & Next.js mastery** — React 19 Server Components, Next.js 16 App Router with `async` pages, dynamic metadata generation, ISR caching, and streaming.
 4. **Type-safe full-stack integration** — End-to-end TypeScript from API client to UI components, with Zod runtime validation at data boundaries.
 5. **Full internationalization** — Locale-aware routing, RTL layout switching, locale-scoped number/currency/date formatting, and translated UI strings for Arabic and English.
+
+---
+
+## Key Storefront Features
+
+### 🔍 Live Autocomplete Search
+
+- Real-time client-side search across title, description, brand, and category with preloaded catalog cache.
+- Dropdown preview with product thumbnail, category, brand, localized price, and quick navigation.
+
+### 🎛️ Advanced Faceted Filter System
+
+- **Categories Accordion**: Quick category selection with product counts.
+- **Price Range Filter**: Min/Max price inputs and quick preset chips (`Under 500 EGP`, `500 - 1500 EGP`, `1500 - 3000 EGP`, `3000+ EGP`).
+- **Brand Search & Select**: Searchable brand checklist with live query filtering.
+- **Customer Ratings**: Star rating thresholds (`4★ & up`, `3★ & up`, `2★ & up`).
+- **Discount Tiers**: Quick discount filters (`50%+ Off`, `30%+ Off`, `20%+ Off`, `10%+ Off`).
+- **Availability Toggles**: In-Stock only and On-Sale items filter switches.
+- **Active Filter Chips**: Dismissible filter pills with a single-click "Clear All" action.
+- **Sticky & Independently Scrollable Sidebar**: Desktop 3-column filter sidebar with independent vertical scroll and mobile sliding drawer.
+
+### 🛍️ Optimized Product Card & Gallery
+
+- Flush image presentation with floating wishlist heart (top-right) and cart action (bottom-right).
+- Dynamic discount percentage badge calculation (`-28%`) with strike-through original prices.
+- Hover-activated photo rotation gallery ([ProductImageGallery.tsx](file:///c:/sallees-ecommerce/features/products/components/ProductImageGallery.tsx)).
+- Zero-latency wishlist toggle powered by `React.memo` and atomic Zustand selectors.
+
+### 🔐 Authentication & Session Persistence
+
+- Hydrated Zustand auth store with cookie synchronization.
+- Eye-catching login button for guests and personalized account dropdown for authenticated users.
 
 ---
 
@@ -112,25 +145,19 @@ The application supports **Arabic (RTL)** and **English (LTR)** through a fully 
 | **Routing**        | `app/[lang]/layout.tsx`                   | Reads the `[lang]` segment, sets `<html lang dir>` attributes                                   |
 | **Config**         | `core/constants/app.ts`                   | Centralizes application-wide configuration (locales, currencies, regional settings, directions) |
 | **Context**        | `core/i18n/I18nProvider.tsx`              | Exposes `locale`, `dir`, and `translation` (dictionary) to all client components                |
-| **Translations**   | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings                                                              |
+| **Translations**   | `core/i18n/languages/en.json` / `ar.json` | Flat key-value translation strings (136 keys in 100% parity)                                    |
 | **Locale types**   | `core/i18n/languages.ts`                  | Re-exports types (`Locale`) and loads JSON translation maps dynamically                         |
-| **Direction type** | `core/types/common.types.ts`              | `Direction = 'ltr'                                                                              | 'rtl'` |
+| **Direction type** | `core/types/common.types.ts`              | `Direction = 'ltr' \| 'rtl'`                                                                    |
 | **Helpers**        | `lib/helper.ts`                           | `formatCurrency()`, `formatNumber()`, `formatDate()`, `getLocalizedPath()`, `getAppDirection()` |
 | **Switcher**       | `components/language-switcher.tsx`        | UI control to switch between locales                                                            |
-| **Proxy**          | `proxy.ts`                                | Redirects root `/` to the locale stored in the `NEXT_LOCALE` cookie                             |
+| **Proxy**          | `proxy.ts`                                | Redirects root `/` to the locale stored in the `locale` cookie                                  |
 
 ### RTL Support
 
 - The `<html dir>` attribute switches between `ltr` and `rtl` automatically based on locale.
-- The Navbar reads `dir` from `I18nProvider` and **reverses menu item order** in Arabic so items read naturally right-to-left.
+- The Navbar reads `dir` from `I18nProvider` and adjusts layout order in Arabic so items read naturally right-to-left.
 - Embla Carousel (`ProductImageGallery`) receives `direction: dir` in its options so slide transforms are computed in the correct axis for RTL.
-- All number, currency, and date formatting uses locale-appropriate `Intl` APIs (e.g., `ar-EG` for Arabic).
-
-### Adding a New Language
-
-1. Add a translation file at `core/i18n/languages/<code>.json`.
-2. Extend the `Locale` union in `core/i18n/languages.ts`.
-3. Add the locale to the `[lang]` segment's `generateStaticParams` in `app/[lang]/layout.tsx`.
+- All number, currency, and date formatting uses locale-appropriate `Intl` APIs (e.g., `ar-EG` for Arabic with `ج.م`).
 
 ---
 
@@ -147,8 +174,6 @@ This architecture was chosen because real e-commerce projects grow in predictabl
 | **Performance at scale**                                 | Server Components eliminate client JS for read-heavy pages. TanStack Query handles client-side cache invalidation for mutations. |
 | **Backend migration**                                    | All API calls funnel through `core/api/client.ts`. Swap the base URL, and every feature follows.                                 |
 | **More languages**                                       | Add a JSON translation file and extend the `Locale` type. The routing and context system picks it up automatically.              |
-
-The centralized API client (`apiClient`) acts as an **anti-corruption layer** — if the backend changes its error format or auth scheme, you fix it in one place, not across 10 feature directories.
 
 ---
 
@@ -169,10 +194,6 @@ The entire codebase was developed in collaboration with **Antigravity** — an a
 
 [Context7](https://context7.com) is integrated as an **MCP server** that provides the AI agent with **live, version-accurate documentation** for every library in the stack.
 
-**Why it matters:** LLM training data goes stale. Next.js 16 and React 19 have breaking changes that don't exist in most models' training data. Context7 fetches the _actual current docs_ — not hallucinated patterns from 2023.
-
-**Configured via:** `mcp_config.json` with authenticated API key for higher rate limits.
-
 ### Neon MCP (Database Intelligence)
 
 [Neon](https://neon.tech) is configured as an MCP server for serverless Postgres integration, enabling AI-assisted database schema design, query optimization, and migration planning.
@@ -185,15 +206,6 @@ The project leverages custom agent instructions and automated skills inside the 
 - **`context7.md`**: Directs agents to fetch version-accurate library documentation.
 - **`structure.md`**: Ensures adherence to the Feature-Sliced Design (FSD) boundaries.
 - **`update_readme.md`**: Orchestrates keeping codebase changes documented in the README.
-
-### Tool Configuration Summary
-
-| Tool            | Purpose                                               | Integration Point  |
-| --------------- | ----------------------------------------------------- | ------------------ |
-| **Antigravity** | AI coding agent (architecture, code gen, review)      | IDE-native         |
-| **Context7**    | Live documentation for Next.js, React, Tailwind, etc. | MCP Server (HTTPS) |
-| **Neon**        | Serverless Postgres, schema design, query tuning      | MCP Server (HTTPS) |
-| **Agent Rules** | Strict architecture guardrails and automation skills  | Local `.agents/`   |
 
 ---
 
@@ -225,28 +237,9 @@ The project leverages custom agent instructions and automated skills inside the 
 | -------------------------------------------- | ------------------------------------------------------- |
 | [TanStack Query](https://tanstack.com/query) | Server state management, caching, optimistic updates    |
 | [TanStack Table](https://tanstack.com/table) | Headless data table with sorting, filtering, pagination |
-| [Zustand](https://zustand.docs.pmnd.rs)      | Client-side state (cart, UI preferences)                |
+| [Zustand](https://zustand.docs.pmnd.rs)      | Client-side state (cart, wishlist, auth)                |
 | [Zod](https://zod.dev)                       | Runtime schema validation at data boundaries            |
 | [Axios](https://axios-http.com)              | HTTP client (available for client-side mutations)       |
-
-### Internationalization
-
-| Technology / Module                | Role                                                                         |
-| ---------------------------------- | ---------------------------------------------------------------------------- |
-| `core/constants/app.ts`            | Centralized locale, direction, currency, and regional settings configuration |
-| `core/i18n/I18nProvider.tsx`       | React context exposing locale, direction, and translation dictionary         |
-| `core/i18n/languages/`             | JSON translation files for `en` and `ar`                                     |
-| `lib/helper.ts`                    | Locale-aware `formatCurrency`, `formatNumber`, `formatDate`                  |
-| `components/language-switcher.tsx` | UI control for switching between Arabic and English                          |
-| `proxy.ts`                         | Cookie-based locale detection and root redirect                              |
-
-### UX Enhancements
-
-| Technology                             | Role                               |
-| -------------------------------------- | ---------------------------------- |
-| [dnd-kit](https://dndkit.com)          | Drag-and-drop table row reordering |
-| [Sonner](https://sonner.emilkowal.ski) | Toast notifications                |
-| [Vaul](https://vaul.emilkowal.ski)     | Mobile-friendly drawer component   |
 
 ### Analytics & Monitoring
 
@@ -276,24 +269,26 @@ sallees-ecommerce/
 │
 ├── features/                     # Feature-sliced business domains
 │   ├── products/                 # Product domain
-│   │   ├── components/           #   ProductCard, ProductGrid, ProductDetails,
-│   │   │                         #   ProductImageGallery, ProductReviews
+│   │   ├── components/           #   HomeContainer, HeroBanner, ProductGrid,
+│   │   │                         #   ProductFiltersSidebar, ProductCard,
+│   │   │                         #   ProductImageGallery, ProductReviews, ProductDetails
 │   │   ├── hooks/                #   useProducts (TanStack Query wrappers)
 │   │   ├── services/             #   product.service.ts (API calls)
 │   │   └── types/                #   Product, ProductSummary, Brand, Category
 │   ├── auth/                     # Authentication domain
+│   │   ├── hooks/                #   useAuthStore (Zustand with persistence)
 │   │   ├── services/             #   authService (signup, signin, reset)
 │   │   └── types/                #   AuthResponse, SignupBody, etc.
 │   ├── cart/                     # Shopping cart domain
 │   │   ├── components/           #   CartPanel (translated UI)
-│   │   ├── hooks/                #   useCartStore (Zustand)
+│   │   ├── hooks/                #   useCartStore (Zustand with persistence)
 │   │   ├── services/             #   Cart API operations
 │   │   └── types/                #   Cart types
-│   ├── orders/                   # Order management domain
-│   │   ├── hooks/                #   Order query hooks
-│   │   ├── services/             #   orderService (cash, checkout sessions)
-│   │   └── types/                #   Order types
 │   ├── wishlist/                 # Wishlist domain
+│   │   ├── hooks/                #   useWishlistStore (Zustand with persistence)
+│   │   ├── services/             #   Wishlist API operations
+│   │   └── types/                #   Wishlist types
+│   ├── orders/                   # Order management domain
 │   ├── reviews/                  # Product reviews domain
 │   ├── categories/               # Category browsing domain
 │   ├── subcategories/            # Subcategory domain
@@ -310,15 +305,18 @@ sallees-ecommerce/
 │   │   ├── I18nProvider.tsx      # React context: locale, dir, translation dictionary
 │   │   ├── languages.ts          # Locale union type + dynamic translation loader
 │   │   └── languages/
-│   │       ├── en.json           # English translation strings
-│   │       └── ar.json           # Arabic translation strings
+│   │       ├── en.json           # English translation strings (136 keys)
+│   │       └── ar.json           # Arabic translation strings (136 keys)
 │   └── types/
 │       └── common.types.ts       # PaginatedResponse, SingleResponse, Direction, etc.
 │
 ├── components/                   # Shared UI components
 │   ├── ui/                       # Shadcn/ui primitives (23 components)
-│   ├── navbar.tsx                # RTL-aware top navigation with locale support
+│   ├── navbar.tsx                # RTL-aware top navigation with live autocomplete search
 │   ├── language-switcher.tsx     # Locale toggle (AR / EN)
+│   ├── hero-banner.tsx           # High-conversion hero banner
+│   ├── trust-badges.tsx          # Store trust guarantees and badges
+│   ├── call-to-action.tsx        # Promotional banner CTA
 │   ├── app-sidebar.tsx           # Dashboard sidebar navigation
 │   ├── chart-area-interactive.tsx # Analytics area chart
 │   ├── data-table.tsx            # Full-featured data table (drag, sort, filter)
