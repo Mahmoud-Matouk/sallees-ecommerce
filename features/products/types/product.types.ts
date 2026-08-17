@@ -42,6 +42,7 @@ export interface ProductSummary {
   slug: string;
   description: string;
   price: number;
+  priceAfterDiscount?: number;
   quantity: number;
   sold: number;
   imageCover: string;

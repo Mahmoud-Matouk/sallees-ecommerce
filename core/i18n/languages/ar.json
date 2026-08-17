@@ -1,17 +1,27 @@
 {
   "common": {
-    "title": "ساليز",
+    "title": "ساليس",
     "home": "الرئيسية",
     "shop": "المتجر",
+    "categories": "التصنيفات",
+    "deals": "العروض",
+    "orderRequest": "طلب خاص",
+    "contactUs": "تواصل معنا",
     "dashboard": "لوحة التحكم",
     "cart": "السلة",
+    "wishlist": "المفضلة",
+    "account": "حسابي",
     "search": "بحث",
+    "searchPlaceholder": "ابحث عن منتج...",
+    "allCategories": "الكل",
+    "viewAll": "عرض الكل",
     "language": "اللغة",
     "english": "الإنجليزية",
     "arabic": "العربية",
     "egp": "ج.م",
     "loading": "جاري التحميل...",
-    "toggleLanguage": "التغيير إلى الإنجليزية"
+    "toggleLanguage": "التغيير إلى الإنجليزية",
+    "itemsCount": "منتج"
   },
   "navbar": {
     "allProducts": "جميع المنتجات",
@@ -26,12 +36,56 @@
     "shippingInfo": "معلومات الشحن",
     "returns": "المرتجعات",
     "login": "تسجيل الدخول",
-    "signup": "إنشاء حساب"
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "suggestedProducts": "المنتجات المقترحة",
+    "noSuggestions": "لا توجد منتجات مطابقة لطلبك",
+    "viewAllResults": "عرض كل نتائج"
+  },
+  "hero": {
+    "discountBadge": "خصم حتى 40%",
+    "headline": "كل ما تحتاجه، في مكان واحد",
+    "subheadline": "تسوق آلاف المنتجات من أحدث الماركات بأفضل الأسعار وأعلى جودة",
+    "cta": "تسوق الآن"
+  },
+  "promos": {
+    "exclusiveOffers": "عروض حصرية",
+    "exclusiveOffersDesc": "خصومات مميزة على أفضل المنتجات",
+    "browseOffers": "تصفح العروض",
+    "freeShipping": "شحن مجاني",
+    "freeShippingDesc": "للطلبات التي تزيد عن 200 ج.م",
+    "learnMore": "معرفة المزيد"
+  },
+  "trust": {
+    "support": "خدمة عملاء 24/7",
+    "supportDesc": "نحن هنا لمساعدتك",
+    "returns": "إرجاع مجاني",
+    "returnsDesc": "إرجاع سهل خلال 14 يوم",
+    "payment": "طرق دفع متعددة",
+    "paymentDesc": "مدى - فيزا - ماستركارد - أبل باي",
+    "secure": "دفع آمن 100%",
+    "secureDesc": "نضمن حماية بياناتك"
+  },
+  "categories": {
+    "title": "التصنيفات",
+    "mensFashion": "أزياء رجالية",
+    "womensFashion": "أزياء نسائية",
+    "electronics": "الإلكترونيات",
+    "supermarket": "سوبر ماركت",
+    "babyToys": "الأطفال والألعاب",
+    "home": "المنزل",
+    "books": "الكتب والمكتبة",
+    "beautyHealth": "الجمال والعناية",
+    "mobiles": "الهواتف الذكية",
+    "music": "الموسيقى والآلات"
   },
   "products": {
+    "bestSellers": "الأكثر مبيعاً",
+    "recommended": "مقترحة لك",
     "price": "السعر",
     "addToCart": "إضافة إلى السلة",
     "reviews": "تقييمات",
+    "review": "تقييم",
     "rating": "التقييم",
     "inStock": "متوفر في المخزون",
     "outOfStock": "غير متوفر",
@@ -42,7 +96,13 @@
     "share": "مشاركة",
     "notFound": "المنتج غير موجود",
     "backToProducts": "العودة للمنتجات",
-    "noReviews": "لا توجد تقييمات بعد. كن أول من يقيم هذا المنتج!"
+    "noReviews": "لا توجد تقييمات بعد. كن أول من يقيم هذا المنتج!",
+    "details": "تفاصيل",
+    "customerReviews": "تقييمات العملاء",
+    "freeShipping": "شحن مجاني",
+    "secureCheckout": "دفع آمن",
+    "unitsInStock": "متوفر في المخزون",
+    "off": "خصم"
   },
   "product": {
     "notFound": "المنتج غير موجود"
@@ -65,5 +125,36 @@
     "checkout": "إتمام الشراء",
     "item": "منتج",
     "items": "منتجات"
+  },
+  "filters": {
+    "title": "الفلاتر",
+    "clearAll": "مسح الكل",
+    "apply": "تطبيق الفلاتر",
+    "sortBy": "ترتيب حسب",
+    "recommended": "الموصى به",
+    "priceLowHigh": "السعر: من الأقل للأعلى",
+    "priceHighLow": "السعر: من الأعلى للأقل",
+    "topRated": "الأعلى تقييماً",
+    "newest": "وصل حديثاً",
+    "mostSold": "الأكثر مبيعاً",
+    "categories": "الفئات",
+    "allCategories": "جميع الفئات",
+    "priceRange": "نطاق السعر",
+    "min": "الحد الأدنى",
+    "max": "الحد الأقصى",
+    "go": "تطبيق",
+    "brands": "الماركات والعلامات التجارية",
+    "searchBrands": "ابحث عن ماركة...",
+    "rating": "تقييم المنتج",
+    "starsAndUp": "نجوم وأكثر",
+    "discount": "الخصم والعروض",
+    "offOrMore": "أو أكثر خصم",
+    "availability": "التوفر والمخزون",
+    "inStockOnly": "المتوفر في المخزون فقط",
+    "onSaleOnly": "المنتجات المخفضة فقط",
+    "resultsCount": "عرض {count} منتج",
+    "showing": "عرض",
+    "of": "من",
+    "products": "منتج"
   }
 }

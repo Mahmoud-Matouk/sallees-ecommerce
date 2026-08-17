@@ -3,15 +3,25 @@
     "title": "Sallees",
     "home": "Home",
     "shop": "Shop",
+    "categories": "Categories",
+    "deals": "Offers",
+    "orderRequest": "Custom Order",
+    "contactUs": "Contact Us",
     "dashboard": "Dashboard",
     "cart": "Cart",
+    "wishlist": "Wishlist",
+    "account": "Account",
     "search": "Search",
+    "searchPlaceholder": "Search for a product...",
+    "allCategories": "All",
+    "viewAll": "View All",
     "language": "Language",
     "english": "English",
     "arabic": "Arabic",
     "egp": "EGP",
     "loading": "Loading...",
-    "toggleLanguage": "Switch to Arabic"
+    "toggleLanguage": "Switch to Arabic",
+    "itemsCount": "products"
   },
   "navbar": {
     "allProducts": "All Products",
@@ -26,12 +36,56 @@
     "shippingInfo": "Shipping Info",
     "returns": "Returns",
     "login": "Log in",
-    "signup": "Sign up"
+    "signup": "Sign up",
+    "logout": "Log out",
+    "suggestedProducts": "Suggested Products",
+    "noSuggestions": "No matching products found",
+    "viewAllResults": "View all results for"
+  },
+  "hero": {
+    "discountBadge": "Up to 40% OFF",
+    "headline": "Everything you need, in one place",
+    "subheadline": "Shop thousands of products from the latest brands with the best prices and highest quality",
+    "cta": "Shop Now"
+  },
+  "promos": {
+    "exclusiveOffers": "Exclusive Offers",
+    "exclusiveOffersDesc": "Special discounts on top selected products",
+    "browseOffers": "Browse Offers",
+    "freeShipping": "Free Shipping",
+    "freeShippingDesc": "On orders over 200 EGP",
+    "learnMore": "Learn More"
+  },
+  "trust": {
+    "support": "24/7 Customer Service",
+    "supportDesc": "We are here to help you",
+    "returns": "Free Returns",
+    "returnsDesc": "Easy returns within 14 days",
+    "payment": "Multiple Payment Methods",
+    "paymentDesc": "Mada - Visa - MasterCard - Apple Pay",
+    "secure": "100% Secure Payment",
+    "secureDesc": "Your data is always protected"
+  },
+  "categories": {
+    "title": "Categories",
+    "mensFashion": "Men's Fashion",
+    "womensFashion": "Women's Fashion",
+    "electronics": "Electronics",
+    "supermarket": "SuperMarket",
+    "babyToys": "Baby & Toys",
+    "home": "Home",
+    "books": "Books",
+    "beautyHealth": "Beauty & Health",
+    "mobiles": "Mobiles",
+    "music": "Music"
   },
   "products": {
+    "bestSellers": "Best Sellers",
+    "recommended": "Recommended",
     "price": "Price",
     "addToCart": "Add to Cart",
     "reviews": "reviews",
+    "review": "review",
     "rating": "Rating",
     "inStock": "In Stock",
     "outOfStock": "Out of Stock",
@@ -42,7 +96,13 @@
     "share": "Share",
     "notFound": "Product Not Found",
     "backToProducts": "Back to Products",
-    "noReviews": "No reviews yet. Be the first to review this product!"
+    "noReviews": "No reviews yet. Be the first to review this product!",
+    "details": "Details",
+    "customerReviews": "Customer Reviews",
+    "freeShipping": "Free shipping",
+    "secureCheckout": "Secure checkout",
+    "unitsInStock": "in stock",
+    "off": "OFF"
   },
   "product": {
     "notFound": "Product Not Found"
@@ -65,5 +125,36 @@
     "checkout": "Checkout",
     "item": "item",
     "items": "items"
+  },
+  "filters": {
+    "title": "Filters",
+    "clearAll": "Clear All",
+    "apply": "Apply Filters",
+    "sortBy": "Sort By",
+    "recommended": "Recommended",
+    "priceLowHigh": "Price: Low to High",
+    "priceHighLow": "Price: High to Low",
+    "topRated": "Top Rated",
+    "newest": "New Arrivals",
+    "mostSold": "Best Sellers",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "priceRange": "Price Range",
+    "min": "Min",
+    "max": "Max",
+    "go": "Go",
+    "brands": "Brands",
+    "searchBrands": "Search brands...",
+    "rating": "Customer Rating",
+    "starsAndUp": "Stars & Up",
+    "discount": "Deals & Discounts",
+    "offOrMore": "or more off",
+    "availability": "Availability",
+    "inStockOnly": "In Stock Only",
+    "onSaleOnly": "On Sale Items Only",
+    "resultsCount": "Showing {count} products",
+    "showing": "Showing",
+    "of": "of",
+    "products": "products"
   }
 }

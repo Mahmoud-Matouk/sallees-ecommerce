@@ -55,7 +55,7 @@ export const useCartStore = create<CartStore>()(
             _id: product._id, // use product id as cart item id locally
             product: cartProduct,
             count: 1,
-            price: product.price,
+            price: product.priceAfterDiscount ?? product.price,
           };
 
           return {

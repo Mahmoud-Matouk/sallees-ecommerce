@@ -1,39 +1,49 @@
 'use client';
 
+import Link from 'next/link';
+import * as React from 'react';
 import { Languages } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 import { setLocaleCookie } from '@/lib/helper';
-import { Button } from '@/components/ui/button';
 import { useI18n } from '@/core/i18n/I18nProvider';
-import { useRouter, usePathname } from 'next/navigation';
-import { appConfig, LOCALES } from '@/core/constants/app';
 
-export function LanguageSwitcher() {
-  const router = useRouter();
+interface LanguageSwitcherProps {
+  className?: string;
+}
+
+export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const { locale, translation: t } = useI18n();
-  const { defaultLocale } = appConfig;
 
-  const handleToggleLanguage = () => {
-    const newLocale = locale === defaultLocale ? LOCALES.ar : LOCALES.en;
-    setLocaleCookie(newLocale);
+  const nextLocale = locale === 'ar' ? 'en' : 'ar';
+  const targetLabel = locale === 'ar' ? 'English' : 'العربية';
+
+  // Compute destination URL with the new locale segment
+  const targetPath = React.useMemo(() => {
     const segments = pathname.split('/');
-    segments[1] = newLocale;
-    const newPath = segments.join('/');
-    router.push(newPath);
+    if (segments[1] === 'ar' || segments[1] === 'en') {
+      segments[1] = nextLocale;
+    } else {
+      segments.splice(1, 0, nextLocale);
+    }
+    return segments.join('/') || `/${nextLocale}`;
+  }, [pathname, nextLocale]);
+
+  const handleLanguageChange = () => {
+    setLocaleCookie(nextLocale);
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="sm"
-      onClick={handleToggleLanguage}
-      className="flex items-center gap-2 h-9 px-3 cursor-pointer select-none"
+    <Link
+      href={targetPath}
+      onClick={handleLanguageChange}
+      className={`flex flex-col items-center justify-center px-2 py-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer select-none ${
+        className || ''
+      }`}
       title={t.common.toggleLanguage}
     >
-      <Languages className="shrink-0" />
-      <span className="text-xs font-semibold uppercase tracking-wider">
-        {locale === LOCALES.en ? LOCALES.ar : LOCALES.en}
-      </span>
-    </Button>
+      <Languages className="size-5" />
+      <span className="text-[11px] font-semibold mt-0.5">{targetLabel}</span>
+    </Link>
   );
 }

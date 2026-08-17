@@ -2,161 +2,204 @@
 
 import Link from 'next/link';
 import * as React from 'react';
-import { Heart } from 'lucide-react';
-import { localizeCurrency } from '@/lib/helper';
-import { Button } from '@/components/ui/button';
 import { useI18n } from '@/core/i18n/I18nProvider';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ShoppingCartIcon, StarIcon } from 'lucide-react';
+import { Heart, ShoppingCart, Star } from 'lucide-react';
 import { ProductImageGallery } from './ProductImageGallery';
 import type { ProductSummary } from '../types/product.types';
+import { localizeCurrency, getLocalizedPath } from '@/lib/helper';
 import { useCartStore } from '@/features/cart/hooks/useCartStore';
+import { useWishlistStore } from '@/features/wishlist/hooks/useWishlistStore';
 
 interface ProductCardProps {
   product: ProductSummary;
+  discountPercentage?: number;
   priority?: boolean;
 }
 
-export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const [isWishlist, setIsWishlist] = React.useState(false);
+export const ProductCard = React.memo(function ProductCard({
+  product,
+  discountPercentage: discountPercentageProp,
+  priority = false,
+}: ProductCardProps) {
   const [isHovered, setIsHovered] = React.useState(false);
   const addItem = useCartStore((s) => s.addItem);
-  const { locale } = useI18n();
 
+  // Granular subscription: only re-render this card if its own favorite status changes
+  const isFavorite = useWishlistStore(
+    React.useCallback(
+      (s) => s.items.some((i) => i._id === product._id),
+      [product._id]
+    )
+  );
+  const toggleItem = useWishlistStore((s) => s.toggleItem);
+
+  const { locale, translation: t } = useI18n();
+
+  // Combine imageCover with images list for the gallery
   const images = React.useMemo(() => {
-    const all = [product.imageCover, ...(product.images || [])];
-    return Array.from(new Set(all)).filter(Boolean);
-  }, [product]);
+    const list = [product.imageCover, ...(product.images || [])].filter(
+      Boolean
+    );
+    return Array.from(new Set(list));
+  }, [product.imageCover, product.images]);
+
+  // Calculate real discount percentage and prices
+  const hasDiscount = Boolean(
+    product.priceAfterDiscount && product.priceAfterDiscount < product.price
+  );
+
+  const discountPercentage = hasDiscount
+    ? Math.round(
+        ((product.price - product.priceAfterDiscount!) / product.price) * 100
+      )
+    : (discountPercentageProp ?? null);
+
+  const currentPrice = hasDiscount
+    ? product.priceAfterDiscount!
+    : product.price;
+
+  const originalPrice = hasDiscount ? product.price : null;
+
+  const productUrl = getLocalizedPath(`/${product._id}`, locale);
+
+  const handleToggleFavorite = React.useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleItem(product);
+    },
+    [toggleItem, product]
+  );
+
+  const handleAddToCart = React.useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      addItem(product);
+    },
+    [addItem, product]
+  );
 
   return (
-    <Link
-      href={`/${product._id}`}
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/5"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card shadow-2xs hover:border-primary/40 transition-colors"
     >
-      {/* Image Gallery */}
-      <div className="relative aspect-square overflow-hidden bg-muted">
-        <ProductImageGallery
-          images={images}
-          title={product.title}
-          variant="card"
-          isHovered={isHovered}
-          priority={priority}
-        />
+      {/* Top Image Container with Overlays */}
+      <div className="relative aspect-square w-full overflow-hidden bg-muted/20">
+        {/* Product Image Gallery with hover rotation */}
+        <Link href={productUrl} className="relative size-full block">
+          {images.length > 0 ? (
+            <ProductImageGallery
+              images={images}
+              title={product.title}
+              variant="card"
+              isHovered={isHovered}
+              priority={priority}
+            />
+          ) : (
+            <div className="flex size-full items-center justify-center bg-muted text-xs text-muted-foreground">
+              No Image
+            </div>
+          )}
+        </Link>
 
-        {/* Wishlist */}
-        <div className="absolute right-3 top-3 z-10">
-          <Heart
-            className={`size-5 transition-colors hover:text-red-500 ${
-              isWishlist ? 'text-red-500' : 'text-black drop-shadow-md'
-            }`}
-            onClick={(e) => {
-              e.preventDefault();
-              setIsWishlist(!isWishlist);
-            }}
-          />
-        </div>
-
-        {/* Category badge */}
-        <div className="absolute left-3 top-3 z-10">
-          <span className="inline-flex items-center rounded-full bg-background/80 px-2.5 py-1 text-xs font-medium text-foreground backdrop-blur-sm">
-            {product.category.name}
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        {/* Brand */}
-        <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          {product.brand.name}
-        </span>
-
-        {/* Title */}
-        <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground transition-colors">
-          {product.title}
-        </h3>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <StarIcon
-                key={i}
-                className={`size-3.5 ${
-                  i < Math.round(product.ratingsAverage)
-                    ? 'fill-amber-400 text-amber-400'
-                    : 'fill-muted text-muted'
-                }`}
-              />
-            ))}
+        {/* Discount Badge (Top-Left) */}
+        {discountPercentage && (
+          <div className="absolute top-2.5 start-2.5 z-20 pointer-events-none">
+            <span className="inline-flex items-center rounded-md bg-red-600 px-2 py-0.5 text-xs font-bold text-white shadow-xs">
+              -{discountPercentage}%
+            </span>
           </div>
-          <span className="text-xs text-muted-foreground">
-            ({product.ratingsAverage})
-          </span>
-        </div>
+        )}
 
-        {/* Price */}
-        <div className="mt-auto pt-2">
-          <span className="text-lg font-bold text-foreground">
-            {localizeCurrency(product.price, locale)}
-          </span>
-        </div>
-
-        {/* Add to cart button */}
-        <Button
-          size="lg"
-          className="mt-2 w-full bg-primary text-primary-foreground hover:bg-primary/90"
-          onClick={(e) => {
-            e.preventDefault();
-            addItem(product);
-          }}
+        {/* Wishlist Button (Top-Right) */}
+        <button
+          type="button"
+          onClick={handleToggleFavorite}
+          className="absolute top-2.5 end-2.5 z-20 flex size-8 items-center justify-center rounded-full bg-background/90 text-muted-foreground shadow-xs backdrop-blur-xs hover:text-red-500 hover:bg-background transition-colors cursor-pointer"
+          title={t.navbar.wishlist}
         >
-          <ShoppingCartIcon className="size-4" />
-          Add to cart
-        </Button>
+          <Heart
+            className={`size-4 transition-colors ${
+              isFavorite ? 'fill-red-500 text-red-500' : ''
+            }`}
+          />
+        </button>
+
+        {/* Add to Cart Button (Bottom-Right corner of image) */}
+        <button
+          type="button"
+          onClick={handleAddToCart}
+          className="absolute bottom-2.5 end-2.5 z-20 flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-md hover:bg-primary/90 transition-colors cursor-pointer"
+          title={t.products.addToCart}
+        >
+          <ShoppingCart className="size-4" />
+        </button>
       </div>
-    </Link>
+
+      {/* Bottom Info Section with dedicated padding */}
+      <div className="p-3.5 flex flex-1 flex-col justify-between gap-2">
+        <div>
+          {/* Brand or Category */}
+          {(product.brand?.name || product.category?.name) && (
+            <span className="text-[11px] font-medium text-muted-foreground block truncate">
+              {product.brand?.name || product.category?.name}
+            </span>
+          )}
+
+          {/* Title */}
+          <Link
+            href={productUrl}
+            className="line-clamp-1 text-sm font-bold text-foreground transition-colors hover:text-primary mt-0.5"
+            title={product.title}
+          >
+            {product.title}
+          </Link>
+        </div>
+
+        {/* Rating & Price Row */}
+        <div className="flex items-center justify-between pt-1">
+          {/* Rating */}
+          <div className="flex items-center gap-1">
+            <span className="text-xs font-bold text-foreground">
+              {product.ratingsAverage?.toFixed(1) || '4.5'}
+            </span>
+            <Star className="size-3.5 fill-amber-400 text-amber-400" />
+          </div>
+
+          {/* Price with Original & Discounted display */}
+          <div className="flex items-baseline gap-1.5">
+            {originalPrice && (
+              <span className="text-xs text-muted-foreground line-through">
+                {localizeCurrency(originalPrice, locale)}
+              </span>
+            )}
+            <span className="text-sm font-extrabold text-foreground">
+              {localizeCurrency(currentPrice, locale)}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+});
 
 export function ProductCardSkeleton() {
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card">
-      {/* Image Gallery Skeleton */}
-      <div className="relative aspect-square overflow-hidden bg-muted">
-        <Skeleton className="h-full w-full" />
+    <div className="flex flex-col justify-between overflow-hidden rounded-2xl border border-border/80 bg-card">
+      <div className="aspect-square w-full bg-muted/40">
+        <Skeleton className="size-full" />
       </div>
-
-      {/* Content Skeleton */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        {/* Brand */}
-        <Skeleton className="h-3 w-16" />
-
-        {/* Title */}
-        <div className="space-y-1">
-          <Skeleton className="h-5 w-full" />
-          <Skeleton className="h-5 w-2/3" />
+      <div className="p-3.5 space-y-2">
+        <Skeleton className="h-3 w-1/3" />
+        <Skeleton className="h-4 w-3/4" />
+        <div className="flex justify-between items-center pt-1">
+          <Skeleton className="h-3 w-10" />
+          <Skeleton className="h-4 w-16" />
         </div>
-
-        {/* Rating */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center gap-0.5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className="size-3.5 rounded-full" />
-            ))}
-          </div>
-          <Skeleton className="h-3 w-8" />
-        </div>
-
-        {/* Price */}
-        <div className="mt-auto pt-2">
-          <Skeleton className="h-6 w-24" />
-        </div>
-
-        {/* Add to cart button */}
-        <Skeleton className="mt-2 h-11 w-full rounded-md" />
       </div>
     </div>
   );

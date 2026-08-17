@@ -44,14 +44,14 @@ export function ProductImageGallery({
 
   // Card variant: Auto-play when hovered
   React.useEffect(() => {
-    if (!api || !isCard || !isHovered) return;
+    if (!api || !isCard || !isHovered || images.length <= 1) return;
 
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 800);
+    }, 700);
 
     return () => clearInterval(interval);
-  }, [api, isCard, isHovered, dir]);
+  }, [api, isCard, isHovered, dir, images.length]);
 
   // Card variant: Smoothly reset back to the cover image when hover ends
   React.useEffect(() => {
@@ -74,18 +74,18 @@ export function ProductImageGallery({
       <Carousel
         setApi={setApi}
         opts={{ loop: true, direction: dir }}
-        className="w-full"
+        className="size-full"
       >
-        <CarouselContent>
+        <CarouselContent className="size-full ml-0">
           {images.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="relative aspect-square w-full">
+            <CarouselItem key={index} className="size-full pl-0">
+              <div className="relative aspect-square size-full">
                 <Image
                   src={image}
                   alt={`${title} - Image ${index + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="object-contain size-full"
                   priority={priority && index === 0}
                 />
               </div>
@@ -114,7 +114,7 @@ export function ProductImageGallery({
                     alt={`${title} - Image ${index + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover transition-all duration-500"
+                    className="object-contain"
                     priority={index === 0}
                   />
                 </div>
